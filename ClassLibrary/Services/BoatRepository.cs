@@ -4,10 +4,64 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ClassLibrary.Interfaces;
+using ClassLibrary.Models;
+using ClassLibrary.Exceptions;
+using System.Reflection;
+using System.Runtime.ConstrainedExecution;
 
 namespace ClassLibrary.Services
 {
     public class BoatRepository : IBoatRepository
     {
+        #region Instance Fields
+        private Dictionary<string, Boat> _boats; // string is Registration as key
+        #endregion
+
+        #region Methods
+        public List<Boat> GetAll()
+        {
+            return _boats.Values.ToList();
+        }
+
+        public void AddBoat(Boat boat)
+        {
+            if (!_boats.ContainsKey(boat.Registration))
+            { // because dictionaries cannot contain duplicates
+                _boats.Add(boat.Registration, boat);
+            }
+            else
+            {
+                throw new BoatRegistrationExist();
+            }
+        }
+
+        public Boat GetBoatByReg(string registration)
+        {
+            if (registration != null && _boats.ContainsKey(registration))
+            {
+                return _boats[registration];
+            }
+            return null;
+        }
+
+        public void RemoveBoat(string registration)
+        {
+            _boats.Remove(registration);
+        }
+
+        public void EditBoat(Boat newBoatInfo, Model model, string description, string registration)
+        {
+            Boat oldBoatInfo = GetBoatByReg(registration);
+            oldBoatInfo.Model = newBoatInfo.Model;
+            oldBoatInfo.Description = newBoatInfo.Description;
+        }
+        public void PrintAllBoats()
+        {
+            foreach (Boat boat in _boats.Values)
+            {
+                Console.WriteLine(boat.ToString());
+            }
+        }
+        #endregion
     }
 }
