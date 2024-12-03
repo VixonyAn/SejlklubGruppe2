@@ -8,6 +8,7 @@ namespace ClassLibrary.Interfaces
 {
     public interface IMember
     {
+
         string Name { get; set;}
         string Email { get; set; }
         string Phone { get; set; }
