@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SejlklubGruppe2", "Sejlklub
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary", "ClassLibrary\ClassLibrary.csproj", "{90267EC3-3E09-4DEA-91DA-2D00063B1964}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SejlklubRazor", "SejlklubRazor\SejlklubRazor.csproj", "{6440A218-55C8-470A-A75E-E5D89713AC6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{90267EC3-3E09-4DEA-91DA-2D00063B1964}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90267EC3-3E09-4DEA-91DA-2D00063B1964}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90267EC3-3E09-4DEA-91DA-2D00063B1964}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6440A218-55C8-470A-A75E-E5D89713AC6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6440A218-55C8-470A-A75E-E5D89713AC6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6440A218-55C8-470A-A75E-E5D89713AC6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6440A218-55C8-470A-A75E-E5D89713AC6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
