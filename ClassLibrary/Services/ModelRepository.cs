@@ -40,28 +40,37 @@ namespace ClassLibrary.Services
             }
         }
 
-        public Model GetModelByName(string name)
+        public Model GetModelByName(string modelName)
         {
-            if (name != null && _models.ContainsKey(name))
+            if (modelName != null && _models.ContainsKey(modelName))
             {
-                return _models[name];
+                return _models[modelName];
             }
             return null;
         }
 
-        public void RemoveModel(string name)
+        public void RemoveModel(string modelName)
         {
-            throw new NotImplementedException();
+            _models.Remove(modelName);
         }
 
-        public void EditModel(Model newModelInfo, Model model, string description, double hullLength, double hullWidth, double hullDepth, double baseWeight)
+        public void EditModel(Model newModelInfo, Model model, string modelName, string description, double hullLength, double hullWidth, double hullDepth, double baseWeight)
         {
-            throw new NotImplementedException();
+            Model oldModelInfo = GetModelByName(modelName);
+            oldModelInfo.ModelName = newModelInfo.ModelName;
+            oldModelInfo.Description = newModelInfo.Description;
+            oldModelInfo.HullLength = newModelInfo.HullLength;
+            oldModelInfo.HullWidth = newModelInfo.HullWidth;
+            oldModelInfo.HullDepth = newModelInfo.HullDepth;
+            oldModelInfo.BaseWeight = newModelInfo.BaseWeight;
         }
 
         public void PrintAllModels()
         {
-            throw new NotImplementedException();
+            foreach (Model model in _models.Values)
+            {
+                Console.WriteLine(model.ToString());
+            }
         }
         #endregion
     }

@@ -11,8 +11,15 @@ namespace ClassLibrary.Services
 {
     public class CourseRepository : ICourseRepository
     {
-        private Dictionary<int, Course> _courses;
+        private Dictionary<int, Course> _courses = new Dictionary<int, Course>();
         public int Count { get { return _courses.Count; } }
+
+
+        public CourseRepository()
+        {
+            
+        }
+
 
         public void Add(Course course)
         {

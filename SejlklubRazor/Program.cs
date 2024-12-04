@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<IBoatRepository, BoatRepository>(); // Add singleton, dependency injection
+builder.Services.AddSingleton<IModelRepository, ModelRepository>();
+builder.Services.AddSingleton<IMemberRepository, MemberRepository>();
 
 var app = builder.Build();
 

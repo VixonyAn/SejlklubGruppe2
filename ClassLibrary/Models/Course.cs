@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using ClassLibrary.Interfaces;
 
 namespace ClassLibrary.Models
@@ -11,7 +15,7 @@ namespace ClassLibrary.Models
     {
         public int Id { get; set; }
 
-        public string[,] TimeSlot {  get; set; }
+        public string[] TimeSlot {  get; set; }
             // new string[2, 2];
 
 
@@ -29,7 +33,7 @@ namespace ClassLibrary.Models
         {    
         }
 
-        public Course(int id, string[,] timeSlot, int[] attendeeRange, List<Member> attendees, Member master, string description)
+        public Course(int id, string[] timeSlot, int[] attendeeRange, List<Member> attendees, Member master, string description)
         {
             Id = id;
             TimeSlot = timeSlot;
@@ -38,5 +42,10 @@ namespace ClassLibrary.Models
             Master = master;
             Description = description;
         }
+        public override string ToString()
+        {
+            return $"id: {Id} \n  timeslot   from: {TimeSlot[0]}, to:{TimeSlot[1]} \n  Creator: {Master.Name} \n  Minimum Number of Attendees: {AttendeeRange[0]} ,  Max Number of Attendees: {AttendeeRange[1]}  \n  places left: {((Attendees.Count < AttendeeRange[1]) ? $"der er {AttendeeRange[1]-Attendees.Count} pladser tilbage" : $"der er ikke flere pladser {Attendees.Count} ud af {AttendeeRange[1]} \n " +$"")}";
+        }
     }
+
 }

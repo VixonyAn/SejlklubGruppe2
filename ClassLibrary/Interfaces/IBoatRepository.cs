@@ -14,6 +14,7 @@ namespace ClassLibrary.Interfaces
         Boat GetBoatByReg(string registration);
         void RemoveBoat(string registration);
         void EditBoat(Boat newBoatInfo, Model model, string description, string registration);
+        int NumberOfModel(string modelName);
         void PrintAllBoats();
     }
 }
