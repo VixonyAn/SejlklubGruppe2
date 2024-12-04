@@ -16,6 +16,8 @@ internal class Program
         #endregion
 
         #region KTest
+        Member testEgon = new Member("Egon", "11 11 11 11", "REalMail@Mail.ru");
+        Console.WriteLine(testEgon);
 
         #endregion
 
