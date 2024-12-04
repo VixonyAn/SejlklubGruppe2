@@ -10,6 +10,9 @@ internal class Program
     {
         #region VTest
         Model optimistjolle = new Model("Optimistjolle", "hyggelig for begyndere", 00.00, 00.00, 00.00, 00.00);
+        
+        // lav en dropdown model liste i razorpages "Add Boat"
+        // fandt ikke din model? knap/link til "Add Model"
         Boat b1 = new Boat(optimistjolle, "5678");
         Boat b2 = new Boat(optimistjolle, "5678");
         IBoatRepository boatRepo = new BoatRepository();
@@ -27,7 +30,6 @@ internal class Program
         {
             Console.WriteLine(boat);
         }
-        //Console.WriteLine(b1);
         #endregion
 
         #region Atest

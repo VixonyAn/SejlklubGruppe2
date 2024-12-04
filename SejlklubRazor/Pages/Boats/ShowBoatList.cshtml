@@ -1,0 +1,33 @@
+﻿@page
+@using ClassLibrary.Models;
+@model SejlklubRazor.Pages.Boats.ShowBoatListModel
+@{
+    ViewData["Title"] = "Klubbens Både";
+}
+
+<h3>Klubbens Både</h3>
+
+<p>
+    <a asp-page="AddBoat">Opret ny båd</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Model</th>
+            <th>Antal Klubben Ejer</th>
+            <th>Beskrivelse</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Boat item in Model.Boats)
+        {
+            <tr>
+                @* <td>@item.Model</td> *@
+                <td>@item.Registration</td>
+                <td><a asp-page="EditBoat" asp-route-mobile="@item.Registration">Edit</a></td>
+                <td><a asp-page="DeleteBoat" asp-route-deleteMobile="@item.Registration">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
