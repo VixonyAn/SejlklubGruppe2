@@ -30,31 +30,48 @@ namespace ClassLibrary.Services
         #region Methods
         public void AddMember(string name, string phone, string email)
         {
-            if (_internalRepo.ContainsKey(name)) return;
+            if (_internalRepo.ContainsKey(name)) throw new KeyTakenException();
             _internalRepo[name] = new Member(name, phone, email);
         }
 
-        public IMember GetMemberByName(string name)
+        public void AddMember(IMember member)
         {
-            if (_internalRepo.ContainsKey(name)) return _internalRepo[name];
-            return null;
+            if (_internalRepo.ContainsKey(member.Name)) throw new KeyTakenException();
+            _internalRepo[member.Name] = member;
         }
-        public IMember GetMemberByPhone(string phone)
-        {
-            foreach(IMember member in _internalRepo.Values)
+
+        #region Search and filters
+
+            #region Individual
+            public IMember GetMemberByName(string name)
             {
-                if (member.Phone == phone) return member;
+                if (_internalRepo.ContainsKey(name)) return _internalRepo[name];
+                throw new KeyNotFoundException();
             }
-            return null;
-        }
-        public IMember GetMemberByMail(string email)
-        {
-            foreach (IMember member in _internalRepo.Values)
+            public IMember GetMemberByPhone(string phone)
             {
-                if (member.Email == email) return member;
+                foreach(IMember member in _internalRepo.Values)
+                {
+                    if (member.Phone == phone) return member;
+                }
+                throw new KeyNotFoundException();
             }
-            return null;
-        }
+            public IMember GetMemberByMail(string email)
+            {
+                foreach (IMember member in _internalRepo.Values)
+                {
+                    if (member.Email == email) return member;
+                }
+                throw new KeyNotFoundException();
+            }
+            #endregion
+
+            #region Lists
+
+
+            #endregion
+
+        #endregion
 
         public void EditMember(string oldName,string newName, string phone, string email)
         {

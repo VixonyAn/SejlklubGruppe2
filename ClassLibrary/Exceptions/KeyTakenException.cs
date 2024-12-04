@@ -8,6 +8,14 @@ namespace ClassLibrary.Exceptions
 {
     public class KeyTakenException : Exception
     {
+        public KeyTakenException()
+        {
+        }
 
+        public KeyTakenException(string message) : base(message)
+        {
+        }
     }
+
+
 }
