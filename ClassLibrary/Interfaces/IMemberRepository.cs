@@ -15,6 +15,8 @@ namespace ClassLibrary.Interfaces
         IMember GetMemberByPhone(string phone);
         IMember GetMemberByMail(string email);
 
+        List<IMember> GetAll();
+
         void EditMember(string oldName, string newName, string phone, string email);
 
 

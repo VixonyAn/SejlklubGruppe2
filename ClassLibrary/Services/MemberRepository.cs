@@ -67,7 +67,10 @@ namespace ClassLibrary.Services
             #endregion
 
             #region Lists
-
+                public List<IMember> GetAll()
+                {
+                    return _internalRepo.Values.ToList();
+                } 
 
             #endregion
 
