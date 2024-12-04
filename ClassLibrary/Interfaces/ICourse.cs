@@ -17,7 +17,7 @@ namespace ClassLibrary.Interfaces
         //master/teacher/creator of the course/event
         //description
 
-        string[,] TimeSlot { get; set; }
+        string[] TimeSlot { get; set; }
         int[] AttendeeRange { get; set; }
         List<Member> Attendees { get; set; }
         Member Master { get; set; }
