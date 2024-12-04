@@ -1,4 +1,8 @@
-﻿using ClassLibrary.Models;
+﻿using ClassLibrary.Exceptions;
+using ClassLibrary.Interfaces;
+using ClassLibrary.Models;
+using ClassLibrary.Services;
+using System.Threading.Channels;
 
 internal class Program
 {
@@ -7,8 +11,23 @@ internal class Program
         #region VTest
         Model optimistjolle = new Model("Optimistjolle", "hyggelig for begyndere", 00.00, 00.00, 00.00, 00.00);
         Boat b1 = new Boat(optimistjolle, "5678");
-        //Boat b2 = new Boat(optimistjolle, "5678");
-        Console.WriteLine(b1);
+        Boat b2 = new Boat(optimistjolle, "5678");
+        IBoatRepository boatRepo = new BoatRepository();
+        try
+        {
+            boatRepo.AddBoat(b1);
+            boatRepo.AddBoat(b2);
+        }
+        catch (BoatRegistrationExist error)
+        {
+            Console.WriteLine($"{error.Message}");
+        }
+        List<Boat> boats = boatRepo.GetAll();
+        foreach (Boat boat in boats)
+        {
+            Console.WriteLine(boat);
+        }
+        //Console.WriteLine(b1);
         #endregion
 
         #region Atest
@@ -24,5 +43,5 @@ internal class Program
         #region LTest
 
         #endregion
-    }
+        }
 }

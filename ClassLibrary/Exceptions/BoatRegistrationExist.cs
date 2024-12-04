@@ -13,7 +13,7 @@ namespace ClassLibrary.Exceptions
         }
 
         public BoatRegistrationExist(string message) : base(message)
-        {   
+        {
         }
     }
 }
