@@ -17,9 +17,10 @@
         </tr>
     </thead>
     <tbody>
-        @* get ONE boats information, maybe Model.Boat.Value? redirect to this page using Model *@
+        @* get ONE model info, redirect to this page using ModelName *@
+        @*GetModelByName*@
 
-        @foreach (Boat item in Model.Boats)
+        @foreach (Boat item in Model.Models)
         {
             <tr>
                 @* <td>@item.ModelName</td>
