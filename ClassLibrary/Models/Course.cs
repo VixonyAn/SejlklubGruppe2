@@ -18,9 +18,9 @@ namespace ClassLibrary.Models
         public int[] AttendeeRange {  get; set; }
                                    //new int[2];
 
-        public List<member> Attendees {  get; set; }
+        public List<Member> Attendees {  get; set; }
 
-        public member Master {  get; set; }
+        public Member Master {  get; set; }
 
         public string Description { get; set; }
 
@@ -29,7 +29,7 @@ namespace ClassLibrary.Models
         {    
         }
 
-        public Course(int id, string[,] timeSlot, int[] attendeeRange, List<member> attendees, member master, string description)
+        public Course(int id, string[,] timeSlot, int[] attendeeRange, List<Member> attendees, Member master, string description)
         {
             Id = id;
             TimeSlot = timeSlot;

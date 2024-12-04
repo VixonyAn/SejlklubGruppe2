@@ -19,8 +19,8 @@ namespace ClassLibrary.Interfaces
 
         string[,] TimeSlot { get; set; }
         int[] AttendeeRange { get; set; }
-        List<member> Attendees { get; set; }
-        member Master { get; set; }
+        List<Member> Attendees { get; set; }
+        Member Master { get; set; }
         string Description { get; set; }
     }
 }
