@@ -18,7 +18,7 @@ internal class Program
             boatRepo.AddBoat(b1);
             boatRepo.AddBoat(b2);
         }
-        catch (BoatRegistrationExist error)
+        catch (KeyTakenException error)
         {
             Console.WriteLine($"{error.Message}");
         }

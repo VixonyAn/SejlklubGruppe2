@@ -38,7 +38,7 @@ namespace ClassLibrary.Services
             }
             else
             {
-                throw new BoatRegistrationExist($"En båd med registrerings ID '{boat.Registration}' findes allerede\n");
+                throw new KeyTakenException($"En båd med registrerings ID '{boat.Registration}' findes allerede\n");
             }
         }
 
