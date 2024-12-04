@@ -13,11 +13,21 @@ namespace ClassLibrary.Models
         // boat includes "maintenance log" of issues
         // udover default + en ny constructor til salg opslag (ejer's kontakt/pris i Post)
 
-        Model Model { get; set; }
-        string Description { get; set; }
-        string Registration { get; set; }
-        Issue Issue { get; set; }
+        public Model Model { get; set; }
+        public string Description { get; set; }
+        public string Registration { get; set; }
+        public List<Issue> Issue { get; set; }
 
-        string ToString();
+        public Boat(Model model, string description, string registration)
+        {
+            Model = model;
+            Description = description;
+            Registration = registration;
+        }
+
+        public override string ToString()
+        {
+            return $"Model: {Model}\nDescription: {Description}\nRegistration: {Registration}";
+        }
     }
 }
