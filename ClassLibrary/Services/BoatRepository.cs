@@ -17,6 +17,13 @@ namespace ClassLibrary.Services
         private Dictionary<string, Boat> _boats; // string is Registration as key
         #endregion
 
+        #region Constructors
+        public BoatRepository()
+        {
+            _boats = new Dictionary<string, Boat>();
+        }
+        #endregion
+
         #region Methods
         public List<Boat> GetAll()
         {
@@ -31,7 +38,7 @@ namespace ClassLibrary.Services
             }
             else
             {
-                throw new BoatRegistrationExist();
+                throw new KeyTakenException($"En båd med registrerings ID '{boat.Registration}' findes allerede\n");
             }
         }
 
@@ -53,7 +60,6 @@ namespace ClassLibrary.Services
         {
             Boat oldBoatInfo = GetBoatByReg(registration);
             oldBoatInfo.Model = newBoatInfo.Model;
-            oldBoatInfo.Description = newBoatInfo.Description;
         }
         public void PrintAllBoats()
         {

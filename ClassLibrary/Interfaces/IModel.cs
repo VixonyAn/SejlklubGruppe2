@@ -9,6 +9,7 @@ namespace ClassLibrary.Interfaces
     public interface IModel
     {
         string ModelName { get; set; }
+        string Description { get; set; }
         double HullLength { get; set; }
         double HullWidth { get; set; }
         double HullDepth { get; set; }

@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary.Exceptions
 {
-    public class BoatRegistrationExist : Exception
+    public class KeyTakenException : Exception
     {
-        public BoatRegistrationExist()
+        public KeyTakenException()
         {
         }
 
-        public BoatRegistrationExist(string message) : base(message)
-        {   
+        public KeyTakenException(string message) : base(message)
+        {
         }
     }
+
+
 }
