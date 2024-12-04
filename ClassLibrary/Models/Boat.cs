@@ -14,20 +14,18 @@ namespace ClassLibrary.Models
         // udover default + en ny constructor til salg opslag (ejer's kontakt/pris i Post)
 
         public Model Model { get; set; }
-        public string Description { get; set; }
         public string Registration { get; set; }
-        public List<Issue> Issue { get; set; }
+        public List<Issue> Issue { get; set; } // skal hente liste og printe den med båden når man ser båden?
 
-        public Boat(Model model, string description, string registration)
+        public Boat(Model model, string registration) // Constructor takes a Model and Registration for the boat
         {
             Model = model;
-            Description = description;
             Registration = registration;
         }
 
-        public override string ToString()
+        public override string ToString() // This prints the Models ToString too :>
         {
-            return $"Model: {Model}\nDescription: {Description}\nRegistration: {Registration}";
+            return $"Model: {Model}\nRegistration: {Registration}";
         }
     }
 }
