@@ -53,7 +53,6 @@ namespace ClassLibrary.Services
         {
             Boat oldBoatInfo = GetBoatByReg(registration);
             oldBoatInfo.Model = newBoatInfo.Model;
-            oldBoatInfo.Description = newBoatInfo.Description;
         }
         public void PrintAllBoats()
         {

@@ -18,6 +18,7 @@ namespace ClassLibrary.Models
         public double BaseWeight { get; set; }
         #endregion
 
+        #region Constructors
         public Model(string modelName, string description, double hullLength, double hullWidth, double hullDepth, double baseWeight)
         {
             ModelName = modelName;
@@ -27,10 +28,13 @@ namespace ClassLibrary.Models
             HullDepth = hullDepth;
             BaseWeight = baseWeight;
         }
+        #endregion
 
+        #region Methods
         public override string ToString()
         {
             return $"{ModelName}\nDescription: {Description}\nHull Length: {HullLength}\nHull Width: {HullWidth}\nHull Depth: {HullDepth}\nBase Weight: {BaseWeight}";
         }
+        #endregion
     }
 }
