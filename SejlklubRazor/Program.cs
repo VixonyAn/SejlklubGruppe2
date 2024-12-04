@@ -1,7 +1,11 @@
+using ClassLibrary.Interfaces;
+using ClassLibrary.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddSingleton<IBoatRepository, BoatRepository>(); // Add singleton, dependency injection
 
 var app = builder.Build();
 

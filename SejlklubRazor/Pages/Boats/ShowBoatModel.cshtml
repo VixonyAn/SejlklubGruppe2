@@ -1,0 +1,35 @@
+﻿@page
+@using ClassLibrary.Models;
+@model SejlklubRazor.Pages.Boats.ShowBoatModel
+@{
+    ViewData["Title"] = "Båd Information";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Model Name</th>
+            <th>Skrog Længde</th>
+            <th>Skrog Bredde</th>
+            <th>Skrog Dybde</th>
+            <th>Vægt</th>
+            <th>Registrerings ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        @* get ONE boats information, maybe Model.Boat.Value? redirect to this page using Model *@
+
+        @foreach (Boat item in Model.Boats)
+        {
+            <tr>
+                @* <td>@item.ModelName</td>
+                <td>@item.Description</td>
+                <td>@item.HullLength</td>
+                <td>@item.HullWidth</td>
+                <td>@item.HullDepth</td>
+                <td>@item.BaseWeight</td> *@
+                <td>@item.Registration</td>
+            </tr>
+        }
+    </tbody>
+</table>
