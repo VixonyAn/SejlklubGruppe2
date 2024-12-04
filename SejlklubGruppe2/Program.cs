@@ -7,8 +7,8 @@ internal class Program
         #region VTest
         Model optimistjolle = new Model("Optimistjolle", "hyggelig for begyndere", 00.00, 00.00, 00.00, 00.00);
         Boat b1 = new Boat(optimistjolle, "5678");
+        //Boat b2 = new Boat(optimistjolle, "5678");
         Console.WriteLine(b1);
-        //Kommentar
         #endregion
 
         #region Atest

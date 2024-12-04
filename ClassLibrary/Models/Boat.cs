@@ -12,20 +12,25 @@ namespace ClassLibrary.Models
         // boat (grasp) is the expert on it's own issues and maintenance
         // boat includes "maintenance log" of issues
         // udover default + en ny constructor til salg opslag (ejer's kontakt/pris i Post)
-
+        #region Properties
         public Model Model { get; set; }
         public string Registration { get; set; }
         public List<Issue> Issue { get; set; } // skal hente liste og printe den med båden når man ser båden?
+        #endregion
 
+        #region Constructors
         public Boat(Model model, string registration) // Constructor takes a Model and Registration for the boat
         {
             Model = model;
             Registration = registration;
         }
+        #endregion
 
+        #region Methods
         public override string ToString() // This prints the Models ToString too :>
         {
             return $"Model: {Model}\nRegistration: {Registration}";
         }
+        #endregion
     }
 }
