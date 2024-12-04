@@ -14,6 +14,12 @@ namespace ClassLibrary.Models
         #endregion
 
         #region Constructors
+        public Member(string name, string phone, string email)
+        {
+            Name = name;
+            Phone = phone;
+            Email = email;
+        }
 
         #endregion
 

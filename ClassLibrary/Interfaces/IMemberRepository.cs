@@ -10,12 +10,14 @@ namespace ClassLibrary.Interfaces
     {
         void AddMember(string name, string phone, string email);
 
-        IMember GetMember(string phone);
+        IMember GetMemberByName(string name);
+        IMember GetMemberByPhone(string phone);
+        IMember GetMemberByMail(string email);
 
-        void EditMember(string phone);
+        void EditMember(string oldName, string newName, string phone, string email);
 
 
-        void RemoveMember();
+        void RemoveMember(string name);
 
     }
 }
