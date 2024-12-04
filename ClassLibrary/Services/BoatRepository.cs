@@ -61,6 +61,18 @@ namespace ClassLibrary.Services
             Boat oldBoatInfo = GetBoatByReg(registration);
             oldBoatInfo.Model = newBoatInfo.Model;
         }
+        public int NumberOfModel(string modelName)
+        {
+            int count = 0;
+            foreach (Boat boat in _boats.Values)
+            {
+                if (boat.Model.ModelName == modelName)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
         public void PrintAllBoats()
         {
             foreach (Boat boat in _boats.Values)

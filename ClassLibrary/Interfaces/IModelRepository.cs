@@ -11,9 +11,9 @@ namespace ClassLibrary.Interfaces
     {
         List<Model> GetAll();
         void AddModel(Model model);
-        Model GetModelByName(string name);
-        void RemoveModel(string name);
-        void EditModel(Model newModelInfo, Model model, string description, double hullLength, double hullWidth, double hullDepth, double baseWeight);
+        Model GetModelByName(string modelName);
+        void RemoveModel(string modelName);
+        void EditModel(Model newModelInfo, Model model, string modelName, string description, double hullLength, double hullWidth, double hullDepth, double baseWeight);
         void PrintAllModels();
     }
 }
