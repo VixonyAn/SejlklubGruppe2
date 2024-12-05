@@ -8,10 +8,8 @@ namespace ClassLibrary.Helpers
 {
     public class DLStringComparer
     {
-        public static int Compare(string aInput, string bInput)
+        public static int Compare(string a, string b)
         {
-            string a = aInput.ToLower();
-            string b = bInput.ToLower();
             int[,] matrix = new int[a.Length + 1, b.Length + 1];
             int cost = 0;
 
@@ -46,6 +44,26 @@ namespace ClassLibrary.Helpers
             }
 
             return matrix[a.Length, b.Length];
+        }
+
+        public static List<String> Matches(List<string> matchables, string query, int maxDLCost)
+        {
+            List<DLStringValuePair> sortables = new List<DLStringValuePair>();
+            foreach(string s in matchables)
+            {
+                sortables.Add(new DLStringValuePair(Compare(query,s), s));
+            }
+
+            DLInsertionSort.Sort(sortables);
+
+            List<string> results = new List<string>();
+
+            for(int i = 0; i<sortables.Count;i++)
+            {
+                results.Add(sortables[i].DLString);
+            }
+
+            return results;
         }
     }
 }
