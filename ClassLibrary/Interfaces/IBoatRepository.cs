@@ -11,6 +11,7 @@ namespace ClassLibrary.Interfaces
     {
         List<Boat> GetAll();
         void AddBoat(Boat boat);
+        void AddBoat(Model modelName, string registration);
         Boat GetBoatByReg(string registration);
         void RemoveBoat(string registration);
         void EditBoat(string oldBoatReg, string newBoatReg);

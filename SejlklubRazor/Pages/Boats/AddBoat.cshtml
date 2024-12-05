@@ -1,0 +1,24 @@
+﻿@page
+@using ClassLibrary.Models;
+@model SejlklubRazor.Pages.Boats.AddBoatModel
+@{
+    ViewData["Title"] = "Opret Båd";
+}
+
+<h3>Opret en Båd</h3>
+
+<form method="post">
+    <div class="form-group">
+        <label>Vælg Bådens Model</label>
+        <select id="ChosenModelType" name="ChosenModelType"
+                asp-for="@Model.ChosenModelType" asp-items="@Model.ModelSelectList">
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Registration" class="control-label"></label> @* missing some sort of asp route *@
+        <input asp-for="@Model.Registration" style="display: inline; width: 30%;" class="form-control" />
+    </div>
+    <div class="formgroup">
+        <input type="submit" asp-page="ShowBoats" asp-route-registration="Registration" value="Opret Ny Båd" class="btn btn-primary" />
+    </div>
+</form>

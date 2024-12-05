@@ -44,6 +44,19 @@ namespace ClassLibrary.Services
             }
         }
 
+        //eyyyy this is polymorphism
+        public void AddBoat(Model modelName, string registration)
+        {
+            if (!_boats.ContainsKey(registration)) // if dict DOESN'T contain this key, boat is added
+            { // because dictionaries cannot contain duplicates
+                _boats.Add(registration, new Boat(modelName, registration));
+            }
+            else // if dict DOES contain this key, exception is thrown
+            {
+                throw new KeyTakenException($"Kan ikke oprette en båd med registrerings ID '{registration}' denne ID findes allerede\n");
+            }
+        }
+
         public Boat GetBoatByReg(string registration)
         {
             if (registration != null && _boats.ContainsKey(registration))
