@@ -9,15 +9,15 @@ namespace SejlklubRazor.Pages.Boats
     {
         private IModelRepository _modelRepo;
 
-        public List<Model> Models { get; private set; } // NEEDS TO CHANGE TO ONLY SHOW ONE!!!!!
+        public Model Model { get; set; } // NEEDS TO CHANGE TO ONLY SHOW ONE!!!!!
 
         public ShowModelInfo(IModelRepository modelRepository)
         {
             _modelRepo = modelRepository;
         }
-        public void OnGet()
+        public void OnGet(string modelName)
         {
-            Models = _modelRepo.GetAll();
+            Model = _modelRepo.GetModelByName(modelName);
         }
     }
 }

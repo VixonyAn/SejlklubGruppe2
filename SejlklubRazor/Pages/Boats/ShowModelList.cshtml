@@ -21,8 +21,8 @@
         {
             <tr>
                 <td>@item.ModelName</td>
-                <td>@Model.Boats.Count</td>
-                <td><a asp-page="ShowModelInfo" asp-route-mobile="@item.ModelName">Læs mere om båden her</a></td>
+                <td>@Model.Boats.Count</td> @* need to properly connect the counter *@
+                <td><a asp-page="ShowModelInfo" asp-route-modelName="@item.ModelName">Læs mere om båden her</a></td>
             </tr>
         }
     </tbody>

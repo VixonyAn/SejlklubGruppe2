@@ -1,5 +1,6 @@
 ﻿@page
 @using ClassLibrary.Models;
+@using SejlklubRazor.Pages.Boats;
 @model SejlklubRazor.Pages.Boats.ShowModelInfo
 @{
     ViewData["Title"] = "Båd Information";
@@ -19,18 +20,13 @@
     <tbody>
         @* get ONE model info, redirect to this page using ModelName *@
         @*GetModelByName*@
-
-        @foreach (Boat item in Model.Models)
-        {
-            <tr>
-                @* <td>@item.ModelName</td>
-                <td>@item.Description</td>
-                <td>@item.HullLength</td>
-                <td>@item.HullWidth</td>
-                <td>@item.HullDepth</td>
-                <td>@item.BaseWeight</td> *@
-                <td>@item.Registration</td>
-            </tr>
-        }
+        <tr>
+            <td>@Model.Model.ModelName</td>
+            <td>@Model.Model.Description</td>
+            <td>@Model.Model.HullLength</td>
+            <td>@Model.Model.HullWidth</td>
+            <td>@Model.Model.HullDepth</td>
+            <td>@Model.Model.BaseWeight</td>
+        </tr>
     </tbody>
 </table>
