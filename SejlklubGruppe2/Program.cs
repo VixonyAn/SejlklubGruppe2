@@ -67,12 +67,10 @@ internal class Program
         Console.WriteLine("");
         Console.WriteLine( "Alex test start");
 
+        /*
         CourseRepository courseRepository = new CourseRepository();
-
         Member courseMember1 = new Member("testName", "123435", "only message in bottle");
         Member courseMember2 = new Member("testName2", "12345677", "no message in bottle");
-        
-
         DateTime start = new DateTime(2015, 4, 7);
         DateTime end = new DateTime(2015, 8, 7);
         List<Member> members = new List<Member>();
@@ -89,7 +87,7 @@ internal class Program
         int[] att2 = { 2, 200 };
         Course testCourse2 = new Course(2, "TestNavn2", start2, end2, att2, members2, courseMember1, "this is a test Course2");
         courseRepository.Add(testCourse2);
-        courseRepository.PrintAllCourses();
+        courseRepository.PrintAllCourses();*/
 
         Console.WriteLine( "Alex test end");
         Console.WriteLine( );
