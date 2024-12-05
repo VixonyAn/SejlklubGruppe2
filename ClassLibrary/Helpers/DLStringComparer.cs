@@ -30,7 +30,7 @@ namespace ClassLibrary.Helpers
                     {
                         cost = 0;
                     }
-                    else cost = 1;
+                    else cost = 2;
 
                     matrix[i, j] = Math.Min(matrix[i - 1, j] + 1,
                         Math.Min(matrix[i, j - 1] + 1,
