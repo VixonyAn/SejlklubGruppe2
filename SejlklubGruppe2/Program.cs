@@ -48,7 +48,7 @@ internal class Program
         }
         catch (KeyTakenException error)
         {
-            Console.WriteLine($"{error.Message}"); // works!!
+            Console.WriteLine($"{error.Message}"); // works!! tested 05/12
         }
         // print boat list
         foreach (Boat boat in boatList)
@@ -57,10 +57,10 @@ internal class Program
         }
         // test searching for the new ID
         Boat search = boatRepo.GetBoatByReg("6666");
-        Console.WriteLine($"found your boat {search}"); // works!!
+        Console.WriteLine($"found your boat {search}"); // works!! tested 05/12
         // test adding a new boat using the old (no longer in use) ID that belonged to b1
         Boat b5 = new Boat(modelRepo.GetModelByName("Laserjolle"), "1234");
-        Console.WriteLine(b5); // works!!
+        Console.WriteLine(b5); // works!! tested 05/12
         */
         #endregion
 
