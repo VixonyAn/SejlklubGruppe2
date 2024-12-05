@@ -19,6 +19,10 @@ namespace ClassLibrary.Models
         #endregion
 
         #region Constructors
+        public Model()
+        {
+            
+        }
         public Model(string modelName, string description, double hullLength, double hullWidth, double hullDepth, double baseWeight)
         {
             ModelName = modelName;
