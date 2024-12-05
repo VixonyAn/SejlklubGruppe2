@@ -13,7 +13,7 @@ namespace ClassLibrary.Interfaces
         void AddBoat(Boat boat);
         Boat GetBoatByReg(string registration);
         void RemoveBoat(string registration);
-        void EditBoat(Boat newBoatInfo, Model model, string description, string registration);
+        void EditBoat(string oldBoatReg, string newBoatReg);
         int NumberOfModel(string modelName);
         void PrintAllBoats();
     }

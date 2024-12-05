@@ -1,4 +1,5 @@
-﻿using ClassLibrary.Exceptions;
+﻿using ClassLibrary.Data;
+using ClassLibrary.Exceptions;
 using ClassLibrary.Interfaces;
 using ClassLibrary.Models;
 using ClassLibrary.Services;
@@ -9,6 +10,8 @@ internal class Program
     private static void Main(string[] args)
     {
         #region VTest
+        /* initial constructor and Add to list exception test
+        // test create new model and boats, add to list, catch exception when ID already exists in list
         Model optimistjolle = new Model("Optimistjolle", "hyggelig for begyndere", 00.00, 00.00, 00.00, 00.00);
         Boat b1 = new Boat(optimistjolle, "5678");
         Boat b2 = new Boat(optimistjolle, "5678");
@@ -27,7 +30,37 @@ internal class Program
         {
             Console.WriteLine(boat);
         }
-        //Console.WriteLine(b1);
+        */
+
+        // initializing data
+        IModelRepository modelRepo = new ModelRepository();
+        IBoatRepository boatRepo = new BoatRepository();
+        List<Boat> boatList = boatRepo.GetAll(); // bring our dict into a list
+
+        /* testing edit function using the Reg ID
+        // test edit Reg ID function
+        boatRepo.EditBoat(boatList[0].Registration, "6666"); // edit first boat in list Reg (1234 = 6666)
+        // test try and catch exception, cannot update Reg ID to a Reg ID that already exists
+        try
+        {
+            boatRepo.EditBoat(boatList[0].Registration, "3456");
+        }
+        catch (KeyTakenException error)
+        {
+            Console.WriteLine($"{error.Message}"); // works!!
+        }
+        // print boat list
+        foreach (Boat boat in boatList)
+        {
+            Console.WriteLine($"{boat}");
+        }
+        // test searching for the new ID
+        Boat search = boatRepo.GetBoatByReg("6666");
+        Console.WriteLine($"found your boat {search}"); // works!!
+        // test adding a new boat using the old (no longer in use) ID that belonged to b1
+        Boat b5 = new Boat(modelRepo.GetModelByName("Laserjolle"), "1234");
+        Console.WriteLine(b5); // works!!
+        */
         #endregion
 
         #region Atest
