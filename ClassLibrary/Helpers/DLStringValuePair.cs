@@ -8,12 +8,12 @@ namespace ClassLibrary.Helpers
 {
     public class DLStringValuePair
     {
-        #region instance
+        #region Instance Fields
         private int _DLValue;
         private string _DLString;
         #endregion
 
-        #region Contstructors
+        #region Constructors
         public DLStringValuePair(int value, string s)
         {
             _DLValue = value;
@@ -29,7 +29,7 @@ namespace ClassLibrary.Helpers
         #region Methods
         public override string ToString()
         {
-            return $"String: {_DLString}.Damerau-Levenshtein distance: {_DLValue}.";
+            return $"String: {_DLString}. DL-Value: {_DLValue}.";
         }
         #endregion
     }

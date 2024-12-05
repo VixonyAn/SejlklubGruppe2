@@ -15,9 +15,9 @@ namespace ClassLibrary.Helpers
             {
                 currentValuePair = list[i];
                 int j = i - 1;
-                while(j>0 && currentValuePair.DLValue < list[j].DLValue)
+                while(j>=0 && currentValuePair.DLValue < list[j].DLValue)
                 {
-                    list[j] = list[j + 1];
+                    list[j+1] = list[j];
                     j--;
                 }
                 list[j + 1] = currentValuePair;

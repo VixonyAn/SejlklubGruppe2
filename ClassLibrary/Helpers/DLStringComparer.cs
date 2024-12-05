@@ -46,12 +46,26 @@ namespace ClassLibrary.Helpers
             return matrix[a.Length, b.Length];
         }
 
+        public static List<DLStringValuePair> SortPairs(List<string> matchables, string query)
+        {
+            List<DLStringValuePair> sortables = new List<DLStringValuePair>();
+            foreach (string s in matchables)
+            {
+                sortables.Add(new DLStringValuePair(Compare(query.ToLower(), s.ToLower()), s));
+            }
+
+            DLInsertionSort.Sort(sortables);
+
+            return sortables;
+        }
+
+
         public static List<String> Matches(List<string> matchables, string query, int maxDLCost)
         {
             List<DLStringValuePair> sortables = new List<DLStringValuePair>();
             foreach(string s in matchables)
             {
-                sortables.Add(new DLStringValuePair(Compare(query,s), s));
+                sortables.Add(new DLStringValuePair(Compare(query.ToLower(),s.ToLower()), s));
             }
 
             DLInsertionSort.Sort(sortables);
