@@ -102,18 +102,20 @@ internal class Program
         Console.WriteLine(testEgon);
         */
 
-        List<string> DLTestList = new List<string>() { "Egon", "Egon Olsen", "Svendsonson", "Al Jazeera", "Sigurd", "Ejgild"};
+        List<string> DLTestList = new List<string>() { "Egon", "Svendsonson", "Al Jazeera", "Sigurd", "Ejgild", "Egon Olsen"};
 
         string query = "Eegon";
 
-        List<string> DLTestResultList = DLStringComparer.Matches(DLTestList, query, 7);
+        List<string> DLTestResultList = DLStringComparer.Matches(DLTestList, query, 9, 5);
 
         List<DLStringValuePair> DLTestResultListWithValues = DLStringComparer.SortPairs(DLTestList, query);
 
+        Console.WriteLine("Testing the cost-of-editing algorithm");
         for(int i = 0; i<DLTestResultList.Count;i++)
         {
             Console.WriteLine($"Result {i}: {DLTestResultListWithValues[i]}");
         }
+        Console.WriteLine("Test ended");
 
         #endregion
 

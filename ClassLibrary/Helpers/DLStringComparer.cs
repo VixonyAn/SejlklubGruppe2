@@ -30,20 +30,24 @@ namespace ClassLibrary.Helpers
                     {
                         cost = 0;
                     }
-                    else cost = 2;
+                    else cost = 2; //Values above 1 makes letter substitution much less desirable.
+                                   //This means that the algorithm won't consider strings similar just because they have a similar length.
+                                   //Mainly usefull with regards to surnames.
 
-                    matrix[i, j] = Math.Min(matrix[i - 1, j] + 1,
-                        Math.Min(matrix[i, j - 1] + 1,
-                        matrix[i - 1, j - 1] + cost));
 
-                    if (i > 1 && j > 1 && a[i - 1] == b[j - 2] && a[i - 2] == b[j - 1])
+                    matrix[i, j] = //Here we save the "cheapest" possible cost for reaching this "square"
+                        Math.Min(matrix[i - 1, j] + 1, //matrix[i - 1, j] + 1, is the cost of deleting a letter. This "moves" the comparison to a new letter combination
+                        Math.Min(matrix[i, j - 1] + 1, //matrix[i, j - 1] + 1, is the cost of inserting a new letter. This also "moves" the comparison
+                        matrix[i - 1, j - 1] + cost)); //matrix[i - 1, j - 1] + cost is the cost of substituting a letter with the correct one (cost = 0 if it was already the same)
+
+                    if (i > 1 && j > 1 && a[i - 1] == b[j - 2] && a[i - 2] == b[j - 1]) //We can only swap neightbouring letters and only if we are on letter nr. 2 in both strings.
                     {
-                        matrix[i, j] = Math.Min(matrix[i, j], matrix[i - 2, j - 2] + 1);
+                        matrix[i, j] = Math.Min(matrix[i, j], matrix[i - 2, j - 2] + 1); //If two letters can be swapped the cost is matrix[i - 2, j - 2] + 1
                     }
                 }
             }
 
-            return matrix[a.Length, b.Length];
+            return matrix[a.Length, b.Length]; //Lower right corner of the grid is now the optimal cost (int)
         }
 
         public static List<DLStringValuePair> SortPairs(List<string> matchables, string query)
@@ -60,19 +64,25 @@ namespace ClassLibrary.Helpers
         }
 
 
-        public static List<String> Matches(List<string> matchables, string query, int maxDLCost)
+        public static List<String> Matches(List<string> matchables, string query, int maxDLCost, int maxResults)
         {
             List<DLStringValuePair> sortables = new List<DLStringValuePair>();
+            int checkValue;
             foreach(string s in matchables)
             {
-                sortables.Add(new DLStringValuePair(Compare(query.ToLower(),s.ToLower()), s));
+                checkValue = Compare(query, s);
+
+                if (checkValue < maxDLCost)
+                {
+                    sortables.Add(new DLStringValuePair(checkValue, s));
+                }
             }
 
             DLInsertionSort.Sort(sortables);
 
             List<string> results = new List<string>();
 
-            for(int i = 0; i<sortables.Count;i++)
+            for(int i = 0; i<Math.Min(sortables.Count,maxResults);i++)
             {
                 results.Add(sortables[i].DLString);
             }

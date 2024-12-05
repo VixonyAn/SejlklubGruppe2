@@ -11,7 +11,7 @@ namespace ClassLibrary.Helpers
         public static void Sort(List<DLStringValuePair> list)
         {
             DLStringValuePair currentValuePair;
-            for(int i = 1; i<list.Count-1;i++)
+            for(int i = 1; i<list.Count;i++)
             {
                 currentValuePair = list[i];
                 int j = i - 1;
