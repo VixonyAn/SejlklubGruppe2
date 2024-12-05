@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using ClassLibrary.Data;
 using ClassLibrary.Exceptions;
 using ClassLibrary.Interfaces;
 using ClassLibrary.Models;
@@ -19,7 +20,8 @@ namespace ClassLibrary.Services
         #region Constructors
         public MemberRepository()
         {
-            _internalRepo = new Dictionary<string, IMember>();
+            //_internalRepo = new Dictionary<string, IMember>();
+            _internalRepo = MockData.GetInstance().MemberData;
         }
         #endregion
 

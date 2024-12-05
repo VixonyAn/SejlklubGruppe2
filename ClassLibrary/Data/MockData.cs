@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ClassLibrary.Interfaces;
 using ClassLibrary.Models;
 
 namespace ClassLibrary.Data
@@ -19,6 +20,8 @@ namespace ClassLibrary.Data
         private Dictionary<string, Model> _modelData;
 
         private Dictionary<string, Boat> _boatData;
+
+        private Dictionary<string, IMember> _memberData;
         #endregion
 
         #region Constructors
@@ -40,6 +43,14 @@ namespace ClassLibrary.Data
             { "9012", new Boat(optimistjolle, "9012") },
             { "3456", new Boat(laserjolle, "3456") }
             };
+
+            _memberData = new Dictionary<string, IMember>()
+            {
+            { "Kurt", new Member("Kurt", "11 11 11 11", "Kurt@Chainmail.kz") },
+            { "Poul", new Member("Poul", "5678", "pohe@Zealand.dk") },
+            { "Valdemar Den Store", new Member("Valdemar Den Store", "10 10 10 10", "ValdeM@OldMail.dk") },
+            { "Egon Olsen", new Member("Egon Olsen", "72 55 65 00", "HrOlsen@Mail.dk") }
+            };
         }
         #endregion
 
@@ -52,6 +63,11 @@ namespace ClassLibrary.Data
         public Dictionary<string, Boat> BoatData
         {
             get { return _boatData; }
+        }
+
+        public Dictionary<string, IMember> MemberData
+        {
+            get { return _memberData; }
         }
         #endregion
 

@@ -1,4 +1,5 @@
 ﻿@page
+@using ClassLibrary.Models
 @model SejlklubRazor.Pages.Members.ShowMembersModel
 @{
     ViewData["Title"] = "Medlemsskabsliste";
@@ -12,6 +13,14 @@
     </thead>
 
     <tbody>
+        @foreach (Member member in Model.Members) 
+        {
+            <tr>
+                <td>@member.Name</td>
+                <td>@member.Phone</td>
+                <td>@member.Email</td>
+            </tr>
+        }
 
     </tbody>
 </table>
