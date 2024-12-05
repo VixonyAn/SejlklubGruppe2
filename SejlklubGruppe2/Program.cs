@@ -34,16 +34,29 @@ internal class Program
         Console.WriteLine("");
         Console.WriteLine( "Alex test start");
 
+        CourseRepository courseRepository = new CourseRepository();
+
         Member courseMember1 = new Member("testName", "123435", "only message in bottle");
         Member courseMember2 = new Member("testName2", "12345677", "no message in bottle");
-        string[] time = { "1", "2" };
-        int[] range = { 1, 10 };
+        
+
+        DateTime start = new DateTime(2015, 4, 7);
+        DateTime end = new DateTime(2015, 8, 7);
         List<Member> members = new List<Member>();
         members.Add(courseMember1);
         members.Add(courseMember2);
-        Course testCourse = new Course(1,time,range, members,courseMember1,"this is a test Course");
-
-        Console.WriteLine( testCourse);
+        int[] att = { 1, 10 };
+        Course testCourse = new Course(1,"TestNavn",start,end,att, members,courseMember1,"this is a test Course");
+        courseRepository.Add(testCourse);
+        DateTime start2 = new DateTime(2015, 4, 7);
+        DateTime end2 = new DateTime(2015, 8, 7);
+        List<Member> members2 = new List<Member>();
+        members2.Add(courseMember1);
+        members2.Add(courseMember2);
+        int[] att2 = { 2, 200 };
+        Course testCourse2 = new Course(2, "TestNavn2", start2, end2, att2, members2, courseMember1, "this is a test Course2");
+        courseRepository.Add(testCourse2);
+        courseRepository.PrintAllCourses();
 
         Console.WriteLine( "Alex test end");
         Console.WriteLine( );

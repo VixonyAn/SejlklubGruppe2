@@ -14,9 +14,11 @@ namespace ClassLibrary.Models
     public class Course : ICourse
     {
         public int Id { get; set; }
-
-        public string[] TimeSlot {  get; set; }
-            // new string[2, 2];
+        public string Name { get; set; }
+        public DateTime StartDateTime { get; set; }
+        public DateTime EndDateTime { get; set; }
+        public DateTime[] TimeSlot = new DateTime[2];
+        
 
 
         public int[] AttendeeRange {  get; set; }
@@ -33,10 +35,12 @@ namespace ClassLibrary.Models
         {    
         }
 
-        public Course(int id, string[] timeSlot, int[] attendeeRange, List<Member> attendees, Member master, string description)
+        public Course(int id,string name, DateTime startDateTime, DateTime endDateTime, int[] attendeeRange, List<Member> attendees, Member master, string description)
         {
             Id = id;
-            TimeSlot = timeSlot;
+            Name = name;
+            TimeSlot[0]=startDateTime;
+            TimeSlot[1]=endDateTime;
             AttendeeRange = attendeeRange;
             Attendees = attendees;
             Master = master;
@@ -44,7 +48,7 @@ namespace ClassLibrary.Models
         }
         public override string ToString()
         {
-            return $"id: {Id} \n  timeslot   from: {TimeSlot[0]}, to:{TimeSlot[1]} \n  Creator: {Master.Name} \n  Minimum Number of Attendees: {AttendeeRange[0]} ,  Max Number of Attendees: {AttendeeRange[1]}  \n  places left: {((Attendees.Count < AttendeeRange[1]) ? $"der er {AttendeeRange[1]-Attendees.Count} pladser tilbage" : $"der er ikke flere pladser {Attendees.Count} ud af {AttendeeRange[1]} \n " +$"")}";
+            return $"id: {Id} \n Name: {Name} \n  timeslot   from: {TimeSlot[0]}, to:{TimeSlot[1]} \n  Creator: {Master.Name} \n  Minimum Number of Attendees: {AttendeeRange[0]} ,  Max Number of Attendees: {AttendeeRange[1]}  \n  places left: {((Attendees.Count < AttendeeRange[1]) ? $"der er {AttendeeRange[1]-Attendees.Count} pladser tilbage" : $"der er ikke flere pladser {Attendees.Count} ud af {AttendeeRange[1]} \n " +$"")}";
         }
     }
 
