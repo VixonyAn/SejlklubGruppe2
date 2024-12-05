@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,16 +10,19 @@ namespace ClassLibrary.Services
 {
     public class CourseRepository : ICourseRepository
     {
+        #region Instance fields
         private Dictionary<int, Course> _courses = new Dictionary<int, Course>();
+        #endregion
+        #region Properties
         public int Count { get { return _courses.Count; } }
-
-
+        #endregion 
+        #region Constructors
         public CourseRepository()
         {
-            
+
         }
-
-
+        #endregion
+        #region Methods
         public void Add(Course course)
         {
             _courses.Add(Count + 1, course);
@@ -33,10 +35,13 @@ namespace ClassLibrary.Services
 
         public void PrintAllCourses()
         {
+            Console.WriteLine("\n liste af alle kurser \n -");
             foreach (Course c in _courses.Values)
             {
+                Console.WriteLine();
                 Console.WriteLine(c);   
             }
+            Console.WriteLine("\n liste sluttede \n ");
         }
 
         public void Update(Course course)
@@ -49,5 +54,6 @@ namespace ClassLibrary.Services
         {
             return _courses.Values.ToList();
         }
+        #endregion
     }
 }
