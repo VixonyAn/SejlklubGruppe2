@@ -29,7 +29,7 @@ namespace ClassLibrary.Helpers
         #region Methods
         public override string ToString()
         {
-            return $"String: {_DLString}.Damerau-Levenshtein distance: {_DLValue}.";
+            return $"String: {_DLString}. DL-Value: {_DLValue}.";
         }
         #endregion
     }

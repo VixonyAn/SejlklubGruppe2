@@ -1,5 +1,6 @@
 ﻿using ClassLibrary.Data;
 using ClassLibrary.Exceptions;
+using ClassLibrary.Helpers;
 using ClassLibrary.Interfaces;
 using ClassLibrary.Models;
 using ClassLibrary.Services;
@@ -65,13 +66,13 @@ internal class Program
 
         #region Atest
         Console.WriteLine("");
-        Console.WriteLine( "Alex test start");
+        Console.WriteLine("Alex test start");
 
         CourseRepository courseRepository = new CourseRepository();
 
         Member courseMember1 = new Member("testName", "123435", "only message in bottle");
         Member courseMember2 = new Member("testName2", "12345677", "no message in bottle");
-        
+
 
         DateTime start = new DateTime(2015, 4, 7);
         DateTime end = new DateTime(2015, 8, 7);
@@ -79,7 +80,7 @@ internal class Program
         members.Add(courseMember1);
         members.Add(courseMember2);
         int[] att = { 1, 10 };
-        Course testCourse = new Course(1,"TestNavn",start,end,att, members,courseMember1,"this is a test Course");
+        Course testCourse = new Course(1, "TestNavn", start, end, att, members, courseMember1, "this is a test Course");
         courseRepository.Add(testCourse);
         DateTime start2 = new DateTime(2015, 4, 7);
         DateTime end2 = new DateTime(2015, 8, 7);
@@ -91,13 +92,28 @@ internal class Program
         courseRepository.Add(testCourse2);
         courseRepository.PrintAllCourses();
 
-        Console.WriteLine( "Alex test end");
-        Console.WriteLine( );
+        Console.WriteLine("Alex test end");
+        Console.WriteLine();
         #endregion
 
         #region KTest
+        /* Test of member ctor
         Member testEgon = new Member("Egon", "11 11 11 11", "REalMail@Mail.ru");
         Console.WriteLine(testEgon);
+        */
+
+        List<string> DLTestList = new List<string>() { "Egon", "Egon Olsen", "Svendsonson", "Al Jazeera", "Sigurd", "Ejgild"};
+
+        string query = "Eegon";
+
+        List<string> DLTestResultList = DLStringComparer.Matches(DLTestList, query, 7);
+
+        List<DLStringValuePair> DLTestResultListWithValues = DLStringComparer.SortPairs(DLTestList, query);
+
+        for(int i = 0; i<DLTestResultList.Count;i++)
+        {
+            Console.WriteLine($"Result {i}: {DLTestResultListWithValues[i]}");
+        }
 
         #endregion
 
