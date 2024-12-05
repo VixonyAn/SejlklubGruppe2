@@ -8,6 +8,7 @@ using ClassLibrary.Models;
 using ClassLibrary.Exceptions;
 using System.Reflection;
 using System.Runtime.ConstrainedExecution;
+using ClassLibrary.Data;
 
 namespace ClassLibrary.Services
 {
@@ -20,7 +21,8 @@ namespace ClassLibrary.Services
         #region Constructors
         public BoatRepository()
         {
-            _boats = new Dictionary<string, Boat>();
+            _boats = MockData.GetInstance().BoatData;
+            //_boats = new Dictionary<string, Boat>();
         }
         #endregion
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ClassLibrary.Data;
 using ClassLibrary.Exceptions;
 using ClassLibrary.Interfaces;
 using ClassLibrary.Models;
@@ -18,7 +19,8 @@ namespace ClassLibrary.Services
         #region Constructors
         public ModelRepository()
         {
-            _models = new Dictionary<string, Model>();
+            _models = MockData.GetInstance().ModelData;
+            //_models = new Dictionary<string, Model>();
         }
         #endregion
 

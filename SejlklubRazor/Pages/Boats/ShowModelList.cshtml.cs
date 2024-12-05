@@ -15,7 +15,7 @@ namespace SejlklubRazor.Pages.Boats
 
         #region Properties
         public List<Model> Models { get; private set; }
-        public List<Boat> Boats { get; private set; }
+        public IBoatRepository Boats { get; private set; }
         #endregion
 
         #region Constructors
@@ -30,7 +30,7 @@ namespace SejlklubRazor.Pages.Boats
         public void OnGet()
         {
             Models = _modelRepo.GetAll();
-            Boats = _boatRepo.GetAll();
+            Boats = _boatRepo;
         }
         #endregion
     }
