@@ -45,10 +45,8 @@ namespace SejlklubRazor.Pages.Boats
 
         public IActionResult OnPost()
         {
-            //Boat.Model = ChosenModelType;
-            //_boatRepo[]
             _boatRepo.AddBoat(Model, Registration);
-            return RedirectToPage("ShowBoats");
+            return RedirectToPage("ShowBoatList");
         }
     }
 }
