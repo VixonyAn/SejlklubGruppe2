@@ -4,12 +4,27 @@
     ViewData["Title"] = "Opret Medlem";
 }
 
+    @if(Model.OldName != null)
+    {
+        <h3>Du er i gang med at redigere brugeren: @Model.OldName</h3>
+    }
+
 <form method="post">
     <div class="form-group">
         <label asp-for="@Model.Name" class="control-label"></label>
         <input asp-for="@Model.Name" class="form-control" />
     </div>
-    <h5><span class="text-danger">@Model.NameWarning</span></h5>
+
+    @if(Model.PrevName != null)
+    {
+        <h5><span class="text-danger">@Model.NameWarning:</span></h5>
+        <h5><span class="text-danger">@Model.PrevName. Rediger denne bruger?</span></h5>
+
+        <a class="nav-link text-dark bg-primary" style="display: inline; width: 20%;" asp-page="AddMember" asp-route-oldName="@Model.PrevName">Ja</a>
+        <p style=" display: inline"> </p>
+        <a class="nav-link text-dark bg-primary" style="display: inline; width: 20%;" asp-page="AddMember" asp-route-oldName="@Model.OldName">Nej</a>
+    }
+
     <div class="form-group">
         <label asp-for="@Model.Phone" class="control-label"></label>
         <input asp-for="@Model.Phone" class="form-control" />

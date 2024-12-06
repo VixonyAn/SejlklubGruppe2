@@ -6,7 +6,7 @@
 }
 
 <btn>
-    <a class="nav-link text-dark bg-primary" asp-page="/Members/AddMember">Tilføj nyt medlem</a>
+    <a class="nav-link text-dark bg-primary" asp-page="AddMember">Tilføj nyt medlem</a>
 </btn>
 
 <table class="table">
@@ -23,6 +23,7 @@
                 <td>@member.Name</td>
                 <td>@member.Phone</td>
                 <td>@member.Email</td>
+                <td><a asp-page="AddMember" asp-route-oldName="@member.Name">Edit</a></td>
             </tr>
         }
 

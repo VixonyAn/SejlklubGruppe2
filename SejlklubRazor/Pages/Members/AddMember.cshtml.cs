@@ -1,3 +1,4 @@
+using ClassLibrary.Exceptions;
 using ClassLibrary.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -16,25 +17,39 @@ namespace SejlklubRazor.Pages.Members
         public string Email { get; set; }
         public string NameWarning { get; set; }
 
+        public string OldName { get; set; }
+        public string PrevName { get; set; }
+
 
         public AddMemberModel(IMemberRepository memberRepository)
         {
             _internalMRepo = memberRepository;
         }
-        public void OnGet()
+        public void OnGet(string oldName)
         {
-
+            OldName = oldName;
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(string oldName)
         {
+            OldName = oldName;
             try
             {
-                _internalMRepo.AddMember(Name, Phone, Email);
-                return RedirectToPage("ShowMembers");
-            } catch
+                if(OldName == null)
+                {
+                    _internalMRepo.AddMember(Name, Phone, Email);
+                    return RedirectToPage("ShowMembers");
+                } else
+                {
+                    _internalMRepo.EditMember(OldName, Name, Phone, Email);
+                    return RedirectToPage("ShowMembers");
+                }
+            } catch(KeyTakenException keyEx)
             {
-                NameWarning = "A customer with this name already exists";
+                if (OldName == null) PrevName = Name;
+                else PrevName = OldName;
+
+                NameWarning = PrevName + " er allerede registreret som navn.";
                 return Page();
             }
 
