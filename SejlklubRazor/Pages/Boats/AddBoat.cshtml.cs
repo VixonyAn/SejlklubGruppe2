@@ -14,7 +14,11 @@ namespace SejlklubRazor.Pages.Boats
         [BindProperty] // Two way binding
         public string Registration { get; set; }
         [BindProperty]
+        public Boat Boat { get; set; }
+        [BindProperty]
         public Model Model { get; set; }
+        [BindProperty]
+        public string ModelName { get; set; }
         public List<SelectListItem> ModelSelectList { get; set; }
         [BindProperty]
         public Model ChosenModelType { get; set; }
@@ -45,7 +49,8 @@ namespace SejlklubRazor.Pages.Boats
 
         public IActionResult OnPost()
         {
-            _boatRepo.AddBoat(Model, Registration);
+            Boat.Model = ChosenModelType;
+            _boatRepo.AddBoat(Boat.Model, Registration); /*_modelRepo.GetModelByName(ChosenModelType)*/
             return RedirectToPage("ShowBoatList");
         }
     }

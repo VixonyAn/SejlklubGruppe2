@@ -19,6 +19,10 @@ namespace ClassLibrary.Models
         #endregion
 
         #region Constructors
+        public Boat()
+        {
+            
+        }
         public Boat(Model model, string registration) // Constructor takes a Model and Registration for the boat
         {
             Model = model;
