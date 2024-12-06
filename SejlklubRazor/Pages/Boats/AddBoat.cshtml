@@ -15,7 +15,11 @@
         </select>
     </div>
     <div class="form-group">
-        <label asp-for="@Model.Registration" class="control-label"></label> @* missing some sort of asp route *@
+        <label asp-for="@Model.Nickname" class="control-label"></label>
+        <input asp-for="@Model.Nickname" style="display: inline; width: 30%;" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Registration" class="control-label"></label>
         <input asp-for="@Model.Registration" style="display: inline; width: 30%;" class="form-control" />
     </div>
     <div class="formgroup">

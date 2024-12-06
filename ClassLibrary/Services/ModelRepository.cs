@@ -30,15 +30,16 @@ namespace ClassLibrary.Services
             return _models.Values.ToList();
         }
 
-        public void AddModel(Model model)
+        public void AddModel(string modelName, string description, double hullLength, double hullWidth, double hullDepth, double baseWeight)
         {
-            if (!_models.ContainsKey(model.ModelName))
+            if (!_models.ContainsKey(modelName))
             { // because dictionaries cannot contain duplicates
-                _models.Add(model.ModelName, model);
+                Model newModel = new Model(modelName, description, hullLength, hullWidth, hullDepth, baseWeight);
+                _models.Add(modelName, newModel);
             }
             else
             {
-                throw new KeyTakenException($"En model af navnet '{model.ModelName}' findes allerede\n");
+                throw new KeyTakenException($"En model af navnet '{modelName}' findes allerede\n");
             }
         }
 

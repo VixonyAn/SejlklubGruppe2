@@ -38,10 +38,10 @@ namespace ClassLibrary.Data
 
             _boatData = new Dictionary<string, Boat>()
             {
-            { "1234", new Boat(optimistjolle, "1234") },
-            { "5678", new Boat(optimistjolle, "5678") },
-            { "9012", new Boat(optimistjolle, "9012") },
-            { "3456", new Boat(laserjolle, "3456") }
+            { "1234", new Boat(optimistjolle, "Ahoy", "1234") },
+            { "5678", new Boat(optimistjolle, "Ship'n", "5678") },
+            { "9012", new Boat(optimistjolle, "Rover", "9012") },
+            { "3456", new Boat(laserjolle, "Tintin", "3456") }
             };
 
             _memberData = new Dictionary<string, IMember>()

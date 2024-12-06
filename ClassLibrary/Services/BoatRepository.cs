@@ -45,11 +45,11 @@ namespace ClassLibrary.Services
         }
 
         //eyyyy this is polymorphism
-        public void AddBoat(Model modelName, string registration)
+        public void AddBoat(Model modelName, string nickname, string registration)
         {
             if (!_boats.ContainsKey(registration)) // if dict DOESN'T contain this key, boat is added
             { // because dictionaries cannot contain duplicates
-                _boats.Add(registration, new Boat(modelName, registration));
+                _boats.Add(registration, new Boat(modelName, nickname, registration));
             }
             else // if dict DOES contain this key, exception is thrown
             {
@@ -71,9 +71,8 @@ namespace ClassLibrary.Services
             _boats.Remove(registration);
         }
 
-        // Unnecessary to edit a boat as it always keeps the same model and registration ID
-        // UNLESS the registration ID was entered incorrectly during creation
-        public void EditBoat(string oldBoatReg, string newBoatReg)
+        // Edit in case of registration ID typo or a new nickname for the boat
+        public void EditBoat(string oldBoatReg, string newBoatReg, string newNickname)
         {
             if (_boats.ContainsKey(newBoatReg))
             { // if Dict already contains a Boat with the new Reg ID, throw an exception
@@ -85,6 +84,7 @@ namespace ClassLibrary.Services
             _boats.Remove(oldBoatReg); // severs Ref to the Boat (oldRegID) in the Dict
             _boats[newBoatReg] = oldBoat; // oldBoat info placed in new spot using new Reg ID as key
             oldBoat.Registration = newBoatReg; // overwrites old Reg ID with new Reg ID in object (not key)
+            oldBoat.Nickname = newNickname; // overwrites old Nickname with new Nickname
         }
         public int NumberOfModel(string modelName)
         {

@@ -10,6 +10,7 @@ namespace ClassLibrary.Interfaces
     public interface IBoat
     {
         Model Model { get; set; }
+        string Nickname { get; set; }
         string Registration { get; set; }
         List<Issue> Issue { get; set; }
 

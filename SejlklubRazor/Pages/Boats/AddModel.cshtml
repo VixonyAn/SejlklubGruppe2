@@ -1,0 +1,38 @@
+﻿@page
+@using ClassLibrary.Models;
+@model SejlklubRazor.Pages.Boats.AddModelModel
+@{
+    ViewData["Title"] = "Opret Model";
+}
+
+<h3>Opret en Model</h3>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="@Model.ModelName" class="control-label"></label>
+        <input asp-for="@Model.ModelName" style="display: inline; width: 30%;" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Description" class="control-label"></label>
+        <input asp-for="@Model.Description" style="display: inline; width: 30%;" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.HullLength" class="control-label"></label>
+        <input asp-for="@Model.HullLength" style="display: inline; width: 30%;" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.HullWidth" class="control-label"></label>
+        <input asp-for="@Model.HullWidth" style="display: inline; width: 30%;" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.HullDepth" class="control-label"></label>
+        <input asp-for="@Model.HullDepth" style="display: inline; width: 30%;" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.BaseWeight" class="control-label"></label>
+        <input asp-for="@Model.BaseWeight" style="display: inline; width: 30%;" class="form-control" />
+    </div>
+    <div class="formgroup">
+        <input type="submit" value="Opret Ny Model" class="btn btn-primary" />
+    </div>
+</form>
