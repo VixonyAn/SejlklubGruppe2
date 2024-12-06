@@ -19,11 +19,11 @@ namespace SejlklubRazor.Pages.Boats
         [BindProperty] // Two way binding
         public Boat Boat { get; set; }
         [BindProperty]
-        public string oldBoatReg { get; set; }
+        public string Registration { get; set; }
         [BindProperty]
-        public string newBoatReg { get; set; }
+        public string newRegistration { get; set; }
         [BindProperty]
-        public string newNickname { get; set; }
+        public string Nickname { get; set; }
 
         #endregion
 
@@ -35,15 +35,15 @@ namespace SejlklubRazor.Pages.Boats
         #endregion
 
         #region Methods
-        public IActionResult OnGet(string oldBoatReg)
+        public IActionResult OnGet(string registration)
         {
-            Boat = _boatRepo.GetBoatByReg(oldBoatReg);
+            Boat = _boatRepo.GetBoatByReg(registration);
             return Page();
         }
 
-        public IActionResult OnPost(string oldBoatReg)
+        public IActionResult OnPost(string newRegistration)
         {
-            _boatRepo.EditBoat(oldBoatReg, newBoatReg, newNickname);
+            _boatRepo.EditBoat(Registration, newRegistration, Nickname);
             return RedirectToPage("ShowBoatList");
         }
         #endregion
