@@ -1,0 +1,47 @@
+﻿@page
+@using ClassLibrary.Models;
+@using ClassLibrary.Services;
+@using ClassLibrary.Interfaces;
+@using SejlklubRazor.Pages;
+@model SejlklubRazor.Pages.Courses.AddCourse.AddCourseModel
+@{
+    ViewData["Title"] = "Lav et Hold";
+}
+
+
+<h3>Opret en Hold</h3>
+
+<form method="post">
+    <div class="form-group">
+        <p> write you name, if you are a member</p>
+        <label asp-for="@Model.Master" class="control-label"></label>
+        <input asp-for="@Model.Master" style="display: inline; width: 30%;" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Name" class="control-label"></label>
+        <input asp-for="@Model.Name" style="display: inline; width: 30%;" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.MinAttendeeNum" class="control-label"></label>
+        <input asp-for="@Model.MinAttendeeNum" style="display: inline; width: 30%;" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.MaxAttendeeNum" class="control-label"></label>
+        <input asp-for="@Model.MaxAttendeeNum" style="display: inline; width: 30%;" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.StartDate" class="control-label"></label>
+        <input asp-for="@Model.StartDate" style="display: inline; width: 30%;" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.EndDate" class="control-label"></label>
+        <input asp-for="@Model.EndDate" style="display: inline; width: 30%;" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Description" class="control-label"></label>
+        <input asp-for="@Model.Description" style="display: inline; width: 30%;" class="form-control" />
+    </div>
+    <div class="formgroup">
+        <input type="submit" value="Opret Nyt Hold" class="btn btn-primary" />
+    </div>
+</form>

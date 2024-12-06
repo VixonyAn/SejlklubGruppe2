@@ -10,6 +10,10 @@
 
 <h3>Klubbens Hold</h3>
 
+<p>
+    <a asp-page="AddCourseModel">Opret Nyt Hold</a>
+</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -26,7 +30,7 @@
             <tr>
                 <td>@item.Name</td>
                 <td>@item.Attendees.Count</td> 
-                <td><a asp-page="ShowCourseList" asp-route-Name="@item.Name">Læs mere om Holdet her</a></td>
+                
             </tr>
         }
     </tbody>
