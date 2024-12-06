@@ -102,6 +102,7 @@ internal class Program
         Console.WriteLine(testEgon);
         */
 
+        /*Cost of editing algorithm
         List<string> DLTestList = new List<string>() { "Egon", "Svendsonson", "Al Jazeera", "Sigurd", "Ejgild", "Egon Olsen"};
 
         string query = "Eegon";
@@ -116,6 +117,7 @@ internal class Program
             Console.WriteLine($"Result {i}: {DLTestResultListWithValues[i]}");
         }
         Console.WriteLine("Test ended");
+        */
 
         #endregion
 
