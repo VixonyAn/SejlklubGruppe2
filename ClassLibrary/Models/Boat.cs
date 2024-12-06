@@ -14,6 +14,7 @@ namespace ClassLibrary.Models
         // udover default + en ny constructor til salg opslag (ejer's kontakt/pris i Post)
         #region Properties
         public Model Model { get; set; }
+        public string Nickname { get; set; }
         public string Registration { get; set; }
         public List<Issue> Issue { get; set; } // skal hente liste og printe den med båden når man ser båden?
         #endregion
@@ -23,9 +24,10 @@ namespace ClassLibrary.Models
         {
             
         }
-        public Boat(Model model, string registration) // Constructor takes a Model and Registration for the boat
+        public Boat(Model model, string nickname, string registration) // Constructor takes a Model and Registration for the boat
         {
             Model = model;
+            Nickname = nickname;
             Registration = registration;
         }
         #endregion
@@ -33,7 +35,7 @@ namespace ClassLibrary.Models
         #region Methods
         public override string ToString() // This prints the Models ToString too :>
         {
-            return $"Model: {Model}\nRegistration: {Registration}\n";
+            return $"Model: {Model}\nNavn:{Nickname}\nRegistration: {Registration}\n";
         }
         #endregion
     }
