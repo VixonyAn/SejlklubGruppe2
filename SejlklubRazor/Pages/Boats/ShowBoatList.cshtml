@@ -14,6 +14,7 @@
             <th>Navn</th>
             <th>Registrerings ID</th>
             <th>Vedligeholdelse Log</th>
+            <th>Admin</th>
         </tr>
     </thead>
     <tbody>
@@ -24,6 +25,14 @@
                 <td>@item.Nickname</td>
                 <td>@item.Registration</td>
                 <td><a asp-page="ShowBoatLogs" asp-route-boatReg="@item.Registration">Læs vedligeholdeslogs for denne båd</a></td>
+                <td>
+                    <form style="display: inline;" asp-page="EditBoat" asp-route-oldBoatReg="@item.Registration">
+                        <input type="submit" value="Edit" />
+                    </form>
+                    <form method="post" style="display: inline;" asp-page-handler="Delete" asp-route-deleteRegistration="@item.Registration">
+                        <input type="submit" value="Delete" />
+                    </form>
+                </td>
             </tr>
         }
     </tbody>

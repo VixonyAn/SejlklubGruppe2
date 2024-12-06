@@ -25,6 +25,12 @@ namespace SejlklubRazor.Pages.Boats
         #endregion
 
         #region Methods
+        public IActionResult OnPostDelete(string deleteRegistration)
+        {
+            _boatRepo.RemoveBoat(deleteRegistration);
+            return RedirectToPage("ShowBoatList");
+        }
+
         public void OnGet()
         {
             Boats = _boatRepo.GetAll();
