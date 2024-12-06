@@ -10,7 +10,7 @@ namespace ClassLibrary.Interfaces
     public interface IModelRepository
     {
         List<Model> GetAll();
-        void AddModel(Model model);
+        void AddModel(string modelName, string description, double hullLength, double hullWidth, double hullDepth, double baseWeight);
         Model GetModelByName(string modelName);
         void RemoveModel(string modelName);
         void EditModel(Model newModelInfo, Model model, string modelName, string description, double hullLength, double hullWidth, double hullDepth, double baseWeight);

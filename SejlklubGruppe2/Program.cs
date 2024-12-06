@@ -12,6 +12,7 @@ internal class Program
     {
         #region VTest
         /* initial constructor and Add to list exception test
+        // THIS WILL NO LONGER WORK as of 06/12 since nicknames were added
         // test create new model and boats, add to list, catch exception when ID already exists in list
         Model optimistjolle = new Model("Optimistjolle", "hyggelig for begyndere", 00.00, 00.00, 00.00, 00.00);
         Boat b1 = new Boat(optimistjolle, "5678");
@@ -37,7 +38,7 @@ internal class Program
         IModelRepository modelRepo = new ModelRepository();
         IBoatRepository boatRepo = new BoatRepository();
         List<Boat> boatList = boatRepo.GetAll(); // bring our dict into a list
-        
+
         /* test print alle modeller
         List<Model> modelList = modelRepo.GetAll();
         foreach (Model model in modelList)
@@ -46,6 +47,7 @@ internal class Program
         } */
 
         /* testing edit function using the Reg ID
+        // THIS WILL NO LONGER WORK as of 06/12 since nicknames were added
         // test edit Reg ID function
         boatRepo.EditBoat(boatList[0].Registration, "6666"); // edit first boat in list Reg (1234 = 6666)
         // test try and catch exception, cannot update Reg ID to a Reg ID that already exists
