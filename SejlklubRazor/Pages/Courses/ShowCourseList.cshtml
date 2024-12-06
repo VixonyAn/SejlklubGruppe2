@@ -1,0 +1,33 @@
+﻿@page
+@using ClassLibrary.Models;
+@using ClassLibrary.Services;
+@using ClassLibrary.Interfaces;
+@using SejlklubRazor.Pages;
+@model SejlklubRazor.Pages.Courses.ShowCourseList.ShowCourseList
+@{
+    ViewData["Title"] = "Klubbens Hold";
+}
+
+<h3>Klubbens Hold</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Titel</th>
+            <th>pladser tilbage</th>
+            <th>Beskrivelse</th>
+            <th>hold lavet af</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (Course item in Model.ListOfCourses )
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Attendees.Count</td> 
+                <td><a asp-page="ShowCourseList" asp-route-Name="@item.Name">Læs mere om Holdet her</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

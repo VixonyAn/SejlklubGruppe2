@@ -8,6 +8,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddSingleton<IBoatRepository, BoatRepository>(); // Add singleton, dependency injection
 builder.Services.AddSingleton<IModelRepository, ModelRepository>();
 builder.Services.AddSingleton<IMemberRepository, MemberRepository>();
+builder.Services.AddSingleton<ICourseRepository, CourseRepository>();
 
 var app = builder.Build();
 
