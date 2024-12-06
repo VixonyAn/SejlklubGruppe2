@@ -37,6 +37,13 @@ internal class Program
         IModelRepository modelRepo = new ModelRepository();
         IBoatRepository boatRepo = new BoatRepository();
         List<Boat> boatList = boatRepo.GetAll(); // bring our dict into a list
+        
+        /* test print alle modeller
+        List<Model> modelList = modelRepo.GetAll();
+        foreach (Model model in modelList)
+        {
+            Console.WriteLine($"{model}");
+        } */
 
         /* testing edit function using the Reg ID
         // test edit Reg ID function
