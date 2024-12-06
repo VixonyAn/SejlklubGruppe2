@@ -18,18 +18,19 @@ namespace ClassLibrary.Models
         public string PostType { get; set; } //Event  /  News    / Sale
         public DateTime PostDate { get; set; }
 
+
         public Post()
         {
         }
 
-        public Post(int id, string title, string text, Member writer, string postType, DateTime postDate)  //normal post
+        public Post(int id, string title, string text, Member writer, string postType)  //normal post
         {
             Id = id;
             Title = title;
             Text = text;
             Writer = writer;
             PostType = postType;
-            PostDate = postDate;
+            PostDate = DateTime.Now;
         }
 
         public override string ToString()
