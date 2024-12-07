@@ -31,6 +31,11 @@ namespace SejlklubRazor.Pages.Boats
             return RedirectToPage("ShowBoatList");
         }
 
+        public IActionResult OnPostEdit(string Registration)
+        {
+            return RedirectToPage("EditBoat", new { Registration = Registration });
+        }
+
         public void OnGet()
         {
             Boats = _boatRepo.GetAll();

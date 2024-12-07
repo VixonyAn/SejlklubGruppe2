@@ -26,12 +26,14 @@
                 <td>@item.Registration</td>
                 <td><a asp-page="ShowBoatLogs" asp-route-boatReg="@item.Registration">Læs vedligeholdeslogs for denne båd</a></td>
                 <td>
-                    <a method="get" style="display: inline;" asp-page="EditBoat" asp-route-Registration="@item.Registration">
+                    <form method="post" style="display: inline;" asp-page-handler="Edit" asp-route-Registration="@item.Registration">
                         <input type="submit" value="Edit" />
-                    </a>
+                    </form>
+
                     <form method="post" style="display: inline;" asp-page-handler="Delete" asp-route-deleteRegistration="@item.Registration">
                         <input type="submit" value="Delete" />
                     </form>
+
                 </td>
             </tr>
         }
