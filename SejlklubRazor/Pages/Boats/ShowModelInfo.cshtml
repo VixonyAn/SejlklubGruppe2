@@ -15,16 +15,25 @@
             <th>Skrog Bredde</th>
             <th>Skrog Dybde</th>
             <th>Vægt</th>
+            <th>Admin</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>@Model.Model.ModelName</td>
-            <td>@Model.Model.Description</td>
+            <td>@Model.Model.Description</td> @* would like to set a width limit and force new lines *@
             <td>@Model.Model.HullLength</td>
             <td>@Model.Model.HullWidth</td>
             <td>@Model.Model.HullDepth</td>
             <td>@Model.Model.BaseWeight</td>
+            <td>
+                <form method="post" style="display: inline;" asp-page-handler="Edit" asp-route-ModelName="@Model.Model.ModelName">
+                    <input type="submit" value="Edit" />
+                </form>
+                <form method="post" style="display: inline;" asp-page-handler="Delete" asp-route-deleteModelName="@Model.Model.ModelName">
+                    <input type="submit" value="Delete" />
+                </form>
+            </td>
         </tr>
     </tbody>
 </table>

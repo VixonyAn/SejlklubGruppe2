@@ -57,15 +57,21 @@ namespace ClassLibrary.Services
             _models.Remove(modelName);
         }
 
-        public void EditModel(Model newModelInfo, Model model, string modelName, string description, double hullLength, double hullWidth, double hullDepth, double baseWeight)
+        public void EditModel(string oldModelName, string newModelName, string description, double hullLength, double hullWidth, double hullDepth, double baseWeight)
         {
-            Model oldModelInfo = GetModelByName(modelName);
-            oldModelInfo.ModelName = newModelInfo.ModelName;
-            oldModelInfo.Description = newModelInfo.Description;
-            oldModelInfo.HullLength = newModelInfo.HullLength;
-            oldModelInfo.HullWidth = newModelInfo.HullWidth;
-            oldModelInfo.HullDepth = newModelInfo.HullDepth;
-            oldModelInfo.BaseWeight = newModelInfo.BaseWeight;
+            if (_models.ContainsKey(newModelName))
+            { // if Dict already contains a Model with the new ModelName, throw an exception
+                throw new KeyTakenException($"Kan ikke ændre modellens navn til '{newModelName}' denne model navn findes allerede\n");
+            } // else
+            Model oldModel = _models[oldModelName]; // temp Ref to Model, gets oldModel info
+            _models.Remove(oldModelName); // severs Ref to the Model (oldModelName) in the Dict
+            _models[newModelName] = oldModel; // oldModel info placed in new spot using new ModelName as key
+            oldModel.ModelName = newModelName; // overwrites old ModelName with new ModelName in object (not key)
+            oldModel.Description = description; // the rest overwrite old info with new info
+            oldModel.HullLength = hullLength;
+            oldModel.HullWidth = hullWidth;
+            oldModel.HullDepth = hullDepth;
+            oldModel.BaseWeight = baseWeight;
         }
 
         public void PrintAllModels()
