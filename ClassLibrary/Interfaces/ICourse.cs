@@ -10,8 +10,6 @@ namespace ClassLibrary.Interfaces
     public interface ICourse
     {
         string Name { get; set; }
-        DateTime StartDateTime { get; set; }
-        DateTime EndDateTime { get; set; }
        
         int[] AttendeeRange { get; set; }
         List<Member> Attendees { get; set; }

@@ -8,10 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SejlklubRazor.Pages.Courses.AddCourse
 {
-    public class AddCourseModel : PageModel
+    public class AddCourseModel(CourseRepository CourseRepository) : PageModel
     {
+  
         #region Instance Fields
-        private CourseRepository _CourseRepo;
+        private CourseRepository _CourseRepo = CourseRepository;
         private MemberRepository _MemberRepo;
         #endregion 
 
@@ -31,21 +32,14 @@ namespace SejlklubRazor.Pages.Courses.AddCourse
         public string Description { get; set; }
         [BindProperty] // Two way binding
         public string MasterName { get; set; }
-        #endregion
 
+        #endregion
         #region Constructors
-        public AddCourseModel() 
-        {
-        
-        }
-        public AddCourseModel(CourseRepository CourseRepository)
-        {
-            _CourseRepo = CourseRepository;
-        }
-        #endregion 
+        #endregion
         #region Methods
         public void OnGet()
         {
+            Console.WriteLine("AddCourse.cshtml.cs  line 42 here!!!!!!!!!!!!!!!____________________--------------");
         }
         public IActionResult OnPost()
         {
@@ -57,5 +51,7 @@ namespace SejlklubRazor.Pages.Courses.AddCourse
             return RedirectToPage("ShowCourseList");
         }
         #endregion
+  
     }
+  
 }
