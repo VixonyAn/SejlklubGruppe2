@@ -11,16 +11,16 @@ namespace ClassLibrary.Interfaces
         void AddMember(IMember member);
         void AddMember(string name, string phone, string email);
 
+        IMember GetMemberByEmail(string email);
         IMember GetMemberByName(string name);
         IMember GetMemberByPhone(string phone);
-        IMember GetMemberByMail(string email);
 
         List<IMember> GetAll();
 
-        void EditMember(string oldName, string newName, string phone, string email);
+        void EditMember(string name, string phone, string email, string oldEmail);
 
 
-        void RemoveMember(string name);
+        void RemoveMember(string email);
 
     }
 }
