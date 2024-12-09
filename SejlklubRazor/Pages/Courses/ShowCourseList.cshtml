@@ -1,7 +1,5 @@
 ﻿@page
 @using ClassLibrary.Models;
-@using ClassLibrary.Services;
-@using ClassLibrary.Interfaces;
 @using SejlklubRazor.Pages;
 @model SejlklubRazor.Pages.Courses.ShowCourseList.ShowCourseList
 @{
@@ -10,9 +8,9 @@
 
 <h3>Klubbens Hold</h3>
 
-<p>
-    <a asp-page="AddCourseModel">Opret Nyt Hold</a>
-</p>
+<btn>
+    <a class="nav-link text-dark bg-primary" asp-page="AddCourse">Opret nyt Hold</a>
+</btn>
 
 <table class="table">
     <thead>

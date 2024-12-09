@@ -11,7 +11,7 @@ namespace ClassLibrary.Services
     public class CourseRepository : ICourseRepository
     {
         #region Instance fields
-        private Dictionary<int, Course> _courses = new Dictionary<int, Course>();
+        private Dictionary<int, Course> _courses=new Dictionary<int, Course>() ;
         #endregion
         #region Properties
         public int Count { get { return _courses.Count; } }
@@ -19,7 +19,7 @@ namespace ClassLibrary.Services
         #region Constructors
         public CourseRepository()
         {
-
+          //  _courses = new Dictionary<int, Course>();
         }
         #endregion
         #region Methods
