@@ -46,10 +46,10 @@ namespace ClassLibrary.Data
 
             _memberData = new Dictionary<string, IMember>()
             {
-            { "Kurt", new Member("Kurt", "11 11 11 11", "Kurt@Chainmail.kz") },
-            { "Poul", new Member("Poul", "5678", "pohe@Zealand.dk") },
-            { "Valdemar Den Store", new Member("Valdemar Den Store", "10 10 10 10", "ValdeM@OldMail.dk") },
-            { "Egon Olsen", new Member("Egon Olsen", "72 55 65 00", "HrOlsen@Mail.dk") }
+            { "Kurt@Chainmail.kz", new Member("Kurt", "11 11 11 11", "Kurt@Chainmail.kz") },
+            { "pohe@Zealand.dk", new Member("Poul", "5678", "pohe@Zealand.dk") },
+            { "ValdeM@OldMail.dk", new Member("Valdemar Den Store", "10 10 10 10", "ValdeM@OldMail.dk") },
+            { "HrOlsen@Mail.dk", new Member("Egon Olsen", "72 55 65 00", "HrOlsen@Mail.dk") }
             };
         }
         #endregion

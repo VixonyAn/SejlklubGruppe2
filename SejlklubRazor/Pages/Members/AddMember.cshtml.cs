@@ -1,5 +1,6 @@
 using ClassLibrary.Exceptions;
 using ClassLibrary.Interfaces;
+using ClassLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -17,39 +18,48 @@ namespace SejlklubRazor.Pages.Members
         public string Email { get; set; }
         public string NameWarning { get; set; }
 
-        public string OldName { get; set; }
-        public string PrevName { get; set; }
+        public IMember OldUser { get; set; }
+        public IMember ExistingUser { get; set; }
 
 
         public AddMemberModel(IMemberRepository memberRepository)
         {
             _internalMRepo = memberRepository;
         }
-        public void OnGet(string oldName)
+        public void OnGet(string oldEmail)
         {
-            OldName = oldName;
+            if (oldEmail != null) 
+            {
+                OldUser = _internalMRepo.GetMemberByEmail(oldEmail);
+                Name = OldUser.Name;
+                Phone = OldUser.Phone;
+                Email = OldUser.Email;
+            }
         }
 
-        public IActionResult OnPost(string oldName)
+        public IActionResult OnPost(string oldEmail)
         {
-            OldName = oldName;
             try
             {
-                if(OldName == null)
+                if(oldEmail == null)
                 {
                     _internalMRepo.AddMember(Name, Phone, Email);
                     return RedirectToPage("ShowMembers");
                 } else
                 {
-                    _internalMRepo.EditMember(OldName, Name, Phone, Email);
+                    _internalMRepo.EditMember(Name, Phone, oldEmail, Email);
                     return RedirectToPage("ShowMembers");
                 }
             } catch(KeyTakenException keyEx)
             {
-                if (OldName == null) PrevName = Name;
-                else PrevName = OldName;
+                if (oldEmail == null) OldUser = _internalMRepo.GetMemberByEmail(Email);
+                else
+                {
+                    OldUser = _internalMRepo.GetMemberByEmail(oldEmail);
+                }
+                    ExistingUser = _internalMRepo.GetMemberByEmail(Email);
 
-                NameWarning = PrevName + " er allerede registreret som navn.";
+                NameWarning = "en bruger er allerede registreret med Email: " + ExistingUser.Email;
                 return Page();
             }
 

@@ -4,9 +4,9 @@
     ViewData["Title"] = "Opret Medlem";
 }
 
-    @if(Model.OldName != null)
+    @if(Model.OldUser != null)
     {
-        <h3>Du er i gang med at redigere brugeren: @Model.OldName</h3>
+    <h3>Du er i gang med at redigere brugeren: @Model.OldUser.Name (@Model.OldUser.Email)</h3>
     }
 
 <form method="post">
@@ -15,15 +15,6 @@
         <input asp-for="@Model.Name" class="form-control" />
     </div>
 
-    @if(Model.PrevName != null)
-    {
-        <h5><span class="text-danger">@Model.NameWarning:</span></h5>
-        <h5><span class="text-danger">@Model.PrevName. Rediger denne bruger?</span></h5>
-
-        <a class="nav-link text-dark bg-primary" style="display: inline; width: 20%;" asp-page="AddMember" asp-route-oldName="@Model.PrevName">Ja</a>
-        <p style=" display: inline"> </p>
-        <a class="nav-link text-dark bg-primary" style="display: inline; width: 20%;" asp-page="AddMember" asp-route-oldName="@Model.OldName">Nej</a>
-    }
 
     <div class="form-group">
         <label asp-for="@Model.Phone" class="control-label"></label>
@@ -33,7 +24,17 @@
         <label asp-for="@Model.Email" class="control-label"></label>
         <input asp-for="@Model.Email" class="form-control" />
     </div>
+    @if (Model.ExistingUser != null)
+    {
+        <h5><span class="text-danger">@Model.NameWarning:</span></h5>
+        <h5><span class="text-danger">@Model.ExistingUser.Name. Rediger denne bruger?</span></h5>
 
-    <input type="submit" value="Opret medlem" class="btn btn-primary" />
+        <a class="nav-link text-dark bg-primary" style="display: inline; width: 20%;" asp-page="AddMember" asp-route-oldEmail="@Model.ExistingUser.Email">Ja</a>
+        <p style=" display: inline"> </p>
+        <a class="nav-link text-dark bg-primary" style="display: inline; width: 20%;" asp-page="AddMember" asp-route-oldEmail="@Model.OldUser.Email">Nej</a>
+    } else {
+        <input type="submit" value="Gem" class="btn btn-primary" />
+    }
+
 </form>
 

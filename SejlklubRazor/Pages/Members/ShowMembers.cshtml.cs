@@ -19,14 +19,14 @@ namespace SejlklubRazor.Pages.Members
             Members = _internalRepo.GetAll();
         }
 
-        public IActionResult OnPostEdit(string oldName)
+        public IActionResult OnPostEdit(string oldEmail)
         {
-            return RedirectToPage("AddMember", new { oldName = oldName });
+            return RedirectToPage("AddMember", new { oldEmail = oldEmail });
         }
 
-        public IActionResult OnPostDelete(string name)
+        public IActionResult OnPostDelete(string email)
         {
-            _internalRepo.RemoveMember(name);
+            _internalRepo.RemoveMember(email);
             return RedirectToPage("ShowMembers");
         }
     }

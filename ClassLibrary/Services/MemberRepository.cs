@@ -32,37 +32,38 @@ namespace ClassLibrary.Services
         #region Methods
         public void AddMember(string name, string phone, string email)
         {
-            if (_internalRepo.ContainsKey(name)) throw new KeyTakenException();
-            _internalRepo[name] = new Member(name, phone, email);
+            if (_internalRepo.ContainsKey(email)) throw new KeyTakenException();
+            _internalRepo[email] = new Member(name, phone, email);
         }
 
         public void AddMember(IMember member)
         {
-            if (_internalRepo.ContainsKey(member.Name)) throw new KeyTakenException();
-            _internalRepo[member.Name] = member;
+            if (_internalRepo.ContainsKey(member.Email)) throw new KeyTakenException();
+            _internalRepo[member.Email] = member;
         }
 
         #region Search and filters
 
             #region Individual
-            public IMember GetMemberByName(string name)
+            public IMember GetMemberByEmail(string email)
             {
-                if (_internalRepo.ContainsKey(name)) return _internalRepo[name];
+                if (_internalRepo.ContainsKey(email)) return _internalRepo[email];
                 throw new KeyNotFoundException();
             }
+            public IMember GetMemberByName(string name)
+            {
+                foreach (IMember member in _internalRepo.Values)
+                {
+                    if (member.Name == name) return member;
+                }
+                throw new KeyNotFoundException();
+            }
+
             public IMember GetMemberByPhone(string phone)
             {
                 foreach(IMember member in _internalRepo.Values)
                 {
                     if (member.Phone == phone) return member;
-                }
-                throw new KeyNotFoundException();
-            }
-            public IMember GetMemberByMail(string email)
-            {
-                foreach (IMember member in _internalRepo.Values)
-                {
-                    if (member.Email == email) return member;
                 }
                 throw new KeyNotFoundException();
             }
@@ -78,23 +79,23 @@ namespace ClassLibrary.Services
 
         #endregion
 
-        public void EditMember(string oldName,string newName, string phone, string email)
+        public void EditMember(string name, string phone, string email, string newEmail)
         {
-            if(oldName == newName)
+            if(email == newEmail)
             {
-                _internalRepo[oldName].Phone = phone;
-                _internalRepo[oldName].Email = email;
-            } else if (_internalRepo.ContainsKey(newName))
+                _internalRepo[email].Phone = phone;
+                _internalRepo[email].Email = newEmail;
+            } else if (_internalRepo.ContainsKey(newEmail))
             {
                 throw new KeyTakenException();
             } else
             {
-                IMember tempRef = _internalRepo[oldName];
-                _internalRepo.Remove(oldName);
-                tempRef.Name = newName;
+                IMember tempRef = _internalRepo[email];
+                _internalRepo.Remove(email);
+                tempRef.Name = name;
                 tempRef.Phone = phone;
-                tempRef.Email = email;
-                _internalRepo[newName] = tempRef;
+                tempRef.Email = newEmail;
+                _internalRepo[newEmail] = tempRef;
             }
 
 
@@ -102,9 +103,9 @@ namespace ClassLibrary.Services
         }
 
 
-        public void RemoveMember(string name)
+        public void RemoveMember(string email)
         {
-            _internalRepo.Remove(name);
+            _internalRepo.Remove(email);
         }
         #endregion
     }
