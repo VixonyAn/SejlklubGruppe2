@@ -11,9 +11,11 @@
 
 <table class="table">
     <thead>
-        <th>Navn</th>
-        <th>Tlf.</th>
-        <th>Email</th>
+        <tr>
+            <th>Navn</th>
+            <th>Tlf.</th>
+            <th>Email</th>
+        </tr>
     </thead>
 
     <tbody>
@@ -23,7 +25,15 @@
                 <td>@member.Name</td>
                 <td>@member.Phone</td>
                 <td>@member.Email</td>
-                <td><a asp-page="AddMember" asp-route-oldName="@member.Name">Edit</a></td>
+                <td>
+                    <form style="display: inline;" asp-page-handler="Edit" asp-route-oldName="@member.Name">
+                        <input type="image" src ="~/Images/pencil-square.svg" />
+                    </form>
+
+                    <form style="display: inline;" asp-page-handler="Delete" asp-route-name="@member.Name">
+                        <input type="image" src="~/Images/trash3.svg" />
+                    </form>
+                </td>
             </tr>
         }
 
