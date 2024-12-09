@@ -23,12 +23,14 @@
     </thead>
     <tbody>
 
-        @foreach (Course item in Model.ListOfCourses )
+        @foreach (Course item in Model.ListOfCourses)
         {
             <tr>
                 <td>@item.Name</td>
-                <td>@item.Attendees.Count</td> 
-                
+                <td>@item.AttendeeRange[0]-@item.Attendees.Count</td> 
+                <td>@item.Description</td>
+                <td>@item.Master.Name</td>
+
             </tr>
         }
     </tbody>
