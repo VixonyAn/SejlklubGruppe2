@@ -8,12 +8,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SejlklubRazor.Pages.Courses.AddCourse
 {
-    public class AddCourseModel(CourseRepository CourseRepository) : PageModel
+    public class AddCourseModel(ICourseRepository CourseRepository) : PageModel
     {
   
         #region Instance Fields
-        private CourseRepository _CourseRepo = CourseRepository;
-        private MemberRepository _MemberRepo;
+        private ICourseRepository _CourseRepo = CourseRepository;
+        private IMemberRepository _MemberRepo;
         #endregion 
 
         #region Properties
