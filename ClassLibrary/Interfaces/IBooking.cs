@@ -20,5 +20,7 @@ namespace ClassLibrary.Interfaces
 
         bool IntervalOverlap(DateTime start, DateTime end);
 
+        TimeSpan LengthOfTrip();
+
     }
 }

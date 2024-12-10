@@ -9,5 +9,9 @@ namespace ClassLibrary.Interfaces
     public interface IBookingRepository
     {
 
+        List<IBooking> GetAll();
+        List<IBooking> BookingsForBoat(IBoat boat);
+        List<IBooking> BookingsForModel(IModel model);
+        List<IBooking> BookingsForMember(IMember member);
     }
 }
