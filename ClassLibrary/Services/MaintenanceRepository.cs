@@ -1,4 +1,5 @@
 ﻿using ClassLibrary.Data;
+using ClassLibrary.Exceptions;
 using ClassLibrary.Interfaces;
 using ClassLibrary.Models;
 using System;
@@ -40,14 +41,15 @@ namespace ClassLibrary.Services
             throw new NotImplementedException();
         }
 
-        public void ResolveNote(bool resolved)
+        public void ResolveNote(int index)
         {
-            throw new NotImplementedException();
+            _maintenanceNotes[index].Resolved = true;
         }
 
-        public void EditNote(Member member, string note)
+        public void EditNote(int index, string note)
         {
-            throw new NotImplementedException();
+            _maintenanceNotes[index].Note = note;
+            _maintenanceNotes[index].LastUpdate = DateTime.Now;
         }
         public void SortNotes()
         { // last updated, damage value, damage status
