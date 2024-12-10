@@ -1,0 +1,23 @@
+﻿@page
+@using ClassLibrary.Services;
+@using ClassLibrary.Models;
+@using ClassLibrary.Interfaces;
+@using SejlklubRazor.Pages;
+@using SejlklubRazor.Pages.Courses.ShowCourseList;
+@model SejlklubRazor.Pages.Courses.CourseForMemberModel
+@{
+}
+<label for="members">Choose a member:</label>
+
+<select name="members" id="member">
+    @foreach(Member mem in Model.Members)
+    {
+        <option value="mem.Name">mem.Name</option>
+    }
+  
+
+</select>
+
+
+
+

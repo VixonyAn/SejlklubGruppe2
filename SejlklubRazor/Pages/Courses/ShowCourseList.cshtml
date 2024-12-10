@@ -12,6 +12,11 @@
     <a class="nav-link text-dark bg-primary" asp-page="AddCourse">Opret nyt Hold</a>
 </btn>
 
+
+<btn>
+    <a class="nav-link text-dark bg-primary" asp-page="CourseForMember">vis alle hold som en </a>
+</btn>
+
 <table class="table">
     <thead>
         <tr>
@@ -23,12 +28,14 @@
     </thead>
     <tbody>
 
-        @foreach (Course item in Model.ListOfCourses )
+        @foreach (Course item in Model.ListOfCourses)
         {
             <tr>
                 <td>@item.Name</td>
-                <td>@item.Attendees.Count</td> 
-                
+                <td>@item.AttendeeRange[0]-@item.Attendees.Count</td> 
+                <td>@item.Description</td>
+                <td>@item.Master.Name</td>
+
             </tr>
         }
     </tbody>
