@@ -11,12 +11,10 @@ namespace SejlklubRazor.Pages.Courses.ShowCourseList
         // Show the Courses title, description, and the number of places left in that course   maxNumOfAttendees - Attendees.Count
         #region Instance Fields
         private ICourseRepository _CourseRepo;
-
         #endregion
 
         #region Properties
         public List<Course> ListOfCourses { get; private set; }
-
         #endregion
 
         #region Constructors
@@ -24,25 +22,19 @@ namespace SejlklubRazor.Pages.Courses.ShowCourseList
         {
             _CourseRepo = courseRepository;
         }
-
         #endregion
 
         #region Methods
-
-
         public IActionResult OnPostDelete(int deleteId)
         {
             _CourseRepo.Delete(deleteId);
             return RedirectToPage("ShowCourseList");
         }
 
-        public IActionResult OnPostEdit(int id)
+        public IActionResult OnPostEdit(int editId)
         {
-            return RedirectToPage("EditCourse", new { Registration = id });
+            return RedirectToPage("EditCourse", new { editId = editId });
         }
-
-
-
 
         public void OnGet()
         {

@@ -21,13 +21,12 @@
     <thead>
         <tr>
             <th>Titel</th>
-            <th>pladser tilbage</th>
+            <th>Pladser tilbage</th>
             <th>Beskrivelse</th>
-            <th>hold lavet af</th>
+            <th>Hold lavet af</th>
         </tr>
     </thead>
     <tbody>
-
         @foreach (Course item in Model.ListOfCourses)
         {
             <tr>
@@ -35,7 +34,6 @@
                 <td>@item.AttendeeRange[0]-@item.Attendees.Count</td> 
                 <td>@item.Description</td>
                 <td>@item.Master.Name</td>
-
                 <td>
                     <form method="post" style="display: inline;" asp-page-handler="Edit" asp-route-id="@item.Id">
                         <input type="submit" value="Edit" />
