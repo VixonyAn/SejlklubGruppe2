@@ -10,7 +10,6 @@ namespace ClassLibrary.Interfaces
     public interface ICourse
     {
         string Name { get; set; }
-       
         int[] AttendeeRange { get; set; }
         List<Member> Attendees { get; set; }
         Member Master { get; set; }

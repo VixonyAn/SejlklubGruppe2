@@ -13,18 +13,12 @@ namespace SejlklubRazor.Pages.Courses.AddCourse
 {
     public class AddCourseModel : PageModel
     {
-  
         #region Instance Fields
         private ICourseRepository _courseRepo;
         private IMemberRepository _memberRepo;
-
-
-        //public Dictionary<string, IMember> _MemberMap = MockData.GetInstance().MemberData;
-        
         #endregion 
 
         #region Properties
-       
         public IMember Master { get; set; }
         [BindProperty] // Two way binding
         public string Name { get; set; }
@@ -42,8 +36,8 @@ namespace SejlklubRazor.Pages.Courses.AddCourse
         public string MasterName { get; set; }
         [BindProperty] // Two way binding
         public string Summary { get; set; }
-
         #endregion
+
         #region Constructors
         public AddCourseModel(ICourseRepository courseRepository, IMemberRepository memberRepository)
         {
@@ -51,6 +45,7 @@ namespace SejlklubRazor.Pages.Courses.AddCourse
             _memberRepo = memberRepository;
         }
         #endregion
+
         #region Methods
         public void OnGet()
         {
