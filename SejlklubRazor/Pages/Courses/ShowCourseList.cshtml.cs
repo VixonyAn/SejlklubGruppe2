@@ -28,6 +28,22 @@ namespace SejlklubRazor.Pages.Courses.ShowCourseList
         #endregion
 
         #region Methods
+
+
+        public IActionResult OnPostDelete(int deleteId)
+        {
+            _CourseRepo.Delete(deleteId);
+            return RedirectToPage("ShowCourseList");
+        }
+
+        public IActionResult OnPostEdit(int id)
+        {
+            return RedirectToPage("EditCourse", new { Registration = id });
+        }
+
+
+
+
         public void OnGet()
         {
             ListOfCourses = _CourseRepo.GetAll();

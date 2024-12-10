@@ -12,6 +12,7 @@ namespace ClassLibrary.Services
     {
         #region Instance fields
         private Dictionary<int, Course> _courses=new Dictionary<int, Course>() ;
+        private static int counter;
         #endregion
         #region Properties
         public int Count { get { return _courses.Count; } }
@@ -23,14 +24,17 @@ namespace ClassLibrary.Services
         }
         #endregion
         #region Methods
-        public void Add(Course course)
+        public void Add(string name, DateTime startDateTime, DateTime endDateTime, int[] attendeeRange, List<Member> attendees, Member master, string summary, string description)
         {
-            _courses.Add(Count + 1, course);
+            
+            _courses.Add(counter, new Course(counter, name,  startDateTime,  endDateTime,  attendeeRange,  attendees,  master, summary, description));
+            counter++;
         }       // previous id+1=new id
 
         public void Delete(int id)
         {
             _courses.Remove(id);
+
         }
 
         public void PrintAllCourses()
@@ -44,15 +48,28 @@ namespace ClassLibrary.Services
             Console.WriteLine("\n liste sluttede \n ");
         }
 
-        public void Update(Course course)
+        public void Update(Course newCourse, Course course)
         {
-            Course courseToUpdate = course;
+            
+            course.Name = ((newCourse.Name == null) ? course.Name : newCourse.Name);
+            course.Master = ((newCourse.Master == null) ? course.Master : newCourse.Master);
+            course.AttendeeRange = ((newCourse.AttendeeRange == null) ? course.AttendeeRange : newCourse.AttendeeRange);
+            course.TimeSlot[0] = ((newCourse.TimeSlot[0] == null) ? course.TimeSlot[0] : newCourse.TimeSlot[0]);
+            course.TimeSlot[1] = ((newCourse.TimeSlot[1] == null) ? course.TimeSlot[1] : newCourse.TimeSlot[1]);
+            course.Summary = ((newCourse.Summary == null) ? course.Summary : newCourse.Summary);
+            course.Description = ((newCourse.Description == null) ? course.Description : newCourse.Description);
+            /*
             Delete(course.Id);
-            _courses.Add(course.Id,courseToUpdate);
+            _courses.Add(course.Id,courseToUpdate);*/
         }
         public List<Course> GetAll()
         {
             return _courses.Values.ToList();
+        }
+
+        public Course GetCourseById(int id)
+        {
+            return _courses[id];   
         }
         #endregion
     }

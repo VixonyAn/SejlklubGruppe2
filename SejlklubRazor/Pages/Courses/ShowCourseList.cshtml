@@ -36,6 +36,15 @@
                 <td>@item.Description</td>
                 <td>@item.Master.Name</td>
 
+                <td>
+                    <form method="post" style="display: inline;" asp-page-handler="Edit" asp-route-id="@item.Id">
+                        <input type="submit" value="Edit" />
+                    </form>
+                    <form method="post" style="display: inline;" asp-page-handler="Delete" asp-route-deleteId="@item.Id">
+                        <input type="submit" value="Delete" />
+                    </form>
+                </td>
+
             </tr>
         }
     </tbody>

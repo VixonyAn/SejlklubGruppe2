@@ -2,22 +2,24 @@ using ClassLibrary.Interfaces;
 using ClassLibrary.Models;
 using ClassLibrary.Services;
 using ClassLibrary.Data;
+using SejlklubRazor.Pages.Members;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using SejlklubRazor.Pages.Courses.ShowCourseList;
 
 namespace SejlklubRazor.Pages.Courses.AddCourse
 {
-    public class AddCourseModel(ICourseRepository CourseRepository) : PageModel
+    public class AddCourseModel : PageModel
     {
   
         #region Instance Fields
-        private ICourseRepository _CourseRepo = CourseRepository;
-        public MemberRepository _MemberRepo;
+        private ICourseRepository _courseRepo;
+        private IMemberRepository _memberRepo;
 
 
-        public Dictionary<string, IMember> _MemberMap = MockData.GetInstance().MemberData;
+        //public Dictionary<string, IMember> _MemberMap = MockData.GetInstance().MemberData;
         
         #endregion 
 
@@ -38,9 +40,16 @@ namespace SejlklubRazor.Pages.Courses.AddCourse
         public string Description { get; set; }
         [BindProperty] // Two way binding
         public string MasterName { get; set; }
+        [BindProperty] // Two way binding
+        public string Summary { get; set; }
 
         #endregion
         #region Constructors
+        public AddCourseModel(ICourseRepository courseRepository, IMemberRepository memberRepository)
+        {
+            _courseRepo = courseRepository;
+            _memberRepo = memberRepository;
+        }
         #endregion
         #region Methods
         public void OnGet()
@@ -49,13 +58,12 @@ namespace SejlklubRazor.Pages.Courses.AddCourse
         }
         public IActionResult OnPost()
         {
-            Master = _MemberMap[MasterName];
+            Master = _memberRepo.GetMemberByName(MasterName);
             int[] attRange = {MinAttendeeNum, MaxAttendeeNum};
             List<Member> members = new List<Member>();
 
             members.Add((Member)Master);
-            Course course=new Course(_CourseRepo.Count, Name,StartDate,EndDate, attRange,members,(Member)Master, Description);
-            _CourseRepo.Add(course);
+            _courseRepo.Add(Name, StartDate, EndDate, attRange, members, (Member)Master, Summary, Description);
             return RedirectToPage("ShowCourseList");
         }
         #endregion

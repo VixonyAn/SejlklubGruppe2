@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SejlklubGruppe2", "Sejlklub
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibrary", "ClassLibrary\ClassLibrary.csproj", "{90267EC3-3E09-4DEA-91DA-2D00063B1964}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SejlklubRazor", "SejlklubRazor\SejlklubRazor.csproj", "{6440A218-55C8-470A-A75E-E5D89713AC6E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SejlklubRazor", "SejlklubRazor\SejlklubRazor.csproj", "{6440A218-55C8-470A-A75E-E5D89713AC6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
