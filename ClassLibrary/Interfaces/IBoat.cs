@@ -12,7 +12,7 @@ namespace ClassLibrary.Interfaces
         Model Model { get; set; }
         string Nickname { get; set; }
         string Registration { get; set; }
-        IMaintenanceRepository MaintenanceNotes { get; set; }
+        //IMaintenanceRepository MaintenanceNotes { get; set; }
 
         string ToString();
     }

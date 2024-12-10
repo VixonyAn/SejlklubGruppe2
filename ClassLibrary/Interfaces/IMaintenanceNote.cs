@@ -12,7 +12,8 @@ namespace ClassLibrary.Interfaces
         Member Member { get; set; }
         string Note { get; set; }
         int No { get; }
-        DateTime TimeStamp { get; set; }
+        DateTime TimeCreated { get; }
+        DateTime LastUpdate { get; set; }
         public bool SevereDamage { get; set; }
         public bool Resolved { get; set; }
 
