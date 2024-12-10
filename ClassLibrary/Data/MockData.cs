@@ -97,13 +97,14 @@ namespace ClassLibrary.Data
             return _theInstance;
         }
 
-        public List<IMaintenanceNote> RandomNotes(int maxNotes, List<Member> members)
+        public List<IMaintenanceNote> RandomNotes(int maxNotes)
         {
             List<IMaintenanceNote> result = new List<IMaintenanceNote>();
 
             Random random = new Random();
             int numberOfIssues = random.Next(maxNotes);
             bool pristine = (random.Next(1) < 1);
+            List<Member> members = _memberData.Values.Cast<Member>().ToList();
 
 
             if(!pristine)
