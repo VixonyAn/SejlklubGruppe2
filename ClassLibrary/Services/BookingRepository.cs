@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using ClassLibrary.Interfaces;
@@ -24,7 +25,7 @@ namespace ClassLibrary.Services
             return new List<IBooking>(_internalRepo);
         }
 
-        public List<IBooking> BookingsForBoat(IBoat boat)
+        public List<IBooking> GetBookingsForBoat(IBoat boat)
         {
             List<IBooking> result = new List<IBooking>();
 
@@ -36,7 +37,7 @@ namespace ClassLibrary.Services
             return result;
         }
 
-        public List<IBooking> BookingsForMember(IMember member)
+        public List<IBooking> GetBookingsForMember(IMember member)
         {
             List<IBooking> result = new List<IBooking>();
 
@@ -48,13 +49,44 @@ namespace ClassLibrary.Services
             return result;
         }
 
-        public List<IBooking> BookingsForModel(IModel model)
+        public List<IBooking> GetBookingsForModel(IModel model)
         {
             List<IBooking> result = new List<IBooking>();
 
             for (int i = 0; i < _internalRepo.Count; i++)
             {
                 if (_internalRepo[i].Bookable.Model == model) result.Add(_internalRepo[i]);
+            }
+
+            return result;
+        }
+
+        public List<IBooking> GetBookingForDayInterval(DateTime start, DateTime end, out bool found)//Currently is a time interval, not day interval
+        {
+            List<IBooking> result = new List<IBooking>();
+            int searchIndex = 0;
+            int startIndex = -1;
+            int endIndex = -1;
+            found = false;
+
+            while(searchIndex < _internalRepo.Count && startIndex < 0) //Searches for the first instance (if any)
+                                                                       //where either end or beginning of the booking
+                                                                       //overlaps with either dateTime
+            {
+                if (_internalRepo[searchIndex].IntervalOverlap(start, end)) startIndex = searchIndex;
+                else searchIndex++;
+            }
+
+            if(startIndex > 0) //If this is still -1, there was no bookings at all within the given days.
+            {
+                searchIndex = _internalRepo.Count - 1;
+                while (searchIndex > 0 && endIndex < 0)
+                {
+                    if (_internalRepo[searchIndex].IntervalOverlap(start, end)) startIndex = searchIndex;
+                    else searchIndex--;
+                }
+                found = true;
+                result = _internalRepo.GetRange(startIndex, endIndex - startIndex + 1);
             }
 
             return result;

@@ -10,8 +10,9 @@ namespace ClassLibrary.Interfaces
     {
 
         List<IBooking> GetAll();
-        List<IBooking> BookingsForBoat(IBoat boat);
-        List<IBooking> BookingsForModel(IModel model);
-        List<IBooking> BookingsForMember(IMember member);
+        List<IBooking> GetBookingsForBoat(IBoat boat);
+        List<IBooking> GetBookingsForModel(IModel model);
+        List<IBooking> GetBookingsForMember(IMember member);
+        List<IBooking> GetBookingsFromDayInterval(DateTime start, DateTime end);
     }
 }
