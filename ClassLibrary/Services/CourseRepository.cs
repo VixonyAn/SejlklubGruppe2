@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ClassLibrary.Exceptions;
 using ClassLibrary.Interfaces;
 using ClassLibrary.Models;
 
@@ -50,18 +51,25 @@ namespace ClassLibrary.Services
 
         public void Update(Course newCourse, Course course)
         {
-            
-            course.Name = ((newCourse.Name == null) ? course.Name : newCourse.Name);
+            course.Name=newCourse.Name;
+            course.Master = newCourse.Master;
+            course.AttendeeRange = newCourse.AttendeeRange;
+            course.TimeSlot = newCourse.TimeSlot;
+            course.Summary = newCourse.Summary;
+            course.Description = newCourse.Description;
+
+            /*
+            _courses[course.Id].Name = ((newCourse.Name == null) ? course.Name : newCourse.Name);
             course.Master = ((newCourse.Master == null) ? course.Master : newCourse.Master);
             course.AttendeeRange = ((newCourse.AttendeeRange == null) ? course.AttendeeRange : newCourse.AttendeeRange);
             course.TimeSlot[0] = ((newCourse.TimeSlot[0] == null) ? course.TimeSlot[0] : newCourse.TimeSlot[0]);
             course.TimeSlot[1] = ((newCourse.TimeSlot[1] == null) ? course.TimeSlot[1] : newCourse.TimeSlot[1]);
-            course.Summary = ((newCourse.Summary == null) ? course.Summary : newCourse.Summary);
-            course.Description = ((newCourse.Description == null) ? course.Description : newCourse.Description);
-            /*
-            Delete(course.Id);
-            _courses.Add(course.Id,courseToUpdate);*/
+            _courses[course.Id].Summary = ((newCourse.Summary == null) ? course.Summary : newCourse.Summary);
+            _courses[course.Id].Description = ((newCourse.Description == null) ? course.Description : newCourse.Description);
+            */
         }
+
+
         public List<Course> GetAll()
         {
             return _courses.Values.ToList();

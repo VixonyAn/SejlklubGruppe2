@@ -23,6 +23,7 @@ namespace SejlklubRazor.Pages.Courses.ShowCourseList
         public ShowCourseList(ICourseRepository courseRepository)
         {
             _CourseRepo = courseRepository;
+            ListOfCourses = _CourseRepo.GetAll();
         }
 
         #endregion
@@ -38,7 +39,7 @@ namespace SejlklubRazor.Pages.Courses.ShowCourseList
 
         public IActionResult OnPostEdit(int id)
         {
-            return RedirectToPage("EditCourse", new { Registration = id });
+            return RedirectToPage("EditCourse", new { id });
         }
 
 
@@ -46,7 +47,7 @@ namespace SejlklubRazor.Pages.Courses.ShowCourseList
 
         public void OnGet()
         {
-            ListOfCourses = _CourseRepo.GetAll();
+            
         }
         #endregion
     }

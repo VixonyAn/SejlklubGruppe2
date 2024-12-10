@@ -22,7 +22,7 @@
         <tr>
             <th>Titel</th>
             <th>pladser tilbage</th>
-            <th>Beskrivelse</th>
+            <th>Kort Beskrivelse</th>
             <th>hold lavet af</th>
         </tr>
     </thead>
@@ -32,8 +32,8 @@
         {
             <tr>
                 <td>@item.Name</td>
-                <td>@item.AttendeeRange[0]-@item.Attendees.Count</td> 
-                <td>@item.Description</td>
+                <td>@(item.AttendeeRange[1]-item.Attendees.Count)</td> 
+                <td>@item.Summary</td>
                 <td>@item.Master.Name</td>
 
                 <td>

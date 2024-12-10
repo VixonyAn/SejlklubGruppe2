@@ -13,6 +13,7 @@ namespace SejlklubRazor.Pages.Courses
     {
         #region Instance Fields
         private ICourseRepository _courseRepo;
+        private IMemberRepository _memberRepo;
         #endregion
 
         #region Properties
@@ -39,9 +40,10 @@ namespace SejlklubRazor.Pages.Courses
         #endregion
 
         #region Constructors
-        public EditCourseModel(ICourseRepository courseRepository) // dependency injection
+        public EditCourseModel(ICourseRepository courseRepository, IMemberRepository memberRepository) // dependency injection
         {
-            this._courseRepo = courseRepository; // parameter overført
+            _courseRepo = courseRepository; // parameter overført
+            _memberRepo = memberRepository; // parameter overført
         }
         #endregion
 
@@ -49,12 +51,25 @@ namespace SejlklubRazor.Pages.Courses
         public IActionResult OnGet(int Id)
         {
             Course = _courseRepo.GetCourseById(Id);
+            Name = Course.Name;
+            MasterName = Course.Master.Name;
+            MaxAttendeeNum = Course.AttendeeRange[1];
+            MinAttendeeNum = Course.AttendeeRange[0];
+            StartDate = Course.TimeSlot[0];
+            EndDate = Course.TimeSlot[1];
+            Summary = Course.Summary;
+            Description = Course.Description;
+
             return Page();
         }
 
-        public IActionResult OnPost(Course newcourse, Course course)
+        public IActionResult OnPost( int id)
         {
-            _courseRepo.Update(newcourse,course);
+
+            int[] AttendeeRange = { MinAttendeeNum, MaxAttendeeNum };
+            Course oldCourse = _courseRepo.GetCourseById(id);
+            Course newcourse = new Course(0,Name, StartDate,EndDate,AttendeeRange,oldCourse.Attendees,(Member)_memberRepo.GetMemberByName(MasterName), Summary, Description);
+            _courseRepo.Update(newcourse, _courseRepo.GetCourseById(id));
             return RedirectToPage("ShowCourseList");
         }
         #endregion
