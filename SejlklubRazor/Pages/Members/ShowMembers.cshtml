@@ -15,6 +15,7 @@
             <th>Navn</th>
             <th>Tlf.</th>
             <th>Email</th>
+            <th></th>
         </tr>
     </thead>
 
@@ -36,6 +37,18 @@
                 </td>
             </tr>
         }
+        <tr>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>
+                <form style="display:table; text-align:center" asp-page-handler="Add">
+                    <input type="image" src="~/Images/person-plus.svg" />
+                </form>
+            </td>
+        </tr>
+
+
 
     </tbody>
 </table>

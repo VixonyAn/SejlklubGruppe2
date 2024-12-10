@@ -22,6 +22,8 @@ namespace ClassLibrary.Data
         private Dictionary<string, Boat> _boatData;
 
         private Dictionary<string, IMember> _memberData;
+
+        private List<string> _maintenanceNoteOptions;
         #endregion
 
         #region Constructors
@@ -50,6 +52,19 @@ namespace ClassLibrary.Data
             { "pohe@Zealand.dk", new Member("Poul", "5678", "pohe@Zealand.dk") },
             { "ValdeM@OldMail.dk", new Member("Valdemar Den Store", "10 10 10 10", "ValdeM@OldMail.dk") },
             { "HrOlsen@Mail.dk", new Member("Egon Olsen", "72 55 65 00", "HrOlsen@Mail.dk") }
+            };
+
+            _maintenanceNoteOptions = new List<string>()
+            {
+                "Meget store igler",
+                "Loch Ness",
+                "Læk",
+                "Båd halveret",
+                "Stor læk",
+                "Hva'ba?",
+                "Bom væltet",
+                "Sejl væk ?!?!",
+                "aaaaaaa",
             };
         }
         #endregion
@@ -80,6 +95,26 @@ namespace ClassLibrary.Data
                 _theInstance = new MockData();
             }
             return _theInstance;
+        }
+
+        public List<IMaintenanceNote> RandomNotes(int maxNotes, List<Member> members)
+        {
+            List<IMaintenanceNote> result = new List<IMaintenanceNote>();
+
+            Random random = new Random();
+            int numberOfIssues = random.Next(maxNotes);
+            bool pristine = (random.Next(1) < 1);
+
+
+            if(!pristine)
+            {
+                for(int i = 0; i<numberOfIssues; i++)
+                {
+                    result.Add(new MaintenanceNote(members[(random.Next(members.Count - 1))], _maintenanceNoteOptions[(random.Next(_maintenanceNoteOptions.Count-1))], (random.Next(1) < 1)));
+                }
+            }
+
+            return result;
         }
 
         #endregion

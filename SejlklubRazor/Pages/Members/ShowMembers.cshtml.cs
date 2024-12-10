@@ -19,6 +19,11 @@ namespace SejlklubRazor.Pages.Members
             Members = _internalRepo.GetAll();
         }
 
+        public IActionResult OnPostAdd()
+        {
+            return RedirectToPage("AddMember");
+        }
+
         public IActionResult OnPostEdit(string oldEmail)
         {
             return RedirectToPage("AddMember", new { oldEmail = oldEmail });
