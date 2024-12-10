@@ -34,6 +34,8 @@ namespace SejlklubRazor.Pages.Courses
         public string Summary { get; set; } // shorter version of the Description
         [BindProperty]
         public string Description { get; set; }
+
+
         #endregion
 
         #region Constructors
@@ -47,16 +49,12 @@ namespace SejlklubRazor.Pages.Courses
         public IActionResult OnGet(int Id)
         {
             Course = _courseRepo.GetCourseById(Id);
-            Name = Course.Name;
-            MasterName = Course.Master.Name;
-            Description = Course.Description;
-            Summary = Course.Summary;
             return Page();
         }
 
         public IActionResult OnPost(Course newcourse, Course course)
         {
-            _courseRepo.Update(newcourse, course);
+            _courseRepo.Update(newcourse,course);
             return RedirectToPage("ShowCourseList");
         }
         #endregion
