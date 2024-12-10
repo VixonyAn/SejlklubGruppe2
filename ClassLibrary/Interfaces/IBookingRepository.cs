@@ -8,5 +8,6 @@ namespace ClassLibrary.Interfaces
 {
     public interface IBookingRepository
     {
+
     }
 }
