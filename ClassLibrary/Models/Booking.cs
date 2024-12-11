@@ -20,6 +20,16 @@ namespace ClassLibrary.Models
 
         #endregion
 
+        #region constructors
+        public Booking(IMember holder, IBoat bookable, DateTime start, DateTime end)
+        {
+            Holder = holder;
+            Bookable = bookable;
+            Start = start;
+            End = end;
+        }
+        #endregion
+
         #region methods
         /// <summary>
         /// Checks if an external dateTime interval overlaps with this booking.
@@ -29,7 +39,7 @@ namespace ClassLibrary.Models
         /// <returns>True if an overlap was found. Otherwise returns false.</returns>
         public bool IntervalOverlap(DateTime start, DateTime end)
         {
-            if (start > Start && end < End) return true;
+            if (start >= Start && start <= End || end >= Start && end <= End) return true;
             return false;
         }
 

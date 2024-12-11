@@ -4,6 +4,7 @@ using ClassLibrary.Helpers;
 using ClassLibrary.Interfaces;
 using ClassLibrary.Models;
 using ClassLibrary.Services;
+using System.Diagnostics;
 using System.Threading.Channels;
 
 internal class Program
@@ -128,10 +129,65 @@ internal class Program
         Console.WriteLine("Test ended");
         */
 
+        //Accessing mockdata
+        List<IMember> mTestList = MockData.GetInstance().MemberData.Values.ToList();
+        List<Boat> bTestList = MockData.GetInstance().BoatData.Values.ToList();
+
+        //References to select objects from mockdata
+        IMember m1 = mTestList[0]; IBoat b1 = bTestList[0];
+        IMember m2 = mTestList[1]; IBoat b2 = bTestList[1];
+        IMember m3 = mTestList[2]; IBoat b3 = bTestList[2];
+
+        //Adding bookings to the repo (and creating dateTime instances)
+        BookingRepository bookingTestRepo = new BookingRepository();
+        bookingTestRepo.AddBooking(m1,b1,new DateTime(2024,1,1),new DateTime(2024,1,2));
+        bookingTestRepo.AddBooking(m2, b2, new DateTime(2024, 1, 3), new DateTime(2024, 1, 4));
+        bookingTestRepo.AddBooking(m3, b2, new DateTime(2023, 1, 1), new DateTime(2023, 1, 2));
+        bookingTestRepo.AddBooking(m3, b3, new DateTime(2022, 1, 1), new DateTime(2022, 1, 2));
+
+        List<IBooking> bookingTestList;
+
+        Console.WriteLine("Testing bookings and their filters, 11-12-2024");
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.Start();
+        for(int i = 0; i<5; i++) //5 is the number of different scenarios here
+        {
+            switch(i)
+            {
+                case 0:
+                    bookingTestList = bookingTestRepo.GetAll();
+                    break;
+                case 1:
+                    bookingTestList = bookingTestRepo.GetBookingsForMember(m3);
+                    break;
+                case 2:
+                    bookingTestList = bookingTestRepo.GetBookingsForBoat(b2);
+                    break;
+                case 3:
+                    bookingTestList = bookingTestRepo.GetBookingsForModel(b1.Model);//Should be the same as getAll with current Mockdata
+                    break;
+                case 4:
+                    bookingTestList = bookingTestRepo.GetBookingsForDayInterval(new DateTime(2023, 1, 1), new DateTime(2024, 1, 1), out bool found);
+                    break;
+                default:
+                    bookingTestList = bookingTestRepo.GetBookingsForDayInterval(new DateTime(2023, 1, 1), new DateTime(2024, 1, 1), out bool found2);
+                    break;
+            }
+            Console.WriteLine($"Test {i+1}:\n\n");
+            foreach(IBooking b in bookingTestList)
+            {
+                Console.WriteLine($"\nHolder: {b.Holder.Name}. Boat: {b.Bookable.Nickname}, {b.Bookable.Model.ModelName}.\nStart of booking: {b.Start}\nEnd of Booking: {b.End}");
+            }
+        }
+        stopwatch.Stop();
+        Console.WriteLine($"\nTime taken to run all filters once: {stopwatch.Elapsed.TotalMilliseconds} ms");
+        Console.WriteLine("\nEnd of test \"bookingrepo\" 11-12-24");
+
+
         #endregion
 
         #region LTest
 
         #endregion
-        }
+    }
 }

@@ -11,85 +11,115 @@ namespace ClassLibrary.Services
 {
     public class BookingRepository : IBookingRepository
     {
+        #region instance fields
         public List<IBooking> _internalRepo;
+        #endregion
 
-
+        #region constructors
         public BookingRepository()
         {
             _internalRepo = new List<IBooking>();
         }
+        #endregion
 
+        #region methods
 
-        public List<IBooking> GetAll()
+        public void AddBooking(IBooking booking)
         {
-            return new List<IBooking>(_internalRepo);
-        }
-
-        public List<IBooking> GetBookingsForBoat(IBoat boat)
-        {
-            List<IBooking> result = new List<IBooking>();
-
-            for (int i = 0; i < _internalRepo.Count; i++)
+            int currentIndex = _internalRepo.Count - 1;
+            if(currentIndex<0 || _internalRepo[currentIndex].Start<booking.Start)
             {
-                if (_internalRepo[i].Bookable == boat) result.Add(_internalRepo[i]);
+                _internalRepo.Add(booking);
+            } else
+            {
+                while(currentIndex>0 && _internalRepo[currentIndex-1].Start>booking.Start)
+                {
+                    currentIndex--;
+                }
+                _internalRepo.Insert(currentIndex, booking);
             }
 
-            return result;
         }
 
-        public List<IBooking> GetBookingsForMember(IMember member)
+        public void AddBooking(IMember holder, IBoat bookable, DateTime start, DateTime end)
         {
-            List<IBooking> result = new List<IBooking>();
-
-            for(int i =0; i<_internalRepo.Count;i++)
-            {
-                if (_internalRepo[i].Holder == member) result.Add(_internalRepo[i]);
-            }
-
-            return result;
+            AddBooking(new Booking(holder, bookable, start, end));
         }
 
-        public List<IBooking> GetBookingsForModel(IModel model)
-        {
-            List<IBooking> result = new List<IBooking>();
 
-            for (int i = 0; i < _internalRepo.Count; i++)
+            #region filtering
+            public List<IBooking> GetAll()
             {
-                if (_internalRepo[i].Bookable.Model == model) result.Add(_internalRepo[i]);
+                return new List<IBooking>(_internalRepo);
             }
 
-            return result;
-        }
-
-        public List<IBooking> GetBookingForDayInterval(DateTime start, DateTime end, out bool found)//Currently is a time interval, not day interval
-        {
-            List<IBooking> result = new List<IBooking>();
-            int searchIndex = 0;
-            int startIndex = -1;
-            int endIndex = -1;
-            found = false;
-
-            while(searchIndex < _internalRepo.Count && startIndex < 0) //Searches for the first instance (if any)
-                                                                       //where either end or beginning of the booking
-                                                                       //overlaps with either dateTime
+            public List<IBooking> GetBookingsForBoat(IBoat boat)
             {
-                if (_internalRepo[searchIndex].IntervalOverlap(start, end)) startIndex = searchIndex;
-                else searchIndex++;
+                List<IBooking> result = new List<IBooking>();
+
+                for (int i = 0; i < _internalRepo.Count; i++)
+                {
+                    if (_internalRepo[i].Bookable == boat) result.Add(_internalRepo[i]);
+                }
+
+                return result;
             }
 
-            if(startIndex > 0) //If this is still -1, there was no bookings at all within the given days.
+            public List<IBooking> GetBookingsForMember(IMember member)
             {
-                searchIndex = _internalRepo.Count - 1;
-                while (searchIndex > 0 && endIndex < 0)
+                List<IBooking> result = new List<IBooking>();
+
+                for(int i =0; i<_internalRepo.Count;i++)
+                {
+                    if (_internalRepo[i].Holder == member) result.Add(_internalRepo[i]);
+                }
+
+                return result;
+            }
+
+            public List<IBooking> GetBookingsForModel(IModel model)
+            {
+                List<IBooking> result = new List<IBooking>();
+
+                for (int i = 0; i < _internalRepo.Count; i++)
+                {
+                    if (_internalRepo[i].Bookable.Model == model) result.Add(_internalRepo[i]);
+                }
+
+                return result;
+            }
+
+            public List<IBooking> GetBookingsForDayInterval(DateTime start, DateTime end, out bool found)//Currently is a time interval, not day interval
+            {
+                List<IBooking> result = new List<IBooking>();
+                int searchIndex = 0;
+                int startIndex = -1;
+                int endIndex = -1;
+                found = false;
+
+                while(searchIndex < _internalRepo.Count && startIndex < 0) //Searches for the first instance (if any)
+                                                                           //where either end or beginning of the booking
+                                                                           //overlaps with either dateTime
                 {
                     if (_internalRepo[searchIndex].IntervalOverlap(start, end)) startIndex = searchIndex;
-                    else searchIndex--;
+                    else searchIndex++;
                 }
-                found = true;
-                result = _internalRepo.GetRange(startIndex, endIndex - startIndex + 1);
-            }
 
-            return result;
-        }
+                if(startIndex > 0) //If this is still -1, there was no bookings at all within the given days.
+                {
+                    searchIndex = _internalRepo.Count - 1;
+                    while (searchIndex > 0 && endIndex < 0)//Searches for the last instance 
+                    {
+                        if (_internalRepo[searchIndex].IntervalOverlap(start, end)) endIndex = searchIndex;
+                        else searchIndex--;
+                    }
+                    found = true;
+                    result = _internalRepo.GetRange(startIndex, endIndex - startIndex + 1);
+                }
+
+                return result;
+            }
+            #endregion
+        #endregion
     }
 }
