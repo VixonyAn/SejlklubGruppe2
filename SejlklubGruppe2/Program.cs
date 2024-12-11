@@ -129,6 +129,7 @@ internal class Program
         Console.WriteLine("Test ended");
         */
 
+        /* Test of bookingRepository
         //Accessing mockdata
         List<IMember> mTestList = MockData.GetInstance().MemberData.Values.ToList();
         List<Boat> bTestList = MockData.GetInstance().BoatData.Values.ToList();
@@ -182,6 +183,7 @@ internal class Program
         stopwatch.Stop();
         Console.WriteLine($"\nTime taken to run all filters once: {stopwatch.Elapsed.TotalMilliseconds} ms");
         Console.WriteLine("\nEnd of test \"bookingrepo\" 11-12-24");
+        */
 
 
         #endregion
