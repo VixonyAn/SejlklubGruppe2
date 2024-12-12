@@ -24,14 +24,14 @@ namespace ClassLibrary.Models
         #region Constructors
         public Boat()
         {
-            //MaintenanceLog = new MaintenanceRepository();
+            MaintenanceLog = new MaintenanceRepository();
         }
         public Boat(Model model, string nickname, string registration) // Constructor takes a Model and Registration for the boat
         {
             Model = model;
             Nickname = nickname;
             Registration = registration;
-            //MaintenanceLog = new MaintenanceRepository();
+            MaintenanceLog = new MaintenanceRepository();
         }
         #endregion
 
