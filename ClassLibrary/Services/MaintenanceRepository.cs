@@ -45,7 +45,7 @@ namespace ClassLibrary.Services
         public void ResolveNote(int index)
         {
             _maintenanceNotes[index].Resolved = true;
-            _maintenanceNotes[index].LastUpdate = DateTime.Now;
+            _maintenanceNotes[index].LastUpdated = DateTime.Now;
         }
 
         public void EditNote(int index, string note)

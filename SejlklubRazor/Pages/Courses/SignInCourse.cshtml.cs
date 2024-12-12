@@ -29,7 +29,7 @@ namespace SejlklubRazor.Pages.Courses
         #region Constructors
         
 
-        public CourseForMemberModel(ICourseRepository courseRepository, IMemberRepository memberRepository)  
+        public SignInCourse(ICourseRepository courseRepository, IMemberRepository memberRepository)  
         {
             _CourseRepo = courseRepository;
             _MemberRepo = memberRepository;
