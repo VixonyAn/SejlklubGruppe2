@@ -75,10 +75,11 @@ internal class Program
         #endregion
 
         #region Atest
+        /*
         Console.WriteLine("");
         Console.WriteLine("Alex test start");
 
-        /*
+        
         CourseRepository courseRepository = new CourseRepository();
         Member courseMember1 = new Member("testName", "123435", "only message in bottle");
         Member courseMember2 = new Member("testName2", "12345677", "no message in bottle");
@@ -90,20 +91,34 @@ internal class Program
         members.Add(courseMember1);
         members.Add(courseMember2);
         int[] att = { 1, 10 };
-        Course testCourse = new Course(1, "TestNavn", start, end, att, members, courseMember1, "this is a test Course");
-        courseRepository.Add(testCourse);
+        Course testCourse = new Course(1, "TestNavn", start, end, att, members, courseMember1, "this is a test Course","this is a test course des");
+        courseRepository.Add(testCourse.Name, testCourse.TimeSlot[0], testCourse.TimeSlot[1],testCourse.AttendeeRange,testCourse.Attendees,testCourse.Master,testCourse.Summary,testCourse.Description);
         DateTime start2 = new DateTime(2015, 4, 7);
         DateTime end2 = new DateTime(2015, 8, 7);
         List<Member> members2 = new List<Member>();
         members2.Add(courseMember1);
         members2.Add(courseMember2);
         int[] att2 = { 2, 200 };
-        Course testCourse2 = new Course(2, "TestNavn2", start2, end2, att2, members2, courseMember1, "this is a test Course2");
-        courseRepository.Add(testCourse2);
-        courseRepository.PrintAllCourses();*/
+        Course testCourse2 = new Course(2, "TestNavn2", start2, end2, att2, members2, courseMember1, "this is a test Course2", "this is a test course2 des");
+
+        courseRepository.Add(testCourse2.Name, testCourse2.TimeSlot[0], testCourse2.TimeSlot[1], testCourse2.AttendeeRange, testCourse2.Attendees, testCourse2.Master, testCourse2.Summary, testCourse2.Description);
+        courseRepository.PrintAllCourses();
+        Console.WriteLine("courses added");
+
+        DateTime start3=new DateTime(2024,4, 7); DateTime end3 = new DateTime(2025, 4, 7); int[] att3 = { 5, 200 };
+        Course newcourse = new Course(3, "TestNavn_Newtest", start3, end3, att3, members2, courseMember1, "this is a newCourse3", "this is a newCourse3 des");
+        courseRepository.Update(newcourse, testCourse2);
+        courseRepository.PrintAllCourses();
+        Console.WriteLine( "course edited");
+
+        courseRepository.Delete(testCourse.Id);
+        courseRepository.PrintAllCourses();
+        Console.WriteLine( "course Deleted");
+
 
         Console.WriteLine("Alex test end");
         Console.WriteLine();
+        */
         #endregion
 
         #region KTest

@@ -7,7 +7,7 @@ using SejlklubRazor.Pages.Members;
 
 namespace SejlklubRazor.Pages.Courses
 {
-    public class CourseForMemberModel : PageModel
+    public class SignInCourse : PageModel
     {
         // This page should show the list of all the courses
         // Show the Courses title, description, and the number of places left in that course   maxNumOfAttendees - Attendees.Count

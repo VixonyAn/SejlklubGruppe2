@@ -31,15 +31,7 @@ namespace SejlklubRazor.Pages.Courses.ShowCourseList
         #region Methods
 
 
-        public IActionResult OnPostDelete(int deleteId)
-        {
 
-            
-            _CourseRepo.Delete(deleteId);
-            // return RedirectToPage("DeleteCourse");
-
-            return RedirectToPage("ShowCourse");
-        }
 
         public IActionResult OnPostEdit(int id)
         {
@@ -47,7 +39,10 @@ namespace SejlklubRazor.Pages.Courses.ShowCourseList
         }
 
 
-
+        public IActionResult OnPostSignIn()
+        {
+            return RedirectToPage("SignInCourse");
+        }
 
         public void OnGet()
         {
