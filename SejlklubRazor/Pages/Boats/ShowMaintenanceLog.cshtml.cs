@@ -15,6 +15,7 @@ namespace SejlklubRazor.Pages.Boats
 
         #region Properties
         public List<IMaintenanceNote> MaintenanceNote { get; set; }
+        public Boat Boat { get; set; }
         //public MaintenanceNote MaintenanceNote { get; set; }
         #endregion
 
@@ -49,7 +50,8 @@ namespace SejlklubRazor.Pages.Boats
 
         public void OnGet(string boatReg)
         {
-            _maintRepo = _boatRepo.GetBoatByReg(boatReg).MaintenanceLog;
+            Boat = _boatRepo.GetBoatByReg(boatReg);
+            _maintRepo = Boat.MaintenanceLog;
             MaintenanceNote = _maintRepo.GetAll();
             //MaintenanceNote = _maintRepo.GetNoteById(boatReg);
         }

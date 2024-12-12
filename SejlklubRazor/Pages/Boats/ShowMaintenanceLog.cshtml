@@ -6,23 +6,27 @@
     ViewData["Title"] = "Vedligeholdeslog";
 }
 
-<table class="table">
-    @foreach (MaintenanceNote Note in Model.MaintenanceNote)
-    {
-    <thead>
-        <tr>
-            <th>Skade</th>
-            <th>Status</th>
-            <th>Admin</th>
-        </tr>
-    </thead>
+<h3>Vedligeholdelseslog for båd "@Model.Boat.Nickname" registrering: "@Model.Boat.Registration"</h3>
+
+@foreach (MaintenanceNote Note in Model.MaintenanceNote)
+{
+<table class="table">    
     <tbody>
         <tr>
-            <td>@Note.SevereDamage</td>
-            <td>@Note.Resolved</td>
+            <td><b>Skade:</b> @Note.SevereDamageString</td>
+            <td><b>Status:</b> @Note.ResolvedString</td>
+            <td><b>Dato Rapporteret:</b> @Note.TimeCreated</td>
+            <td><b>Sidst Opdateret:</b> @Note.LastUpdated</td>
+        </tr>
+    </tbody>
+    <tbody>
+        <tr>
+            <td><b>Forfatter:</b> @Note.Member.Name</td>
+            <td colspan="2"><b>Notat:</b> @Note.Note</td>
             <td>
+                <b>Admin:</b>
                 <form method="post" style="display: inline;" asp-page-handler="Resolve" asp-route-resolveMaintenanceNote="@Note.No">
-                    <input type="submit" value="Edit" />
+                    <input type="submit" value="Resolve" />
                 </form>
                 <form method="post" style="display: inline;" asp-page-handler="Edit" asp-route-editMaintenanceNote="@Note.No">
                     <input type="submit" value="Edit" />
@@ -32,30 +36,7 @@
                 </form>
             </td>
         </tr>
-    </tbody>
-    <thead>
-        <tr>
-            <th>Notat</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>@Note.Note</td>
-        </tr>
-    </tbody>
-    <thead>
-        <tr>
-            <th>Forfatter</th>
-            <th>Dato Rapporteret</th>
-            <th>Sidst Opdateret</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>@Note.Member.Name</td>
-            <td>@Note.TimeCreated</td>
-            <td>@Note.LastUpdated</td>
-        </tr>
-    </tbody>
-    }
+    </tbody>    
 </table>
+<br />
+}
