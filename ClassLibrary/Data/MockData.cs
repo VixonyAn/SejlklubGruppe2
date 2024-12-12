@@ -111,7 +111,7 @@ namespace ClassLibrary.Data
 
             Random random = new Random();
             int numberOfIssues = random.Next(maxNotes);
-            bool pristine = (random.Next(1) < 1);
+            bool pristine = false; //(random.Next(1) < 1);
             List<Member> members = memberData.Cast<Member>().ToList();
 
 
