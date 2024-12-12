@@ -32,11 +32,11 @@ namespace ClassLibrary.Services
         {
             _maintenanceNotes.Add(new MaintenanceNote(member, note, severeDamage));
         }
-        public MaintenanceNote GetNoteById(int id)
+        public MaintenanceNote GetNoteById(int index)
         {
             throw new NotImplementedException();
         }
-        public void RemoveNote(Member member, int noteId)
+        public void RemoveNote(int index)
         {
             throw new NotImplementedException();
         }
@@ -44,6 +44,7 @@ namespace ClassLibrary.Services
         public void ResolveNote(int index)
         {
             _maintenanceNotes[index].Resolved = true;
+            _maintenanceNotes[index].LastUpdate = DateTime.Now;
         }
 
         public void EditNote(int index, string note)

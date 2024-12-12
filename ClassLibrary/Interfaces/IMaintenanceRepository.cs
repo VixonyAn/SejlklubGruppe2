@@ -12,8 +12,8 @@ namespace ClassLibrary.Interfaces
 
         List<MaintenanceNote> GetAll();
         void AddNote(Member member, string note, bool severeDamage);
-        MaintenanceNote GetNoteById(int id);
-        void RemoveNote(Member member, int noteId);
+        MaintenanceNote GetNoteById(int index);
+        void RemoveNote(int index);
         void ResolveNote(int index);
         void EditNote(int index, string note);
         void SortNotes();
