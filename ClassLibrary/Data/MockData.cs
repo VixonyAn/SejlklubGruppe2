@@ -23,11 +23,11 @@ namespace ClassLibrary.Data
 
         private Dictionary<string, IMember> _memberData;
 
-        private List<string> _maintenanceNoteOptions;
-        #endregion
+        
+    #endregion
 
-        #region Constructors
-        private MockData()
+    #region Constructors
+    private MockData()
         {
             optimistjolle = new Model("Optimistjolle", "hyggelig for begyndere", 00.00, 00.00, 00.00, 00.00);
             laserjolle = new Model("Laserjolle", "enkel og let for alle aldersgrupper", 00.00, 00.00, 00.00, 00.00);
@@ -38,13 +38,6 @@ namespace ClassLibrary.Data
             { "Laserjolle", laserjolle },
             };
 
-            _boatData = new Dictionary<string, Boat>()
-            {
-            { "1234", new Boat(optimistjolle, "Ahoy", "1234") },
-            { "5678", new Boat(optimistjolle, "Ship'n", "5678") },
-            { "9012", new Boat(optimistjolle, "Rover", "9012") },
-            { "3456", new Boat(laserjolle, "Tintin", "3456") }
-            };
 
             _memberData = new Dictionary<string, IMember>()
             {
@@ -54,18 +47,6 @@ namespace ClassLibrary.Data
             { "HrOlsen@Mail.dk", new Member("Egon Olsen", "72 55 65 00", "HrOlsen@Mail.dk") }
             };
 
-            _maintenanceNoteOptions = new List<string>()
-            {
-                "Meget store igler",
-                "Loch Ness",
-                "Læk",
-                "Båd halveret",
-                "Stor læk",
-                "Hva'ba?",
-                "Bom væltet",
-                "Sejl væk ?!?!",
-                "aaaaaaa",
-            };
         }
         #endregion
 
@@ -93,18 +74,45 @@ namespace ClassLibrary.Data
             if(_theInstance == null)
             {
                 _theInstance = new MockData();
+                _theInstance.PopulateBoats();
             }
             return _theInstance;
         }
 
-        public List<IMaintenanceNote> RandomNotes(int maxNotes)
+        private void PopulateBoats()
         {
-            List<IMaintenanceNote> result = new List<IMaintenanceNote>();
+
+            _boatData = new Dictionary<string, Boat>()
+            {
+            { "1234", new Boat(optimistjolle, "Ahoy", "1234") },
+            { "5678", new Boat(optimistjolle, "Ship'n", "5678") },
+            { "9012", new Boat(optimistjolle, "Rover", "9012") },
+            { "3456", new Boat(laserjolle, "Tintin", "3456") }
+            };
+        }
+
+        public static List<IMaintenanceNote> RandomNotes(int maxNotes, List<IMember> memberData)
+        {
+            List<string> _maintenanceNoteOptions = new List<string>()
+            {
+                "Meget store igler",
+                "Loch Ness",
+                "Læk",
+                "Båd halveret",
+                "Stor læk",
+                "Hva'ba?",
+                "Bom væltet",
+                "Sejl væk ?!?!",
+                "aaaaaaa",
+            };
+
+
+        List<IMaintenanceNote> result = new List<IMaintenanceNote>();
 
             Random random = new Random();
             int numberOfIssues = random.Next(maxNotes);
             bool pristine = (random.Next(1) < 1);
-            List<Member> members = _memberData.Values.Cast<Member>().ToList();
+            List<Member> members = memberData.Cast<Member>().ToList();
 
 
             if(!pristine)
