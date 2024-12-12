@@ -13,30 +13,31 @@ namespace ClassLibrary.Services
     public class MaintenanceRepository : IMaintenanceRepository
     {
         #region Instance Fields
-        private List<MaintenanceNote> _maintenanceNotes;
+        //private List<MaintenanceNote> _maintenanceNotes;
+        private List<IMaintenanceNote> _maintenanceNotes;
         #endregion
 
         #region Constructors
         public MaintenanceRepository()
         {
-            //_maintenanceNotes = MockData.GetInstance().MaintenanceData; // boat dictionary is filled by mockdata
+            _maintenanceNotes = MockData.GetInstance().RandomNotes(5); // boat dictionary is filled by mockdata
         }
         #endregion
 
         #region Methods
-        public List<MaintenanceNote> GetAll()
+        public List<IMaintenanceNote> GetAll()
         {
-            return new List<MaintenanceNote>(_maintenanceNotes);
+            return new List<IMaintenanceNote>(_maintenanceNotes);
         }
         public void AddNote(Member member, string note, bool severeDamage)
         {
             _maintenanceNotes.Add(new MaintenanceNote(member, note, severeDamage));
         }
-        public MaintenanceNote GetNoteById(int id)
+        public MaintenanceNote GetNoteById(int index)
         {
             throw new NotImplementedException();
         }
-        public void RemoveNote(Member member, int noteId)
+        public void RemoveNote(int index)
         {
             throw new NotImplementedException();
         }
@@ -49,7 +50,7 @@ namespace ClassLibrary.Services
         public void EditNote(int index, string note)
         {
             _maintenanceNotes[index].Note = note;
-            _maintenanceNotes[index].LastUpdate = DateTime.Now;
+            _maintenanceNotes[index].LastUpdated = DateTime.Now;
         }
         public void SortNotes()
         { // last updated, damage value, damage status

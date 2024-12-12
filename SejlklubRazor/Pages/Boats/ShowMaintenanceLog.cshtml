@@ -1,0 +1,61 @@
+﻿@page
+@using ClassLibrary.Models;
+@using ClassLibrary.Services;
+@model SejlklubRazor.Pages.Boats.ShowMaintenanceLogModel
+@{
+    ViewData["Title"] = "Vedligeholdeslog";
+}
+
+<table class="table">
+    @foreach (MaintenanceNote Note in Model.MaintenanceNote)
+    {
+    <thead>
+        <tr>
+            <th>Skade</th>
+            <th>Status</th>
+            <th>Admin</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Note.SevereDamage</td>
+            <td>@Note.Resolved</td>
+            <td>
+                <form method="post" style="display: inline;" asp-page-handler="Resolve" asp-route-resolveMaintenanceNote="@Note.No">
+                    <input type="submit" value="Edit" />
+                </form>
+                <form method="post" style="display: inline;" asp-page-handler="Edit" asp-route-editMaintenanceNote="@Note.No">
+                    <input type="submit" value="Edit" />
+                </form>
+                <form method="post" style="display: inline;" asp-page-handler="Delete" asp-route-deleteMaintenanceNote="@Note.No">
+                    <input type="submit" value="Delete" />
+                </form>
+            </td>
+        </tr>
+    </tbody>
+    <thead>
+        <tr>
+            <th>Notat</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Note.Note</td>
+        </tr>
+    </tbody>
+    <thead>
+        <tr>
+            <th>Forfatter</th>
+            <th>Dato Rapporteret</th>
+            <th>Sidst Opdateret</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Note.Member.Name</td>
+            <td>@Note.TimeCreated</td>
+            <td>@Note.LastUpdated</td>
+        </tr>
+    </tbody>
+    }
+</table>

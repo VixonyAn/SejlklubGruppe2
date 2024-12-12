@@ -39,6 +39,5 @@ namespace SejlklubRazor.Pages.Boats
             Model = _modelRepo.GetModelByName(modelName);
         }
         #endregion
-
     }
 }
