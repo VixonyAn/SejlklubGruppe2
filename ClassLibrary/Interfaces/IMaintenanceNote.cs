@@ -13,7 +13,7 @@ namespace ClassLibrary.Interfaces
         string Note { get; set; }
         int No { get; }
         DateTime TimeCreated { get; }
-        DateTime LastUpdate { get; set; }
+        DateTime LastUpdated { get; set; }
         public bool SevereDamage { get; set; }
         public bool Resolved { get; set; }
 

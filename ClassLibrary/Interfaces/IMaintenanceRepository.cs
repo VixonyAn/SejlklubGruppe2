@@ -10,7 +10,7 @@ namespace ClassLibrary.Interfaces
     public interface IMaintenanceRepository
     { // sorting system for two lists, resolved and unresolved
 
-        List<MaintenanceNote> GetAll();
+        List<IMaintenanceNote> GetAll();
         void AddNote(Member member, string note, bool severeDamage);
         MaintenanceNote GetNoteById(int index);
         void RemoveNote(int index);
