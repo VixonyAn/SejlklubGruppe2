@@ -33,8 +33,12 @@ namespace SejlklubRazor.Pages.Courses.ShowCourseList
 
         public IActionResult OnPostDelete(int deleteId)
         {
+
+            
             _CourseRepo.Delete(deleteId);
-            return RedirectToPage("ShowCourseList");
+            // return RedirectToPage("DeleteCourse");
+
+            return RedirectToPage("ShowCourse");
         }
 
         public IActionResult OnPostEdit(int id)

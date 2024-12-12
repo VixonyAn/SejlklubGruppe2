@@ -72,6 +72,10 @@ namespace SejlklubRazor.Pages.Courses
             _courseRepo.Update(newcourse, _courseRepo.GetCourseById(id));
             return RedirectToPage("ShowCourseList");
         }
+        public IActionResult OnPostDelete(int delteId)
+        {
+            return RedirectToPage("DeleteCourse");
+        }
         #endregion
     }
 }
