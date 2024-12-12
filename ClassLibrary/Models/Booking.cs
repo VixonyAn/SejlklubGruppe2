@@ -18,12 +18,16 @@ namespace ClassLibrary.Models
 
         public DateTime End { get; }
 
+        public bool IsValid { get { return true; } } //Bookable.IsDamaged? Where Is Damaged would be a bool-property on a boat object.
+
         #endregion
 
         #region constructors
         public Booking(IMember holder, IBoat bookable, DateTime start, DateTime end)
         {
             Holder = holder;
+            //If Boat.IsDamaged could be a bool-property that looks for any instances of serious damage on the boat
+            //If there is serious damage, throw an exception here? Maybe this should be handled by the repo instead.
             Bookable = bookable;
             Start = start;
             End = end;

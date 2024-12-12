@@ -12,6 +12,11 @@ namespace ClassLibrary.Interfaces
         void AddBooking(IBooking booking);
         void AddBooking(IMember holder, IBoat bookable, DateTime start, DateTime end);
 
+        bool BoatBookedInInterval(IBoat queryBoat, DateTime start, DateTime end);
+
+        List<IBoat> BoatsNotBookedInInterval(List<IBoat> queryBoats, DateTime start, DateTime end);
+
+
         List<IBooking> GetAll();
         List<IBooking> GetBookingsForBoat(IBoat boat);
         List<IBooking> GetBookingsForModel(IModel model);
