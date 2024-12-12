@@ -110,8 +110,8 @@ namespace ClassLibrary.Data
         List<IMaintenanceNote> result = new List<IMaintenanceNote>();
 
             Random random = new Random();
-            int numberOfIssues = random.Next(maxNotes);
-            bool pristine = false; //(random.Next(1) < 1);
+            int numberOfIssues = random.Next(maxNotes+1);
+            bool pristine = (random.Next(2) < 1);
             List<Member> members = memberData.Cast<Member>().ToList();
 
 
