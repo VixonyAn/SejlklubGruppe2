@@ -46,7 +46,7 @@ namespace ClassLibrary.Services
             AddBooking(new Booking(holder, bookable, start, end));
         }
 
-        public bool BoatBookedInInterval(IBoat queryBoat, DateTime start, DateTime end)
+        public bool BoatsBookedInInterval(IBoat queryBoat, DateTime start, DateTime end)
         {
             List<IBooking> matches = GetBookingsForBoat(queryBoat);
             foreach(IBooking booking in matches)
