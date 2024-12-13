@@ -25,13 +25,13 @@
             <td colspan="2"><b>Notat:</b> @Note.Note</td>
             <td>
                 <b>Admin:</b>
-                <form method="post" style="display: inline;" asp-page-handler="Resolve" asp-route-resolveMaintenanceNote="@Note.No">
+                    <form method="post" style="display: inline;" asp-page-handler="Resolve" asp-route-resolveMaintenanceNote="@Note.No" asp-route-boatReg="@Model.Boat.Registration">
                     <input type="submit" value="Resolve" />
                 </form>
-                <form method="post" style="display: inline;" asp-page-handler="Edit" asp-route-editMaintenanceNote="@Note.No">
+                    <form method="post" style="display: inline;" asp-page-handler="Edit" asp-route-editMaintenanceNote="@Note.No" asp-route-boatReg="@Model.Boat.Registration">
                     <input type="submit" value="Edit" />
                 </form>
-                <form method="post" style="display: inline;" asp-page-handler="Delete" asp-route-deleteMaintenanceNote="@Note.No">
+                    <form method="post" style="display: inline;" asp-page-handler="Delete" asp-route-deleteMaintenanceNote="@Note.No" asp-route-boatReg="@Model.Boat.Registration">
                     <input type="submit" value="Delete" />
                 </form>
             </td>

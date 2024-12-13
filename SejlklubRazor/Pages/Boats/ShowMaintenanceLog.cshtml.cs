@@ -34,9 +34,9 @@ namespace SejlklubRazor.Pages.Boats
             return RedirectToPage("ShowMaintenanceLog");
         }
 
-        public IActionResult OnPostEdit(int editMaintenanceNote)
+        public IActionResult OnPostEdit(int editMaintenanceNote, int boatReg)
         {
-            return RedirectToPage("EditNote", new { editMaintenanceNote = editMaintenanceNote, boatReg = Boat.Registration });
+            return RedirectToPage("EditNote", new { editMaintenanceNote = editMaintenanceNote, boatReg = boatReg });
         }
 
         public IActionResult OnPostResolve(int resolveMaintenanceNote, string boatReg)
