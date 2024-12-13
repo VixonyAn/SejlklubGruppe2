@@ -14,7 +14,7 @@ namespace ClassLibrary.Interfaces
 
         bool BoatBookedInInterval(IBoat queryBoat, DateTime start, DateTime end);
 
-        List<IBoat> BoatsNotBookedInInterval(List<IBoat> queryBoats, DateTime start, DateTime end);
+        List<IBoat> BoatsBookedInInterval(List<IBoat> queryBoats, DateTime start, DateTime end);
 
 
         List<IBooking> GetAll();
