@@ -35,7 +35,7 @@ namespace ClassLibrary.Services
         }
         public IMaintenanceNote GetNoteById(int index)
         {
-            if (index > 0 && index < _maintenanceNotes.Count)
+            if (index >= 0 && index < _maintenanceNotes.Count)
             {
                 return _maintenanceNotes[index];
             }

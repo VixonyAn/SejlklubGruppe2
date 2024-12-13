@@ -30,8 +30,9 @@ namespace SejlklubRazor.Pages.Boats
         #region Methods
         public IActionResult OnPostDelete(int deleteMaintenanceNote, string boatReg)
         {
+            _maintRepo = _boatRepo.GetBoatByReg(boatReg).MaintenanceLog;
             _maintRepo.RemoveNote(deleteMaintenanceNote);
-            return RedirectToPage("ShowMaintenanceLog");
+            return RedirectToPage("ShowMaintenanceLog", new { boatReg = boatReg });
         }
 
         public IActionResult OnPostEdit(int editMaintenanceNote, int boatReg)
@@ -44,7 +45,7 @@ namespace SejlklubRazor.Pages.Boats
             _maintRepo = _boatRepo.GetBoatByReg(boatReg).MaintenanceLog;
             MaintenanceNote = _maintRepo.GetAll();
             _maintRepo.ResolveNote(resolveMaintenanceNote);
-            return RedirectToPage("ShowMaintenanceLog");
+            return RedirectToPage("ShowMaintenanceLog", new { boatReg = boatReg});
         }
 
         public void OnGet(string boatReg)

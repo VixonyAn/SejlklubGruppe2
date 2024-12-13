@@ -15,7 +15,9 @@ namespace ClassLibrary.Interfaces
         DateTime TimeCreated { get; }
         DateTime LastUpdated { get; set; }
         public bool SevereDamage { get; set; }
+        public string SevereDamageString { get;}
         public bool Resolved { get; set; }
+        public string ResolvedString { get;}
 
         string ToString();
     }

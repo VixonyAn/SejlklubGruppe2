@@ -111,7 +111,7 @@ namespace ClassLibrary.Data
 
             Random random = new Random();
             int numberOfIssues = random.Next(maxNotes+1);
-            bool pristine = (random.Next(3) < 2);
+            bool pristine = (random.Next(3) < 1);
             List<Member> members = memberData.Cast<Member>().ToList();
 
 
@@ -119,7 +119,7 @@ namespace ClassLibrary.Data
             {
                 for(int i = 0; i<numberOfIssues; i++)
                 {
-                    result.Add(new MaintenanceNote(members[(random.Next(members.Count - 1))], _maintenanceNoteOptions[(random.Next(_maintenanceNoteOptions.Count-1))], (random.Next(1) < 1)));
+                    result.Add(new MaintenanceNote(members[(random.Next(members.Count - 1))], _maintenanceNoteOptions[(random.Next(_maintenanceNoteOptions.Count-1))], (random.Next(2) < 1)));
                 }
             }
 

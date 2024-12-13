@@ -1,6 +1,7 @@
 ﻿@page
 @using ClassLibrary.Models;
 @using ClassLibrary.Services;
+@using ClassLibrary.Interfaces
 @model SejlklubRazor.Pages.Boats.ShowMaintenanceLogModel
 @{
     ViewData["Title"] = "Vedligeholdeslog";
@@ -8,35 +9,39 @@
 
 <h3>Vedligeholdelseslog for båd "@Model.Boat.Nickname" registrering: "@Model.Boat.Registration"</h3>
 
-@foreach (MaintenanceNote Note in Model.MaintenanceNote)
-{
-<table class="table">    
-    <tbody>
-        <tr>
-            <td><b>Skade:</b> @Note.SevereDamageString</td>
-            <td><b>Status:</b> @Note.ResolvedString</td>
-            <td><b>Dato Rapporteret:</b> @Note.TimeCreated</td>
-            <td><b>Sidst Opdateret:</b> @Note.LastUpdated</td>
-        </tr>
-    </tbody>
-    <tbody>
-        <tr>
-            <td><b>Forfatter:</b> @Note.Member.Name</td>
-            <td colspan="2"><b>Notat:</b> @Note.Note</td>
-            <td>
-                <b>Admin:</b>
-                    <form method="post" style="display: inline;" asp-page-handler="Resolve" asp-route-resolveMaintenanceNote="@Note.No" asp-route-boatReg="@Model.Boat.Registration">
-                    <input type="submit" value="Resolve" />
-                </form>
-                    <form method="post" style="display: inline;" asp-page-handler="Edit" asp-route-editMaintenanceNote="@Note.No" asp-route-boatReg="@Model.Boat.Registration">
-                    <input type="submit" value="Edit" />
-                </form>
-                    <form method="post" style="display: inline;" asp-page-handler="Delete" asp-route-deleteMaintenanceNote="@Note.No" asp-route-boatReg="@Model.Boat.Registration">
-                    <input type="submit" value="Delete" />
-                </form>
-            </td>
-        </tr>
-    </tbody>    
-</table>
-<br />
+@{
+    List<IMaintenanceNote> notes = Model.MaintenanceNote;
+    for(int i=0; i<Model.MaintenanceNote.Count; i++)
+    {
+    <table class="table">    
+        <tbody>
+            <tr>
+                <td><b>Skade:</b> @notes[i].SevereDamageString</td>
+                    <td><b>Status:</b> @notes[i].ResolvedString</td>
+                    <td><b>Dato Rapporteret:</b> @notes[i].TimeCreated</td>
+                    <td><b>Sidst Opdateret:</b> @notes[i].LastUpdated</td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+                    <td><b>Forfatter:</b> @notes[i].Member.Name</td>
+                    <td colspan="2"><b>Notat:</b> @notes[i].Note</td>
+                <td>
+                    <b>Admin:</b>
+                        <form method="post" style="display: inline;" asp-page-handler="Resolve" asp-route-resolveMaintenanceNote="@i" asp-route-boatReg="@Model.Boat.Registration">
+                        <input type="submit" value="Resolve" />
+                    </form>
+                        <form method="post" style="display: inline;" asp-page-handler="Edit" asp-route-editMaintenanceNote="@i" asp-route-boatReg="@Model.Boat.Registration">
+                        <input type="submit" value="Edit" />
+                    </form>
+                        <form method="post" style="display: inline;" asp-page-handler="Delete" asp-route-deleteMaintenanceNote="@i" asp-route-boatReg="@Model.Boat.Registration">
+                        <input type="submit" value="Delete" />
+                    </form>
+                </td>
+            </tr>
+        </tbody>    
+    </table>
+    <br />
+
+    }
 }
