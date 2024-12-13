@@ -12,6 +12,12 @@ internal class Program
     private static void Main(string[] args)
     {
         #region VTest
+        /* testing for UML design sekvens diagram
+        ModelRepository modelRepo = new ModelRepository();
+        modelRepo.AddModel("Optimistjolle", "hyggelig for begyndere", 00.00, 00.00, 00.00, 00.00);
+        // should try catch here when testing adding the same model to keep the program running
+        */
+
         /* initial constructor and Add to list exception test
         // THIS WILL NO LONGER WORK as of 06/12 since nicknames were added
         // test create new model and boats, add to list, catch exception when ID already exists in list
@@ -36,10 +42,13 @@ internal class Program
         */
 
         // initializing data
-        IModelRepository modelRepo = new ModelRepository();
+        //IModelRepository modelRepo = new ModelRepository();
         IBoatRepository boatRepo = new BoatRepository();
         List<Boat> boatList = boatRepo.GetAll(); // bring our dict into a list
-
+        foreach (Boat boat in boatList)
+        {
+            Console.WriteLine($"{boat}");
+        }
         /* test print alle modeller
         List<Model> modelList = modelRepo.GetAll();
         foreach (Model model in modelList)
@@ -72,6 +81,14 @@ internal class Program
         Boat b5 = new Boat(modelRepo.GetModelByName("Laserjolle"), "1234");
         Console.WriteLine(b5); // works!! tested 05/12
         */
+
+        /* testing maintenance notes, works on 13/12/2024, remember 50/50 chance of generation
+        IMaintenanceRepository maintRepo = new MaintenanceRepository();
+        List<IMaintenanceNote> noteList = maintRepo.GetAll();
+        foreach (IMaintenanceNote note in noteList)
+        {
+            Console.WriteLine($"{note}");
+        }*/
         #endregion
 
         #region Atest

@@ -49,7 +49,7 @@ namespace ClassLibrary.Models
         #region Methods
         public override string ToString()
         {
-            return $"Vedligeholdesesnotat: {Note}\nSkade: {SevereDamageString} Status: {ResolvedString}\nForfatter:{Member.Name} Dato Rapporteret: {TimeCreated} Sidst Opdateret: {LastUpdated}\n";
+            return $"Vedligeholdesesnotat: {Note}\nSkade: {SevereDamageString} Status: {ResolvedString}\nForfatter: {Member.Name} Dato Rapporteret: {TimeCreated} Sidst Opdateret: {LastUpdated}";
         }
         #endregion
     }

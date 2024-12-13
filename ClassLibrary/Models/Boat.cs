@@ -38,7 +38,7 @@ namespace ClassLibrary.Models
         #region Methods
         public override string ToString() // This prints the Models ToString too :>
         {
-            return $"Model: {Model}\nNavn:{Nickname}\nRegistration: {Registration}\n";
+            return $"Model: {Model.ModelName}\nNavn: {Nickname}\nRegistration: {Registration}\nMaintenance Log: {MaintenanceLog}";
         }
         #endregion
     }

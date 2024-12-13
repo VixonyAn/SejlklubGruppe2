@@ -33,13 +33,17 @@ namespace ClassLibrary.Services
         {
             _maintenanceNotes.Add(new MaintenanceNote(member, note, severeDamage));
         }
-        public MaintenanceNote GetNoteById(int index)
+        public IMaintenanceNote GetNoteById(int index)
         {
-            throw new NotImplementedException();
+            if (index > 0 && index < _maintenanceNotes.Count)
+            {
+                return _maintenanceNotes[index];
+            }
+            throw new IndexOutOfRangeException("No maintenance note exists with that Id");
         }
         public void RemoveNote(int index)
         {
-            throw new NotImplementedException();
+            _maintenanceNotes.RemoveAt(index);
         }
 
         public void ResolveNote(int index)
@@ -54,12 +58,24 @@ namespace ClassLibrary.Services
             _maintenanceNotes[index].LastUpdated = DateTime.Now;
         }
         public void SortNotes()
-        { // last updated, damage value, damage status
+        { // last updated, damage value, damage status, create a new list?
             throw new NotImplementedException();
         }
         public void PrintAllNotes()
         {
-            throw new NotImplementedException();
+            foreach (MaintenanceNote maintNote in _maintenanceNotes)
+            {
+                Console.WriteLine(maintNote.ToString());
+            }
+        }
+        public override string ToString()
+        {
+            string maintLog = "\n";
+            foreach (MaintenanceNote maintNote in _maintenanceNotes)
+            {
+                maintLog += maintNote.ToString() + "\n";
+            }
+            return maintLog;
         }
         #endregion
     }

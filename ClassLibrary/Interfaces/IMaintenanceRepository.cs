@@ -12,7 +12,7 @@ namespace ClassLibrary.Interfaces
 
         List<IMaintenanceNote> GetAll();
         void AddNote(Member member, string note, bool severeDamage);
-        MaintenanceNote GetNoteById(int index);
+        IMaintenanceNote GetNoteById(int index);
         void RemoveNote(int index);
         void ResolveNote(int index);
         void EditNote(int index, string note);
