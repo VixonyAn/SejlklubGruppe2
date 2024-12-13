@@ -15,21 +15,20 @@ namespace SejlklubRazor.Pages.Boats
 
         #region Properties
         public List<IMaintenanceNote> MaintenanceNote { get; set; }
+        [BindProperty]
         public Boat Boat { get; set; }
-        //public MaintenanceNote MaintenanceNote { get; set; }
+        public string BoatReg { get; set; }
         #endregion
 
         #region Constructors
-        public ShowMaintenanceLogModel(IBoatRepository boatRepository) //, IMaintenanceRepository maintenanceRepository)
+        public ShowMaintenanceLogModel(IBoatRepository boatRepository)
         {
-            //_maintRepo = maintenanceRepository;
             _boatRepo = boatRepository;
-            //_maintRepo = boatRepository.GetBoatByReg(boatReg).MaintenanceLog;
         }
         #endregion
 
         #region Methods
-        public IActionResult OnPostDelete(int deleteMaintenanceNote)
+        public IActionResult OnPostDelete(int deleteMaintenanceNote, string boatReg)
         {
             _maintRepo.RemoveNote(deleteMaintenanceNote);
             return RedirectToPage("ShowMaintenanceLog");
@@ -37,7 +36,7 @@ namespace SejlklubRazor.Pages.Boats
 
         public IActionResult OnPostEdit(int editMaintenanceNote)
         {
-            return RedirectToPage("EditNote", new { editMaintenanceNote = editMaintenanceNote });
+            return RedirectToPage("EditNote", new { editMaintenanceNote = editMaintenanceNote, boatReg = Boat.Registration });
         }
 
         public IActionResult OnPostResolve(int resolveMaintenanceNote, string boatReg)
