@@ -18,7 +18,7 @@ namespace ClassLibrary.Models
         public string Nickname { get; set; }
         public string Registration { get; set; }
         public IMaintenanceRepository MaintenanceLog { get; set; }
-        //public List<IMaintenanceNote> MaintenanceNote { get; set; } // skal hente liste og printe den med båden når man ser båden?
+        // skal hente maintenance notes og printe den med båden når man ser båden?
         #endregion
 
         #region Constructors
