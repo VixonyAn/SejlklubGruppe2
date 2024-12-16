@@ -13,8 +13,7 @@ namespace ClassLibrary.Services
     public class MaintenanceRepository : IMaintenanceRepository
     {
         #region Instance Fields
-        //private List<MaintenanceNote> _maintenanceNotes;
-        private List<IMaintenanceNote> _maintenanceNotes;
+        private List<MaintenanceNote> _maintenanceNotes;
         #endregion
 
         #region Constructors
@@ -25,15 +24,27 @@ namespace ClassLibrary.Services
         #endregion
 
         #region Methods
-        public List<IMaintenanceNote> GetAll()
+        public List<MaintenanceNote> GetAll()
         {
-            return new List<IMaintenanceNote>(_maintenanceNotes);
+            return new List<MaintenanceNote>(_maintenanceNotes);
         }
-        public void AddNote(Member member, string note, bool severeDamage)
+        public void AddNote(Member member, Boat boat, string note, bool severeDamage)
         {
-            _maintenanceNotes.Add(new MaintenanceNote(member, note, severeDamage));
+            _maintenanceNotes.Add(new MaintenanceNote(member, boat, note, severeDamage));
         }
-        public IMaintenanceNote GetNoteById(int index)
+        public List<MaintenanceNote> GetNotesByReg(string boatReg)
+        {
+            List<MaintenanceNote> regNoteList = new List<MaintenanceNote>();
+            foreach (MaintenanceNote maintNote in _maintenanceNotes)
+            {
+                if (maintNote.Boat.Registration == boatReg)
+                {
+                    regNoteList.Add(maintNote);
+                }
+            }
+            return regNoteList;
+        }
+        public MaintenanceNote GetNoteById(int index)
         {
             if (index > 0 && index < _maintenanceNotes.Count)
             {

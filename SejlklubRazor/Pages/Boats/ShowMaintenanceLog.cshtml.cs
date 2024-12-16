@@ -14,16 +14,17 @@ namespace SejlklubRazor.Pages.Boats
         #endregion
 
         #region Properties
-        public List<IMaintenanceNote> MaintenanceNote { get; set; }
+        public List<MaintenanceNote> MaintenanceNote { get; set; }
         [BindProperty]
         public Boat Boat { get; set; }
         public string BoatReg { get; set; }
         #endregion
 
         #region Constructors
-        public ShowMaintenanceLogModel(IBoatRepository boatRepository)
+        public ShowMaintenanceLogModel(IBoatRepository boatRepository, IMaintenanceRepository maintenanceRepository)
         {
             _boatRepo = boatRepository;
+            _maintRepo = maintenanceRepository;
         }
         #endregion
 
@@ -39,10 +40,10 @@ namespace SejlklubRazor.Pages.Boats
             return RedirectToPage("EditNote", new { editMaintenanceNote = editMaintenanceNote, boatReg = boatReg });
         }
 
-        public IActionResult OnPostResolve(int resolveMaintenanceNote, string boatReg)
+        public IActionResult OnPostResolve(int resolveMaintenanceNote)
         {
-            _maintRepo = _boatRepo.GetBoatByReg(boatReg).MaintenanceLog;
-            MaintenanceNote = _maintRepo.GetAll();
+            //_maintRepo = _boatRepo.GetBoatByReg(boatReg).MaintenanceLog;
+            //MaintenanceNote = _maintRepo.GetAll();
             _maintRepo.ResolveNote(resolveMaintenanceNote);
             return RedirectToPage("ShowMaintenanceLog");
         }
@@ -50,8 +51,9 @@ namespace SejlklubRazor.Pages.Boats
         public void OnGet(string boatReg)
         {
             Boat = _boatRepo.GetBoatByReg(boatReg);
-            _maintRepo = Boat.MaintenanceLog;
-            MaintenanceNote = _maintRepo.GetAll();
+            MaintenanceNote = _maintRepo.GetNotesByReg(boatReg);
+            //_maintRepo = Boat.MaintenanceLog;
+            //MaintenanceNote = _maintRepo.GetAll();
             //MaintenanceNote = _maintRepo.GetNoteById(boatReg);
         }
         #endregion
