@@ -51,7 +51,7 @@ namespace ClassLibrary.Models
         #region Methods
         public override string ToString()
         {
-            return $"Vedligeholdesesnotat: {Note}\nBåd: {Boat.Registration} Skade: {SevereDamageString} Status: {ResolvedString}\nForfatter: {Member.Name} Dato Rapporteret: {TimeCreated} Sidst Opdateret: {LastUpdated}";
+            return $"Vedligeholdesesnotat: {Note}\nBåd: {Boat.Registration} Skade: {SevereDamageString} Status: {ResolvedString}\nForfatter: {Member.Name} Dato Rapporteret: {TimeCreated} Sidst Opdateret: {LastUpdated}\n";
         }
         #endregion
     }

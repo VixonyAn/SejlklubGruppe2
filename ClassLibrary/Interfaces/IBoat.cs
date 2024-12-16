@@ -12,7 +12,6 @@ namespace ClassLibrary.Interfaces
         Model Model { get; set; }
         string Nickname { get; set; }
         string Registration { get; set; }
-        List<MaintenanceNote> MaintenanceLog { get; set; }
 
         string ToString();
     }
