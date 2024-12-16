@@ -83,7 +83,7 @@ namespace ClassLibrary.Data
             };
         }
 
-        public static List<MaintenanceNote> RandomNotes(int maxNotes, List<IMember> memberData, List<IBoat> boatData)
+        public static List<MaintenanceNote> RandomNotes(int maxNotes, List<IMember> memberData, List<Boat> boatData)
         {
             List<string> _maintenanceNoteOptions = new List<string>()
             {
@@ -104,7 +104,7 @@ namespace ClassLibrary.Data
             int numberOfIssues = random.Next(maxNotes+1);
             bool pristine = (random.Next(3) < 2);
             List<Member> members = memberData.Cast<Member>().ToList();
-            List<Boat> boats = boatData.Cast<Boat>().ToList();
+            List<Boat> boats = boatData.ToList();
 
             if (!pristine)
             {
