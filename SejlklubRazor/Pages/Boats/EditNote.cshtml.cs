@@ -8,40 +8,44 @@ namespace SejlklubRazor.Pages.Boats
     public class EditNoteModel : PageModel
     {
         #region Instance Fields
-        private IBoatRepository _boatRepo;
         private IMaintenanceRepository _maintRepo;
         #endregion
 
         #region Properties
-        public IMaintenanceNote MaintenanceNote { get; set; }
-        public Boat Boat { get; set; }
+        [BindProperty]
+        public MaintenanceNote MaintenanceNote { get; set; }
         [BindProperty]
         public bool SevereDamage { get; set; }
         [BindProperty]
         public string Note { get; set; }
+        [BindProperty]
+        public int No { get; set; }
+        [BindProperty]
+        public string BoatReg { get; set; }
         #endregion
 
         #region Constructors
-        public EditNoteModel(IBoatRepository boatRepository) // dependency injection
+        public EditNoteModel(IMaintenanceRepository maintenanceRepository) // dependency injection
         {
-            this._boatRepo = boatRepository; // parameter overført
+            this._maintRepo = maintenanceRepository;
         }
         #endregion
 
         #region Methods
-        public IActionResult OnGet(int editMaintenanceNote, string boatReg)
-        {
-            _maintRepo = _boatRepo.GetBoatByReg(boatReg).MaintenanceLog;
+        public IActionResult OnGet(int editMaintenanceNote, string boatReg)//, string boatReg)
+        { // retrieve a specific note by it's ID so it can be edited
+            BoatReg = boatReg;
             MaintenanceNote = _maintRepo.GetNoteById(editMaintenanceNote);
+            No = MaintenanceNote.No;
             SevereDamage = MaintenanceNote.SevereDamage;
             Note = MaintenanceNote.Note;
             return Page();
         }
 
-        public IActionResult OnPost(int editMaintenanceNote, string note)
-        {
-            _maintRepo.EditNote(editMaintenanceNote, note);
-            return RedirectToPage("ShowMaintenanceLog");
+        public IActionResult OnPost()
+        { // overwrites the contents of the note
+            _maintRepo.EditNote(No, Note, SevereDamage);
+            return RedirectToPage("ShowMaintenanceLog", new { boatReg = BoatReg});
         }
         #endregion
     }
