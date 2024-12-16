@@ -14,7 +14,7 @@ namespace SejlklubRazor.Pages.Boats
         #endregion
 
         #region Properties
-        public List<MaintenanceNote> MaintenanceNote { get; set; }
+        public List<MaintenanceNote> MaintenanceNotes { get; set; }
         [BindProperty]
         public Boat Boat { get; set; }
         public string BoatReg { get; set; }
@@ -51,7 +51,7 @@ namespace SejlklubRazor.Pages.Boats
         public void OnGet(string boatReg)
         {
             Boat = _boatRepo.GetBoatByReg(boatReg);
-            MaintenanceNote = _maintRepo.GetNotesByReg(boatReg);
+            MaintenanceNotes = _maintRepo.GetNotesByReg(boatReg);
             //_maintRepo = Boat.MaintenanceLog;
             //MaintenanceNote = _maintRepo.GetAll();
             //MaintenanceNote = _maintRepo.GetNoteById(boatReg);

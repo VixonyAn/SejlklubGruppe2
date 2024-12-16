@@ -29,16 +29,16 @@ namespace SejlklubRazor.Pages.Boats
 
         #region Methods
         public IActionResult OnGet(int editMaintenanceNote)
-        {
+        { // retrieve a specific note by it's ID so it can be edited
             MaintenanceNote = _maintRepo.GetNoteById(editMaintenanceNote);
             SevereDamage = MaintenanceNote.SevereDamage;
             Note = MaintenanceNote.Note;
             return Page();
         }
 
-        public IActionResult OnPost(int editMaintenanceNote, string note)
-        {
-            _maintRepo.EditNote(editMaintenanceNote, note);
+        public IActionResult OnPost(int editMaintenanceNote, string note, bool severeDamage)
+        { // overwrites the contents of the note
+            _maintRepo.EditNote(editMaintenanceNote, note, severeDamage);
             return RedirectToPage("ShowMaintenanceLog");
         }
         #endregion

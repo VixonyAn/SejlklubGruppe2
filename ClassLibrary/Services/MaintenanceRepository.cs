@@ -19,7 +19,7 @@ namespace ClassLibrary.Services
         #region Constructors
         public MaintenanceRepository()
         {
-            _maintenanceNotes = MockData.RandomNotes(5, MockData.GetInstance().MemberData.Values.ToList()); // boat dictionary is filled by mockdata
+            _maintenanceNotes = MockData.RandomNotes(5, MockData.GetInstance().MemberData.Values.ToList()); // maintenance list is filled by mockdata
         }
         #endregion
 
@@ -33,7 +33,7 @@ namespace ClassLibrary.Services
             _maintenanceNotes.Add(new MaintenanceNote(member, boat, note, severeDamage));
         }
         public List<MaintenanceNote> GetNotesByReg(string boatReg)
-        {
+        { // retrieve maintenanceNotes to a list if the note has the same registration
             List<MaintenanceNote> regNoteList = new List<MaintenanceNote>();
             foreach (MaintenanceNote maintNote in _maintenanceNotes)
             {
@@ -63,9 +63,10 @@ namespace ClassLibrary.Services
             _maintenanceNotes[index].LastUpdated = DateTime.Now;
         }
 
-        public void EditNote(int index, string note)
+        public void EditNote(int index, string note, bool severeDamage)
         {
             _maintenanceNotes[index].Note = note;
+            _maintenanceNotes[index].SevereDamage = severeDamage;
             _maintenanceNotes[index].LastUpdated = DateTime.Now;
         }
         public void SortNotes()
