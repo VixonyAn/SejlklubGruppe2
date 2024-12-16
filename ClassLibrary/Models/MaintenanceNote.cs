@@ -19,9 +19,11 @@ namespace ClassLibrary.Models
         public string Note { get; set; }
         public int No { get { return _no; } }
         public DateTime TimeCreated { get; }
-        public DateTime LastUpdate { get; set; }
+        public DateTime LastUpdated { get; set; }
         public bool SevereDamage { get; set; }
+        public string SevereDamageString { get { return SevereDamage ? "SERIØST" : "Minimalt"; } }
         public bool Resolved { get; set; }
+        public string ResolvedString { get { return Resolved ? "Løst" : "AKTUELT"; } }
         #endregion
 
         #region Constructors
@@ -38,7 +40,7 @@ namespace ClassLibrary.Models
             Member = member; //get by name
             Note = note;
             TimeCreated = DateTime.Now;
-            LastUpdate = TimeCreated;
+            LastUpdated = TimeCreated;
             SevereDamage = severeDamage;
             Resolved = false;
         }
@@ -47,7 +49,7 @@ namespace ClassLibrary.Models
         #region Methods
         public override string ToString()
         {
-            return $"Vedligeholdesesnotat: {Note}\nSkade: {(SevereDamage?"SERIØST":"Minimalt")} Status: {(Resolved?"Løst":"AKTUELT")}\nForfatter:{Member.Name} Dato Rapporteret: {TimeCreated} Sidst Opdateret: {LastUpdate}\n";
+            return $"Vedligeholdesesnotat: {Note}\nSkade: {SevereDamageString} Status: {ResolvedString}\nForfatter: {Member.Name} Dato Rapporteret: {TimeCreated} Sidst Opdateret: {LastUpdated}";
         }
         #endregion
     }

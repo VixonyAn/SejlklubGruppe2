@@ -46,9 +46,40 @@ namespace ClassLibrary.Services
             AddBooking(new Booking(holder, bookable, start, end));
         }
 
+        public bool BoatBookedInInterval(IBoat queryBoat, DateTime start, DateTime end)
+        {
+            List<IBooking> matches = GetBookingsForBoat(queryBoat);
+            foreach(IBooking booking in matches)
+            {
+                if(booking.IntervalOverlap(start, end)) return true;
+            }
+            return false;
+        }
+        /// <summary>
+        /// The function takes a list of boats and checks if any of them are booked or not depending on the value of the bool isBooked.
+        /// </summary>
+        /// <param name="queryBoats">The boats that we are looking through</param>
+        /// <param name="start">Start of the interval</param>
+        /// <param name="end">End of the interval</param>
+        /// <param name="isBooked">A bool that determines if we are looking for boats that are free (booked = false) or those that are booked (booked = true)</param>
+        /// <returns>A list of boats containing either only those boats that were booked or thoose that were free depending on the value of isBooked</returns>
+        public List<IBoat> BoatsBookedInInterval(List<IBoat> queryBoats, DateTime start, DateTime end, bool isBooked)
+            //In razorpages queryBoats should probably use GetAll() from the singleton boat repo to begin with, assuming you just want to book any boat
+            //Using other (Filtered) lists could make sense in for example a scenario where you only want boats of a certain model
+        {
+            List<IBoat> resultList = new List<IBoat>();
 
-            #region filtering
-            public List<IBooking> GetAll()
+            foreach(IBoat boat in queryBoats)
+            {
+                if(isBooked = BoatBookedInInterval(boat,start, end)) resultList.Add(boat);
+            }
+
+            return resultList;
+        }
+
+
+        #region filtering
+        public List<IBooking> GetAll()
             {
                 return new List<IBooking>(_internalRepo);
             }

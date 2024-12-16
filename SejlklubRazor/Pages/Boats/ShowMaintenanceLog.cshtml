@@ -1,0 +1,42 @@
+﻿@page
+@using ClassLibrary.Models;
+@using ClassLibrary.Services;
+@model SejlklubRazor.Pages.Boats.ShowMaintenanceLogModel
+@{
+    ViewData["Title"] = "Vedligeholdeslog";
+}
+
+<h3>Vedligeholdelseslog for båd "@Model.Boat.Nickname" registrering: "@Model.Boat.Registration"</h3>
+
+@foreach (MaintenanceNote Note in Model.MaintenanceNote)
+{
+<table class="table">    
+    <tbody>
+        <tr>
+            <td><b>Skade:</b> @Note.SevereDamageString</td>
+            <td><b>Status:</b> @Note.ResolvedString</td>
+            <td><b>Dato Rapporteret:</b> @Note.TimeCreated</td>
+            <td><b>Sidst Opdateret:</b> @Note.LastUpdated</td>
+        </tr>
+    </tbody>
+    <tbody>
+        <tr>
+            <td><b>Forfatter:</b> @Note.Member.Name</td>
+            <td colspan="2"><b>Notat:</b> @Note.Note</td>
+            <td>
+                <b>Admin:</b>
+                    <form method="post" style="display: inline;" asp-page-handler="Resolve" asp-route-resolveMaintenanceNote="@Note.No" asp-route-boatReg="@Model.Boat.Registration">
+                    <input type="submit" value="Resolve" />
+                </form>
+                    <form method="post" style="display: inline;" asp-page-handler="Edit" asp-route-editMaintenanceNote="@Note.No" asp-route-boatReg="@Model.Boat.Registration">
+                    <input type="submit" value="Edit" />
+                </form>
+                    <form method="post" style="display: inline;" asp-page-handler="Delete" asp-route-deleteMaintenanceNote="@Note.No" asp-route-boatReg="@Model.Boat.Registration">
+                    <input type="submit" value="Delete" />
+                </form>
+            </td>
+        </tr>
+    </tbody>    
+</table>
+<br />
+}

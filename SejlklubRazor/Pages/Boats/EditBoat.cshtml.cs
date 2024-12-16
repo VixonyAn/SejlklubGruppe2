@@ -38,6 +38,7 @@ namespace SejlklubRazor.Pages.Boats
         public IActionResult OnGet(string registration)
         {
             Boat = _boatRepo.GetBoatByReg(registration);
+            Nickname = Boat.Nickname;
             return Page();
         }
 

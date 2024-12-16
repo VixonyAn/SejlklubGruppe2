@@ -24,7 +24,7 @@
                 <td>@item.Model.ModelName</td>
                 <td>@item.Nickname</td>
                 <td>@item.Registration</td>
-                <td><a asp-page="ShowBoatLogs" asp-route-boatReg="@item.Registration">Læs vedligeholdeslogs for denne båd</a></td>
+                <td><a asp-page="ShowMaintenanceLog" asp-route-boatReg="@item.Registration">Læs vedligeholdeslogs for denne båd</a></td>
                 <td>
                     <form method="post" style="display: inline;" asp-page-handler="Edit" asp-route-Registration="@item.Registration">
                         <input type="submit" value="Edit" />
