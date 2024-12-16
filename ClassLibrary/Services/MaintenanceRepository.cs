@@ -36,9 +36,10 @@ namespace ClassLibrary.Services
         }
         public void AddNote(Member member, Boat boat, string note, bool severeDamage)
         {
-            MaintenanceNote tempNote = new MaintenanceNote(member, boat, note, severeDamage);
-            boat.MaintenanceLog.Add(tempNote);
-            _maintenanceNotes.Add(tempNote);
+            //MaintenanceNote tempNote = new MaintenanceNote(member, boat, note, severeDamage);
+            //boat.MaintenanceLog.Add(tempNote);
+            //_maintenanceNotes.Add(tempNote);
+            _maintenanceNotes.Add(new MaintenanceNote(member, boat, note, severeDamage));
         }
         public List<MaintenanceNote> GetNotesByReg(string boatReg)
         { // retrieve maintenanceNotes to a list if the note has the same registration
@@ -52,32 +53,47 @@ namespace ClassLibrary.Services
             }
             return regNoteList;
         }
-        public MaintenanceNote GetNoteById(int index)
+        public MaintenanceNote GetNoteById(int maintId)
         {
-            if (index > 0 && index < _maintenanceNotes.Count)
+            foreach (MaintenanceNote maintNote in _maintenanceNotes)
             {
-                return _maintenanceNotes[index];
+                if (maintId == maintNote.No)
+                {
+                    return maintNote;
+                }
             }
-            throw new IndexOutOfRangeException("No maintenance note exists with that Id");
+            return null;
+            //throw new Exception("No maintenance note exists with that Id");
+            //if (index >= 0 && index < _maintenanceNotes.Count)
+            //{
+            //    return _maintenanceNotes[index];
+            //}
+            //throw new IndexOutOfRangeException("No maintenance note exists with that Id");
         }
-        public void RemoveNote(int index)
+        public void RemoveNote(int maintId)
         {
-            MaintenanceNote tempNote = _maintenanceNotes[index];
-            tempNote.Boat.MaintenanceLog.Remove(tempNote);
-            _maintenanceNotes.RemoveAt(index);
+            //MaintenanceNote tempNote = _maintenanceNotes[index];
+            //tempNote.Boat.MaintenanceLog.Remove(tempNote);
+            //_maintenanceNotes.RemoveAt(index)
+            _maintenanceNotes.Remove(GetNoteById(maintId));
         }
 
-        public void ResolveNote(int index)
+        public void ResolveNote(int maintId)
         {
-            _maintenanceNotes[index].Resolved = true;
-            _maintenanceNotes[index].LastUpdated = DateTime.Now;
+            GetNoteById(maintId).Resolved = true;
+            GetNoteById(maintId).LastUpdated = DateTime.Now;
+            //_maintenanceNotes[index].Resolved = true;
+            //_maintenanceNotes[index].LastUpdated = DateTime.Now;
         }
 
-        public void EditNote(int index, string note, bool severeDamage)
+        public void EditNote(int maintId, string note, bool severeDamage)
         {
-            _maintenanceNotes[index].Note = note;
-            _maintenanceNotes[index].SevereDamage = severeDamage;
-            _maintenanceNotes[index].LastUpdated = DateTime.Now;
+            GetNoteById(maintId).Note = note;
+            GetNoteById(maintId).SevereDamage = severeDamage;
+            GetNoteById(maintId).LastUpdated = DateTime.Now;
+            //_maintenanceNotes[index].Note = note;
+            //_maintenanceNotes[index].SevereDamage = severeDamage;
+            //_maintenanceNotes[index].LastUpdated = DateTime.Now;
         }
         public void SortNotes()
         { // last updated, damage value, damage status, create a new list?

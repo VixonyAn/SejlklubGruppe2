@@ -18,6 +18,10 @@ namespace SejlklubRazor.Pages.Boats
         public bool SevereDamage { get; set; }
         [BindProperty]
         public string Note { get; set; }
+        [BindProperty]
+        public int No { get; set; }
+        [BindProperty]
+        public string BoatReg { get; set; }
         #endregion
 
         #region Constructors
@@ -28,18 +32,20 @@ namespace SejlklubRazor.Pages.Boats
         #endregion
 
         #region Methods
-        public IActionResult OnGet(int editMaintenanceNote)
+        public IActionResult OnGet(int editMaintenanceNote, string boatReg)//, string boatReg)
         { // retrieve a specific note by it's ID so it can be edited
+            BoatReg = boatReg;
             MaintenanceNote = _maintRepo.GetNoteById(editMaintenanceNote);
+            No = MaintenanceNote.No;
             SevereDamage = MaintenanceNote.SevereDamage;
             Note = MaintenanceNote.Note;
             return Page();
         }
 
-        public IActionResult OnPost(int editMaintenanceNote, string note, bool severeDamage)
+        public IActionResult OnPost()
         { // overwrites the contents of the note
-            _maintRepo.EditNote(editMaintenanceNote, note, severeDamage);
-            return RedirectToPage("ShowMaintenanceLog");
+            _maintRepo.EditNote(No, Note, SevereDamage);
+            return RedirectToPage("ShowMaintenanceLog", new { boatReg = BoatReg});
         }
         #endregion
     }
