@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ClassLibrary.Data;
 using ClassLibrary.Interfaces;
 using ClassLibrary.Services;
 
@@ -17,21 +18,22 @@ namespace ClassLibrary.Models
         public Model Model { get; set; }
         public string Nickname { get; set; }
         public string Registration { get; set; }
-        public IMaintenanceRepository MaintenanceLog { get; set; }
+        public List<MaintenanceNote> MaintenanceLog { get; set; }
         // skal hente maintenance notes og printe den med båden når man ser båden?
         #endregion
 
         #region Constructors
         public Boat()
         {
-            MaintenanceLog = new MaintenanceRepository();
+            //MaintenanceLog = MockData.GetInstance().NoteData;
+            //MaintenanceLog = new MaintenanceRepository();
         }
         public Boat(Model model, string nickname, string registration) // Constructor takes a Model and Registration for the boat
         {
             Model = model;
             Nickname = nickname;
             Registration = registration;
-            MaintenanceLog = new MaintenanceRepository();
+            MaintenanceLog = MockData.GetInstance().NoteData;
         }
         #endregion
 

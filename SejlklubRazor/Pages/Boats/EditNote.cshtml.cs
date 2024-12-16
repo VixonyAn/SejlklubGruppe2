@@ -13,8 +13,8 @@ namespace SejlklubRazor.Pages.Boats
         #endregion
 
         #region Properties
-        public IMaintenanceNote MaintenanceNote { get; set; }
-        public Boat Boat { get; set; }
+        [BindProperty]
+        public MaintenanceNote MaintenanceNote { get; set; }
         [BindProperty]
         public bool SevereDamage { get; set; }
         [BindProperty]
@@ -22,16 +22,15 @@ namespace SejlklubRazor.Pages.Boats
         #endregion
 
         #region Constructors
-        public EditNoteModel(IBoatRepository boatRepository) // dependency injection
+        public EditNoteModel(IMaintenanceRepository maintenanceRepository) // dependency injection
         {
-            this._boatRepo = boatRepository; // parameter overført
+            this._maintRepo = maintenanceRepository;
         }
         #endregion
 
         #region Methods
-        public IActionResult OnGet(int editMaintenanceNote, string boatReg)
+        public IActionResult OnGet(int editMaintenanceNote)
         {
-            _maintRepo = _boatRepo.GetBoatByReg(boatReg).MaintenanceLog;
             MaintenanceNote = _maintRepo.GetNoteById(editMaintenanceNote);
             SevereDamage = MaintenanceNote.SevereDamage;
             Note = MaintenanceNote.Note;
