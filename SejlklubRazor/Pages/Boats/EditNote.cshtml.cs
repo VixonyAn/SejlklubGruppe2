@@ -8,7 +8,6 @@ namespace SejlklubRazor.Pages.Boats
     public class EditNoteModel : PageModel
     {
         #region Instance Fields
-        private IBoatRepository _boatRepo;
         private IMaintenanceRepository _maintRepo;
         #endregion
 
