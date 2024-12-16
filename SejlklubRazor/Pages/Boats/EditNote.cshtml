@@ -12,10 +12,11 @@ update lastupdated onpost *@
 <h3>Opdater Vedligeholdelsesnotat</h3>
 
 <form method="post">
-    <div class="form-group">
-        <label asp-for="@Model.SevereDamage" class="control-label"></label>
-        <input asp-for="@Model.SevereDamage" style="display: br; width: 30%;" class="form-control" />
-    </div>
+    <form method="radio">
+        <input type="radio" asp-for="@Model.SevereDamage" value="True" /> SERIØST
+        <br />
+        <input type="radio" asp-for="@Model.SevereDamage" value="False" /> Minimalt
+    </form>
     <div class="form-group">
         <label asp-for="@Model.Note" class="control-label"></label>
         <input asp-for="@Model.Note" style="display: br; width: 30%;" class="form-control" />
