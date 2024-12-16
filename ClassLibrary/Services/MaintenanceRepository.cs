@@ -19,7 +19,7 @@ namespace ClassLibrary.Services
         #region Constructors
         public MaintenanceRepository()
         {
-            _maintenanceNotes = MockData.RandomNotes(5, MockData.GetInstance().MemberData.Values.ToList()); // maintenance list is filled by mockdata
+            _maintenanceNotes = MockData.RandomNotes(5, MockData.GetInstance().MemberData.Values.ToList(), MockData.GetInstance().BoatData.Values.ToList()); // maintenance list is filled by mockdata
         }
         #endregion
 
