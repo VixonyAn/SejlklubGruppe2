@@ -49,6 +49,16 @@ internal class Program
         {
             Console.WriteLine($"{boat}");
         }
+
+        /* testing maintlogs
+        IMaintenanceRepository maintRepo = new MaintenanceRepository();
+        List<MaintenanceNote> maintList = maintRepo.GetAll();
+        foreach (MaintenanceNote maintenanceNote in maintList)
+        {
+            Console.WriteLine($"{maintenanceNote}");
+        }
+        */
+
         /* test print alle modeller
         List<Model> modelList = modelRepo.GetAll();
         foreach (Model model in modelList)
