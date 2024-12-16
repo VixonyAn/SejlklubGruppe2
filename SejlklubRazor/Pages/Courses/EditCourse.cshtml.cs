@@ -63,7 +63,12 @@ namespace SejlklubRazor.Pages.Courses
             return Page();
         }
 
-        public IActionResult OnPostEdit(int id)
+        /*public IActionResult OnPost(int id)
+        {
+            Console.WriteLine("editCourse OnPost ran somehow, and got id: "+ id);
+            return RedirectToPage("ShowCourseList");
+        }*/
+        public IActionResult OnPost(int id)
         {
             Console.WriteLine($"Edit course: {_courseRepo.GetCourseById(id)} ");
             int[] AttendeeRange = { MinAttendeeNum, MaxAttendeeNum };
