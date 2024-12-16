@@ -16,18 +16,13 @@ namespace ClassLibrary.Data
         private Model optimistjolle;
         private Model laserjolle;
 
-
         private Dictionary<string, Model> _modelData;
-
         private Dictionary<string, Boat> _boatData;
-
         private Dictionary<string, IMember> _memberData;
+        #endregion
 
-        
-    #endregion
-
-    #region Constructors
-    private MockData()
+        #region Constructors
+        private MockData()
         {
             optimistjolle = new Model("Optimistjolle", "hyggelig for begyndere", 00.00, 00.00, 00.00, 00.00);
             laserjolle = new Model("Laserjolle", "enkel og let for alle aldersgrupper", 00.00, 00.00, 00.00, 00.00);
@@ -38,7 +33,6 @@ namespace ClassLibrary.Data
             { "Laserjolle", laserjolle },
             };
 
-
             _memberData = new Dictionary<string, IMember>()
             {
             { "Kurt@Chainmail.kz", new Member("Kurt", "11 11 11 11", "Kurt@Chainmail.kz") },
@@ -46,7 +40,6 @@ namespace ClassLibrary.Data
             { "ValdeM@OldMail.dk", new Member("Valdemar Den Store", "10 10 10 10", "ValdeM@OldMail.dk") },
             { "HrOlsen@Mail.dk", new Member("Egon Olsen", "72 55 65 00", "HrOlsen@Mail.dk") }
             };
-
         }
         #endregion
 
@@ -68,7 +61,6 @@ namespace ClassLibrary.Data
         #endregion
 
         #region Methods
-
         public static MockData GetInstance()
         {
             if(_theInstance == null)
@@ -106,14 +98,12 @@ namespace ClassLibrary.Data
                 "aaaaaaa",
             };
 
-
         List<IMaintenanceNote> result = new List<IMaintenanceNote>();
 
             Random random = new Random();
             int numberOfIssues = random.Next(maxNotes+1);
             bool pristine = (random.Next(3) < 2);
             List<Member> members = memberData.Cast<Member>().ToList();
-
 
             if(!pristine)
             {
@@ -122,10 +112,8 @@ namespace ClassLibrary.Data
                     result.Add(new MaintenanceNote(members[(random.Next(members.Count - 1))], _maintenanceNoteOptions[(random.Next(_maintenanceNoteOptions.Count-1))], (random.Next(1) < 1)));
                 }
             }
-
             return result;
         }
-
         #endregion
     }
 }
