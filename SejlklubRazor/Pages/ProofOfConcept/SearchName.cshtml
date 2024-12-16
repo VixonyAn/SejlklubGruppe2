@@ -1,0 +1,70 @@
+﻿@page
+@using ClassLibrary.Helpers
+@model SejlklubRazor.Pages.ProofOfConcept.SearchNameModel
+@{
+    ViewData["Title"] = "Proof of concept";
+}
+
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<input id="queryField" type="text" oninput="searchFunc(queryField.value)" />
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Navn</th>
+            <th>Email</th>
+            <th>Match-værdi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (DLStringValuePair s in Model.Matches)
+        {
+            <tr>
+                <td>@s.DLString</td>
+                <td>@s.SecondaryString</td>
+                <td>@s.DLValue</td>
+
+            </tr>
+        }
+        </tbody>
+    </table>
+
+
+    @foreach (DLStringValuePair s in Model.Matches)
+    {
+        <h1>@s.DLString</h1>
+        <p>@s.SecondaryString</p>
+        <p>@s.DLValue</p>
+        <p>bob</p>
+    }
+
+    
+
+@* <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        ...
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+    </div>
+</div> *@
+
+
+    <script>
+    function searchFunc(name)
+    {
+
+        fetch(`?handler=Update&name=${name}`)
+
+    }
+    </script>

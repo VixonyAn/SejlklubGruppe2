@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassLibrary.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -85,6 +86,46 @@ namespace ClassLibrary.Helpers
             for(int i = 0; i<Math.Min(sortables.Count,maxResults);i++)
             {
                 results.Add(sortables[i].DLString);
+            }
+
+            return results;
+        }
+
+        //Altered this one to specifically take DLStringValuePair instead of string, since you'd want both email and name to be displayed
+        public static List<DLStringValuePair> Matches(List<DLStringValuePair> matchables, string query, int maxDLCost, int maxResults)
+        {
+            List<DLStringValuePair> sortables = new List<DLStringValuePair>();
+            int checkValue;
+            foreach (DLStringValuePair s in matchables)
+            {
+                checkValue = Compare(query, s.DLString);
+
+                if (checkValue < maxDLCost)
+                {
+                    s.DLValue = checkValue;
+                    sortables.Add(s);
+                }
+            }
+
+            DLInsertionSort.Sort(sortables);
+
+            List<DLStringValuePair> results = new List<DLStringValuePair>();
+
+            for (int i = 0; i < Math.Min(sortables.Count, maxResults); i++)
+            {
+                results.Add(sortables[i]);
+            }
+
+            return results;
+        }
+
+        public static List<DLStringValuePair> ConvertFromMember(List<IMember> members)
+        {
+            List<DLStringValuePair> results = new List<DLStringValuePair>();
+
+            foreach(IMember member in members)
+            {
+                results.Add(new DLStringValuePair(member.Name, member.Email));
             }
 
             return results;

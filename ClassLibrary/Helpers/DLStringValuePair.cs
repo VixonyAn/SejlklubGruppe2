@@ -10,7 +10,7 @@ namespace ClassLibrary.Helpers
     {
         #region Instance Fields
         private int _DLValue;
-        private string _DLString;
+        private string _DLString, _secondaryString;
         #endregion
 
         #region Constructors
@@ -19,11 +19,20 @@ namespace ClassLibrary.Helpers
             _DLValue = value;
             _DLString = s;
         }
+
+        public DLStringValuePair(string s1, string s2)
+        {
+            _DLString = s1;
+            _secondaryString = s2;
+            _DLValue = 0;
+        }
         #endregion
 
         #region Properties
-        public int DLValue { get { return _DLValue; } }
+        public int DLValue { get { return _DLValue; } set { _DLValue = value; } }
         public string DLString { get { return _DLString; } }
+
+        public string SecondaryString { get { return _secondaryString;} }
         #endregion
 
         #region Methods
