@@ -15,6 +15,8 @@ namespace SejlklubRazor.Pages.Boats
         [BindProperty]
         public MaintenanceNote MaintenanceNote { get; set; }
         [BindProperty]
+        public bool Resolved { get; set; }
+        [BindProperty]
         public bool SevereDamage { get; set; }
         [BindProperty]
         public string Note { get; set; }
@@ -37,6 +39,7 @@ namespace SejlklubRazor.Pages.Boats
             BoatReg = boatReg;
             MaintenanceNote = _maintRepo.GetNoteById(editMaintenanceNote);
             No = MaintenanceNote.No;
+            Resolved = MaintenanceNote.Resolved;
             SevereDamage = MaintenanceNote.SevereDamage;
             Note = MaintenanceNote.Note;
             return Page();
@@ -44,7 +47,7 @@ namespace SejlklubRazor.Pages.Boats
 
         public IActionResult OnPost()
         { // overwrites the contents of the note
-            _maintRepo.EditNote(No, Note, SevereDamage);
+            _maintRepo.EditNote(No, Note, SevereDamage, Resolved);
             return RedirectToPage("ShowMaintenanceLog", new { boatReg = BoatReg});
         }
         #endregion

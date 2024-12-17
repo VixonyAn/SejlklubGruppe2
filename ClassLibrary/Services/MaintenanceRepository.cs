@@ -5,6 +5,7 @@ using ClassLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,13 +20,13 @@ namespace ClassLibrary.Services
         #region Constructors
         public MaintenanceRepository()
         {
-            //_maintenanceNotes = new List<MaintenanceNote>();
-            //List<MaintenanceNote> tempList = MockData.RandomNotes(10, MockData.GetInstance().MemberData.Values.ToList(), MockData.GetInstance().BoatData.Values.ToList());
-            //foreach (MaintenanceNote maintNote in tempList)
-            //{
-            //    AddNote(maintNote.Member, maintNote.Boat, maintNote.Note, maintNote.SevereDamage);
-            //}
-            _maintenanceNotes = MockData.RandomNotes(10, MockData.GetInstance().MemberData.Values.ToList(), MockData.GetInstance().BoatData.Values.ToList()); // maintenance list is filled by mockdata
+            _maintenanceNotes = new List<MaintenanceNote>();
+            List<MaintenanceNote> tempList = MockData.RandomNotes(10, MockData.GetInstance().MemberData.Values.ToList(), MockData.GetInstance().BoatData.Values.ToList()); // maintenance list is filled by mockdata
+            foreach (MaintenanceNote maintNote in tempList)
+            {
+                AddNote(maintNote.Member, maintNote.Boat, maintNote.Note, maintNote.SevereDamage);
+            }
+            //_maintenanceNotes = MockData.RandomNotes(10, MockData.GetInstance().MemberData.Values.ToList(), MockData.GetInstance().BoatData.Values.ToList()); // maintenance list is filled by mockdata
         }
         #endregion
 
@@ -34,15 +35,17 @@ namespace ClassLibrary.Services
         {
             return new List<MaintenanceNote>(_maintenanceNotes);
         }
+
         public void AddNote(Member member, Boat boat, string note, bool severeDamage)
         {
-            //MaintenanceNote tempNote = new MaintenanceNote(member, boat, note, severeDamage);
-            //boat.MaintenanceLog.Add(tempNote);
-            //_maintenanceNotes.Add(tempNote);
-            _maintenanceNotes.Add(new MaintenanceNote(member, boat, note, severeDamage));
+            MaintenanceNote tempNote = new MaintenanceNote(member, boat, note, severeDamage);
+            boat.MaintenanceLog.Add(tempNote);
+            _maintenanceNotes.Add(tempNote);
+            //_maintenanceNotes.Add(new MaintenanceNote(member, boat, note, severeDamage));
         }
+
         public List<MaintenanceNote> GetNotesByReg(string boatReg)
-        { // retrieve maintenanceNotes to a list if the note has the same registration
+        { // retrieve maintenanceNotes to a list if the note has the same boat registration
             List<MaintenanceNote> regNoteList = new List<MaintenanceNote>();
             foreach (MaintenanceNote maintNote in _maintenanceNotes)
             {
@@ -63,37 +66,28 @@ namespace ClassLibrary.Services
                 }
             }
             return null;
-            //throw new Exception("No maintenance note exists with that Id");
-            //if (index >= 0 && index < _maintenanceNotes.Count)
-            //{
-            //    return _maintenanceNotes[index];
-            //}
-            //throw new IndexOutOfRangeException("No maintenance note exists with that Id");
         }
+
         public void RemoveNote(int maintId)
         {
-            //MaintenanceNote tempNote = _maintenanceNotes[index];
-            //tempNote.Boat.MaintenanceLog.Remove(tempNote);
-            //_maintenanceNotes.RemoveAt(index)
-            _maintenanceNotes.Remove(GetNoteById(maintId));
+            MaintenanceNote tempNote = GetNoteById(maintId);
+            tempNote.Boat.MaintenanceLog.Remove(tempNote);
+            _maintenanceNotes.Remove(tempNote);
+            //_maintenanceNotes.Remove(GetNoteById(maintId));
         }
 
         public void ResolveNote(int maintId)
-        {
+        { // overrides resolved status and LastUpdated
             GetNoteById(maintId).Resolved = true;
             GetNoteById(maintId).LastUpdated = DateTime.Now;
-            //_maintenanceNotes[index].Resolved = true;
-            //_maintenanceNotes[index].LastUpdated = DateTime.Now;
         }
 
-        public void EditNote(int maintId, string note, bool severeDamage)
-        {
+        public void EditNote(int maintId, string note, bool severeDamage, bool resolved)
+        { // overrides Note, damage status and LastUpdated
             GetNoteById(maintId).Note = note;
             GetNoteById(maintId).SevereDamage = severeDamage;
+            GetNoteById(maintId).Resolved = resolved;
             GetNoteById(maintId).LastUpdated = DateTime.Now;
-            //_maintenanceNotes[index].Note = note;
-            //_maintenanceNotes[index].SevereDamage = severeDamage;
-            //_maintenanceNotes[index].LastUpdated = DateTime.Now;
         }
         public void SortNotes()
         { // last updated, damage value, damage status, create a new list?
