@@ -3,6 +3,7 @@ using ClassLibrary.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Xml.Linq;
 
 namespace SejlklubRazor.Pages.ProofOfConcept
 {
@@ -13,8 +14,9 @@ namespace SejlklubRazor.Pages.ProofOfConcept
 
         public string Query { get; set; }
 
-        public List<DLStringValuePair> Matches { get; set; }
-        public List<DLStringValuePair> Options { get; set; }
+        public List<DLStringValuePair> Matches { get; private set; }
+        public List<DLStringValuePair> Options { get; private set; }
+
 
 
 
@@ -26,20 +28,31 @@ namespace SejlklubRazor.Pages.ProofOfConcept
             _memberRepo = memberRepository;
         }
 
-        public void OnGet()
+        public void OnGet(string name)
         {
-            Matches = new List<DLStringValuePair>();
-            Options = DLStringComparer.ConvertFromMember(_memberRepo.GetAll());
+            if (name != null)
+            {
+                Query = name;
+
+                Options = DLStringComparer.ConvertFromMember(_memberRepo.GetAll());
+                Matches = DLStringComparer.Matches(Options, Query, 9, 10);
+            } else Matches = new List<DLStringValuePair>();
         }
 
         /* https://stackoverflow.com/questions/71680811/call-model-function-from-javascript-in-razor-page */
 
-        public void OnGetUpdate(string name)
+        public async Task<IActionResult> OnGetUpdateAsync(string name)
         {
-            if (name != null) Query = name;
-            else Query = "";
-            Options = DLStringComparer.ConvertFromMember(_memberRepo.GetAll());
-            Matches = DLStringComparer.Matches(Options, Query, 9, 10);
+            if (name != null)
+            {
+                Query = name;
+
+                Options = DLStringComparer.ConvertFromMember(_memberRepo.GetAll());
+                Matches = DLStringComparer.Matches(Options, Query, 9, 10);
+            }
+            else Matches = new List<DLStringValuePair>();
+
+            return new JsonResult(Matches);
         }
     }
 }

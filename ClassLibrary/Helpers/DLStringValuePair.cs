@@ -38,8 +38,10 @@ namespace ClassLibrary.Helpers
         #region Methods
         public override string ToString()
         {
-            return $"String: {_DLString}. DL-Value: {_DLValue}.";
+            return $"String: {_DLString}. DL-Value: {_DLValue}. {((_secondaryString == null || _secondaryString == "")? "" : "Secondary string: " + _secondaryString)}";
         }
+
+
         #endregion
     }
 }

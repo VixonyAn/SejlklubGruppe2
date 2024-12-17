@@ -36,9 +36,22 @@ namespace ClassLibrary.Data
             _memberData = new Dictionary<string, IMember>()
             {
             { "Kurt@Chainmail.kz", new Member("Kurt", "11 11 11 11", "Kurt@Chainmail.kz") },
-            { "pohe@Zealand.dk", new Member("Poul", "5678", "pohe@Zealand.dk") },
+            { "pohe@Zealand.dk", new Member("Poul", "56780", "pohe@Zealand.dk") },
+            { "CHHE@Zealand.dk", new Member("Charlotte", "72010", "CHHE@Zealand.dk") },
             { "ValdeM@OldMail.dk", new Member("Valdemar Den Store", "10 10 10 10", "ValdeM@OldMail.dk") },
-            { "HrOlsen@Mail.dk", new Member("Egon Olsen", "72 55 65 00", "HrOlsen@Mail.dk") }
+            { "HrOlsen@Mail.dk", new Member("Egon Olsen", "72 55 65 00", "HrOlsen@Mail.dk") },
+            { "Yvonne@Mail.dk", new Member("Yvonne", "72 55 65 00", "Yvonne@Mail.dk") },
+
+            { "andenEgon@Egon.Egon", new Member("Egon", "88 88 88 88", "andenEgon@Egon.Egon") },
+            { "Egon@Egon.Egon", new Member("Egon", "88 88 88 88", "Egon@Egon.Egon") },
+
+            { "Kublai@yahoo.dk", new Member("Kublai Khan", "10 10 10 10", "Kublai@yahoo.dk") },
+            { "Ejgild@yahoo.dk", new Member("Ejgild", "14 14 14 14", "Ejgild@yahoo.dk") },
+            { "Ulla@Chainmail.kz", new Member("Ulla", "11 10 11 10", "Ulla@Chainmail.kz") },
+            { "Støj@xenofobi.DK", new Member("Støjberg", "10 13 10 11", "Støj@xenofobi.DK") },
+            { "Vaks@Redaktion.bl", new Member("Viggo", "13 13 13 13", "Vaks@Redaktion.bl") },
+            { "FrkJanne@Redaktion.bl", new Member("Janne", "13 13 13 11", "FrkJanne@Redaktion.bl") },
+            { "Kaos@ministermail.dk", new Member("Stauning", "00 00 00 01", "Kaos@ministermail.dk") }
             };
         }
         #endregion
