@@ -3,8 +3,7 @@ using ClassLibrary.Models;
 using ClassLibrary.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
-
+using SejlklubRazor.Pages.Members;
 namespace SejlklubRazor.Pages.Courses
 {
     public class SignInCourseModel : PageModel
@@ -17,7 +16,10 @@ namespace SejlklubRazor.Pages.Courses
         #endregion
         #region Properties
         public List<ICourse> ListOfEnteredCourses { get; private set; }
-        public Member Member { get; private set; }
+
+        [BindProperty]
+        public Member Member { get;  set; }
+
         public Course Course{ get; private set; }
         public List<IMember> Members { get; set; }
         public List<ICourse> Courses { get; set; }
@@ -29,6 +31,8 @@ namespace SejlklubRazor.Pages.Courses
             _MemberRepo = memberRepository;
             Courses = _CourseRepo.GetAll();
             Members = _MemberRepo.GetAll();
+            Member nenenen=new Member("Nothing is selected yet","no","no");
+            Member = Member ?? nenenen;
         }
         #endregion
         #region Methods
@@ -37,7 +41,15 @@ namespace SejlklubRazor.Pages.Courses
 
 
             List<Course> list = new List<Course>();
-
+            Console.WriteLine("list == null");
+            DateTime start = new DateTime(0001, 01, 01);
+            DateTime end = new DateTime(0001, 01, 01);
+            int[] attRange = { 1, 1000 };
+            List<Member> members = new List<Member>();
+            Member master = new Member(" ", "  ", "  ");
+            members.Add(master);
+            Course course1 = new Course(0, " ", start, end, attRange, members, master, " ", " ");
+            list.Add(course1);
             // if member apperes in the list of attendees then add course to list
             foreach (Course course in Courses)
             {
@@ -45,38 +57,62 @@ namespace SejlklubRazor.Pages.Courses
                 {
                     if (mem == member)
                     {
+                        if (list.Count >= 0 && list[0].Name == " ")
+                        {
+                            Console.WriteLine("just removed smth");
+                            list.Remove(list[0]);
+                        }
+                        else { Console.WriteLine("all clear to proceed"); }
                         list.Add(course);
 
                     }
                 }
             }
-            if (list == null)
-            {
-                DateTime start = new DateTime(0001, 01, 01);
-                DateTime end = new DateTime(0001, 01, 01);
-                int[] attRange = { 1, 1 };
-                List<Member> members = new List<Member>();
-                Member master = new Member(" ", "  ", "  ");
-                members.Add(master);
-                Course course = new Course(0, " ", start, end, attRange, members, master, " ", " ");
-                list.Add(course);
-            }
-            Console.WriteLine("list of courses for a given member  just ran");
+            
+            Console.WriteLine("list of courses for a given member  just ran, and the first item in the list was \n " + list[0]);
             return list;
 
         }
 
+        public bool say(string text)
+        {
+            Console.WriteLine(text);
+            return true;
+        }
 
         public void OnGet()
         {
             //  ListOfCourses = _CourseRepo.GetAll();
+            
             Console.WriteLine("SignInCourse/OnGet Just Ran--");
         }
-        public IActionResult OnPost()
+
+
+        public IActionResult OnPostEnterCourseSignIn(string Name)
         {
+
+
+            //
+            Console.WriteLine("Name" + Name);
+            Console.WriteLine($"{Member.Name} is chosen");
             Console.WriteLine("pressed EnterCourseSignIn");
             return RedirectToPage("EnterCourseSignIn");
         }
+        public IActionResult OnPost()
+        {
+            if (!string.IsNullOrEmpty(Member.Name))
+            {
+                // Process the submitted value (e.g., log, save to DB, etc.)
+                Console.WriteLine($"Selected Option: {Member.Name}");
+
+                // Return a JSON or plain text response for Ajax
+                return new JsonResult(new { success = true, message = "Selection received successfully!" });
+            }
+
+            // Handle errors or invalid submissions
+            return new JsonResult(new { success = false, message = "Invalid selection!" });
+        }
+     
         #endregion
     }
 }

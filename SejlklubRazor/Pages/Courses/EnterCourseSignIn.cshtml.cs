@@ -10,7 +10,7 @@ namespace SejlklubRazor.Pages.Courses
     {
         #region Instance Fields
 
-        private CourseRepository _CourseRepo;
+        private ICourseRepository _CourseRepo;
         private IMemberRepository _MemberRepo;
         #endregion
 
@@ -20,17 +20,17 @@ namespace SejlklubRazor.Pages.Courses
 
 
         public List<IMember> Members { get; set; }
-        public CourseRepository Courses { get; set; }
+        public List<ICourse> Courses { get; set; }
         #endregion
 
         #region Constructors
 
 
-        public EnterCourseSignInModel(CourseRepository courseRepository, IMemberRepository memberRepository)
+        public EnterCourseSignInModel(ICourseRepository courseRepository, IMemberRepository memberRepository)
         {
             _CourseRepo = courseRepository;
             _MemberRepo = memberRepository;
-            Courses = _CourseRepo;
+            Courses = _CourseRepo.GetAll();
             Members = _MemberRepo.GetAll();
 
         }
@@ -41,9 +41,9 @@ namespace SejlklubRazor.Pages.Courses
         public List<Course> NonEnteredCoursesByMember(Member member) 
         {
             List<Course> list = new List<Course>();
-            foreach (var course in Courses.GetAll())
+            foreach (ICourse course in Courses)
             {
-                if (!(Courses.EnteredCourses(member).Contains(course)))
+                if (!(_CourseRepo.EnteredCourses(member).Contains((ICourse)course)))
                 {
                     list.Add((Course)course);
                 }
@@ -56,15 +56,15 @@ namespace SejlklubRazor.Pages.Courses
         }
         public IActionResult OnPost(int Id)
         {
-            Console.WriteLine($"{Member} aplied to Course: {Courses.GetCourseById(Id)}");
-            if(Courses.GetCourseById(Id).Attendees.Count<= Courses.GetCourseById(Id).AttendeeRange[1])
+            Console.WriteLine($"{Member.Name} aplied to Course: {_CourseRepo.GetCourseById(Id)}");
+            if(_CourseRepo.GetCourseById(Id).Attendees.Count<= _CourseRepo.GetCourseById(Id).AttendeeRange[1])
             {
-                Courses.GetCourseById(Id).Attendees.Add(Member);
+                _CourseRepo.GetCourseById(Id).Attendees.Add(Member);
                 return RedirectToPage("SignInCourse");
             }
             else
             {
-                Console.WriteLine($"{Member} tried to sign in to course: {Courses.GetCourseById(Id).Name}, But there is too many");
+                Console.WriteLine($"{Member} tried to sign in to course: {_CourseRepo.GetCourseById(Id).Name}, But there is too many");
             }
             
             return RedirectToPage("SignInCourse");

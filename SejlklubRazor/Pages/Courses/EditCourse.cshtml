@@ -10,7 +10,7 @@
     <div class="form-group">
        
         <label asp-for="@Model.Name" class="control-label"></label>
-        <input asp-for="@Model.Name" class="form-control" />
+        <input asp-for="@Model.Name" style="display: br; width: 30%;" class="form-control" />
     </div>
     <div class="form-group">
         <label asp-for="@Model.MasterName" class="control-label"></label>
@@ -52,11 +52,13 @@
     </div>
     
 
-    <div class=" col-md-4 text-center">
+   
+  <div class="col-md-4 text-center">
     <form style="display: inline;" asp-page-handler="Delete" asp-route-deleteId="@Model.Course.Id">
         <input type="image" src="~/Images/trash3.svg" value="Delete" />
     </form>
-    </div>
+  </div>
+
 
 
 
