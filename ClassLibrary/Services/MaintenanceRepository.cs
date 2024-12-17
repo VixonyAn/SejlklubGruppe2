@@ -5,6 +5,7 @@ using ClassLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,7 +20,13 @@ namespace ClassLibrary.Services
         #region Constructors
         public MaintenanceRepository()
         {
-            _maintenanceNotes = MockData.RandomNotes(10, MockData.GetInstance().MemberData.Values.ToList(), MockData.GetInstance().BoatData.Values.ToList()); // maintenance list is filled by mockdata
+            _maintenanceNotes = new List<MaintenanceNote>();
+            List<MaintenanceNote> tempList = MockData.RandomNotes(10, MockData.GetInstance().MemberData.Values.ToList(), MockData.GetInstance().BoatData.Values.ToList()); // maintenance list is filled by mockdata
+            foreach (MaintenanceNote maintNote in tempList)
+            {
+                AddNote(maintNote.Member, maintNote.Boat, maintNote.Note, maintNote.SevereDamage);
+            }
+            //_maintenanceNotes = MockData.RandomNotes(10, MockData.GetInstance().MemberData.Values.ToList(), MockData.GetInstance().BoatData.Values.ToList()); // maintenance list is filled by mockdata
         }
         #endregion
 
@@ -31,7 +38,10 @@ namespace ClassLibrary.Services
 
         public void AddNote(Member member, Boat boat, string note, bool severeDamage)
         {
-            _maintenanceNotes.Add(new MaintenanceNote(member, boat, note, severeDamage));
+            MaintenanceNote tempNote = new MaintenanceNote(member, boat, note, severeDamage);
+            boat.MaintenanceLog.Add(tempNote);
+            _maintenanceNotes.Add(tempNote);
+            //_maintenanceNotes.Add(new MaintenanceNote(member, boat, note, severeDamage));
         }
 
         public List<MaintenanceNote> GetNotesByReg(string boatReg)
@@ -60,7 +70,10 @@ namespace ClassLibrary.Services
 
         public void RemoveNote(int maintId)
         {
-            _maintenanceNotes.Remove(GetNoteById(maintId));
+            MaintenanceNote tempNote = GetNoteById(maintId);
+            tempNote.Boat.MaintenanceLog.Remove(tempNote);
+            _maintenanceNotes.Remove(tempNote);
+            //_maintenanceNotes.Remove(GetNoteById(maintId));
         }
 
         public void ResolveNote(int maintId)

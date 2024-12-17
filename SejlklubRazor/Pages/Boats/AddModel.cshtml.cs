@@ -1,5 +1,6 @@
 using ClassLibrary.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace SejlklubRazor.Pages.Boats
@@ -23,6 +24,7 @@ namespace SejlklubRazor.Pages.Boats
         public double HullDepth { get; set; }
         [BindProperty]
         public double BaseWeight { get; set; }
+        public string MessageError { get; set; }
         #endregion
 
         #region Constructors
@@ -39,8 +41,16 @@ namespace SejlklubRazor.Pages.Boats
 
         public IActionResult OnPost()
         {
-            _modelRepo.AddModel(ModelName, Description, HullLength, HullWidth, HullDepth, BaseWeight);
-            return RedirectToPage("ShowModelList");
+            try
+            {
+                _modelRepo.AddModel(ModelName, Description, HullLength, HullWidth, HullDepth, BaseWeight);
+                return RedirectToPage("ShowModelList");
+            }
+            catch
+            {
+                MessageError = $"En model af navnet '{ModelName}' findes allerede";
+                return Page();
+            }
         }
         #endregion
     }

@@ -18,33 +18,33 @@ namespace ClassLibrary.Models
         public Model Model { get; set; }
         public string Nickname { get; set; }
         public string Registration { get; set; }
-        //public List<IMaintenanceNote> MaintenanceLog { get; set; }
+        public List<IMaintenanceNote> MaintenanceLog { get; set; }
         // skal hente maintenance notes og printe den med båden når man ser båden?
         #endregion
 
         #region Constructors
         public Boat()
         {
-            //MaintenanceLog = new List<IMaintenanceNote>();
+            MaintenanceLog = new List<IMaintenanceNote>();
         }
         public Boat(Model model, string nickname, string registration) // Constructor takes a Model and Registration for the boat
         {
             Model = model;
             Nickname = nickname;
             Registration = registration;
-            //MaintenanceLog = new List<IMaintenanceNote>();
+            MaintenanceLog = new List<IMaintenanceNote>();
         }
         #endregion
 
         #region Methods
         public override string ToString() // This prints the Models ToString too :>
         {
-            //string maintLog = "";
-            //foreach (MaintenanceNote maintNote in MaintenanceLog)
-            //{
-            //    maintLog += maintNote.ToString();
-            //}
-            return $"Model: {Model.ModelName}\nNavn: {Nickname}\nRegistration: {Registration}\n"; //Maintenance Log: {maintLog}";
+            string maintLog = "";
+            foreach (MaintenanceNote maintNote in MaintenanceLog)
+            {
+                maintLog += maintNote.ToString() + "\n";
+            }
+            return $"Model: {Model.ModelName}\nNavn: {Nickname}\nRegistration: {Registration}\nMaintenance Log:\n\n{maintLog}";
         } // vil ønske at maintlog kunne printes sammen med båden
         #endregion
     }

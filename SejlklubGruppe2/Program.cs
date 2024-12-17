@@ -43,6 +43,8 @@ internal class Program
 
         // initializing data
         //IModelRepository modelRepo = new ModelRepository();
+        IMaintenanceRepository maintRepo = new MaintenanceRepository();
+        List<MaintenanceNote> maintList = maintRepo.GetAll();
         IBoatRepository boatRepo = new BoatRepository();
         List<Boat> boatList = boatRepo.GetAll(); // bring our dict into a list
         foreach (Boat boat in boatList)
@@ -50,14 +52,14 @@ internal class Program
             Console.WriteLine($"{boat}");
         }
 
-        // testing maintlogs
+        /* // testing maintlogs
         IMaintenanceRepository maintRepo = new MaintenanceRepository();
         List<MaintenanceNote> maintList = maintRepo.GetAll();
         foreach (MaintenanceNote maintenanceNote in maintList)
         {
             Console.WriteLine($"{maintenanceNote}");
         }
-        
+        */
 
         /* test print alle modeller
         List<Model> modelList = modelRepo.GetAll();
