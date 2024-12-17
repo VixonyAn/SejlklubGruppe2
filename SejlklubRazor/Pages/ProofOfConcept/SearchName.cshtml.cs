@@ -14,8 +14,8 @@ namespace SejlklubRazor.Pages.ProofOfConcept
 
         public string Query { get; set; }
 
-        public List<DLStringValuePair> Matches { get; private set; }
-        public List<DLStringValuePair> Options { get; private set; }
+        public List<DLStringValuePair<IMember>> Matches { get; private set; }
+        public List<DLStringValuePair<IMember>> Options { get; private set; }
 
 
 
@@ -34,9 +34,9 @@ namespace SejlklubRazor.Pages.ProofOfConcept
             {
                 Query = name;
 
-                Options = DLStringComparer.ConvertFromMember(_memberRepo.GetAll());
-                Matches = DLStringComparer.Matches(Options, Query, 9, 10);
-            } else Matches = new List<DLStringValuePair>();
+                Options = DLStringComparer<IMember>.ConvertFromMember(_memberRepo.GetAll());
+                Matches = DLStringComparer<IMember>.Matches(Options, Query, 9, 10);
+            } else Matches = new List<DLStringValuePair<IMember>>();
         }
 
         /* https://stackoverflow.com/questions/71680811/call-model-function-from-javascript-in-razor-page */
@@ -47,10 +47,10 @@ namespace SejlklubRazor.Pages.ProofOfConcept
             {
                 Query = name;
 
-                Options = DLStringComparer.ConvertFromMember(_memberRepo.GetAll());
-                Matches = DLStringComparer.Matches(Options, Query, 9, 10);
+                Options = DLStringComparer<IMember>.ConvertFromMember(_memberRepo.GetAll());
+                Matches = DLStringComparer<IMember>.Matches(Options, Query, 9, 10);
             }
-            else Matches = new List<DLStringValuePair>();
+            else Matches = new List<DLStringValuePair<IMember>>();
 
             return new JsonResult(Matches);
         }

@@ -1,5 +1,6 @@
 ﻿@page
 @using ClassLibrary.Helpers
+@using ClassLibrary.Interfaces
 @model SejlklubRazor.Pages.ProofOfConcept.SearchNameModel
 @{
     ViewData["Title"] = "Proof of concept";
@@ -18,11 +19,11 @@
         </tr>
     </thead>
     <tbody id="resultsTable">
-        @foreach (DLStringValuePair s in Model.Matches)
+        @foreach(DLStringValuePair<IMember> s in Model.Matches)
         {
             <tr>
                 <td>@s.DLString</td>
-                <td>@s.SecondaryString</td>
+                <td>@s.Data.Email</td>
                 <td>@s.DLValue</td>
             </tr>
         }
@@ -33,21 +34,21 @@
         <script>
             async function searchFunc(name) {
             const response = await fetch(`?handler=Update&name=${name}`);
-            const data = await response.json();
-            updateTable(data);
+            const valuePairs = await response.json();
+            updateTable(valuePairs);
         }
 
-        function updateTable(data) {
+        function updateTable(valuePairs) {
             const tableBody = document.getElementById('resultsTable');
             tableBody.innerHTML = ''; // Clear existing rows
 
-            data.forEach(item => {
+            valuePairs.forEach(item => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${item.dlString}</td>
-                    <td>${item.secondaryString}</td>
+                    <td>${item.data.email}</td>
                     <td>${item.dlValue}</td>
-                `;
+                `; //For inexplicable reasons, properties MUST start with a lower case letter
                 tableBody.appendChild(row);
             });
         }
