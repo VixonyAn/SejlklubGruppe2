@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace SejlklubRazor.Pages.Courses.ShowCourseList
 {
-    public class ShowCourseList : PageModel
+    public class ShowCourseListModel : PageModel
     {   // This page should show the list of all the courses
         // Show the Courses title, description, and the number of places left in that course   maxNumOfAttendees - Attendees.Count
         #region Instance Fields
@@ -15,12 +15,12 @@ namespace SejlklubRazor.Pages.Courses.ShowCourseList
         #endregion
 
         #region Properties
-        public List<Course> ListOfCourses { get; private set; }
+        public List<ICourse> ListOfCourses { get; private set; }
 
         #endregion
 
         #region Constructors
-        public ShowCourseList(ICourseRepository courseRepository)
+        public ShowCourseListModel(ICourseRepository courseRepository)
         {
             _CourseRepo = courseRepository;
             ListOfCourses = _CourseRepo.GetAll();
@@ -41,6 +41,7 @@ namespace SejlklubRazor.Pages.Courses.ShowCourseList
 
         public IActionResult OnPostSignIn()
         {
+            Console.WriteLine("ShowCourseList/OnPostSignIn just ran");
             return RedirectToPage("SignInCourse");
         }
 

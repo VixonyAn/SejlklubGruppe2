@@ -12,7 +12,7 @@ namespace ClassLibrary.Services
     public class CourseRepository : ICourseRepository
     {
         #region Instance fields
-        private Dictionary<int, Course> _courses=new Dictionary<int, Course>() ;
+        private Dictionary<int, ICourse> _courses=new Dictionary<int, ICourse>() ;
         private static int counter;
         #endregion
         #region Properties
@@ -58,26 +58,52 @@ namespace ClassLibrary.Services
             course.Summary = newCourse.Summary;
             course.Description = newCourse.Description;
 
-            /*
-            _courses[course.Id].Name = ((newCourse.Name == null) ? course.Name : newCourse.Name);
-            course.Master = ((newCourse.Master == null) ? course.Master : newCourse.Master);
-            course.AttendeeRange = ((newCourse.AttendeeRange == null) ? course.AttendeeRange : newCourse.AttendeeRange);
-            course.TimeSlot[0] = ((newCourse.TimeSlot[0] == null) ? course.TimeSlot[0] : newCourse.TimeSlot[0]);
-            course.TimeSlot[1] = ((newCourse.TimeSlot[1] == null) ? course.TimeSlot[1] : newCourse.TimeSlot[1]);
-            _courses[course.Id].Summary = ((newCourse.Summary == null) ? course.Summary : newCourse.Summary);
-            _courses[course.Id].Description = ((newCourse.Description == null) ? course.Description : newCourse.Description);
-            */
+ 
         }
 
 
-        public List<Course> GetAll()
+        public List<ICourse> GetAll()
         {
             return _courses.Values.ToList();
         }
 
-        public Course GetCourseById(int id)
+        public ICourse GetCourseById(int id)
         {
             return _courses[id];   
+        }
+
+
+        public List<ICourse> EnteredCourses(Member member) // search through all courses to find all that member is a part of
+        {
+
+
+            List<ICourse> list = new List<ICourse>();
+
+            // if member apperes in the list of attendees then add course to list
+            foreach (Course course in _courses.Values)
+            {
+                foreach (Member mem in course.Attendees)
+                {
+                    if (mem == member)
+                    {
+                        list.Add(course);
+
+                    }
+                }
+            }
+            if (list == null)
+            {
+                DateTime start = new DateTime(0001, 01, 01);
+                DateTime end = new DateTime(0001, 01, 01);
+                int[] attRange = { 1, 1 };
+                List<Member> members = new List<Member>();
+                Member master = new Member(" ", "  ", "  ");
+                members.Add(master);
+                Course course = new Course(0," ",start,end,attRange, members,master, " "," ");
+                list.Add((ICourse)course);
+            }
+            Console.WriteLine("list of courses for a given member  just ran");
+            return list;
         }
         #endregion
     }

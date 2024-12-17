@@ -50,7 +50,7 @@ namespace SejlklubRazor.Pages.Courses
         #region Methods
         public IActionResult OnGet(int Id)
         {
-            Course = _courseRepo.GetCourseById(Id);
+            Course = (Course)(_courseRepo.GetCourseById(Id));
             Name = Course.Name;
             MasterName = Course.Master.Name;
             MaxAttendeeNum = Course.AttendeeRange[1];
@@ -72,9 +72,9 @@ namespace SejlklubRazor.Pages.Courses
         {
             Console.WriteLine($"Edit course: {_courseRepo.GetCourseById(id)} ");
             int[] AttendeeRange = { MinAttendeeNum, MaxAttendeeNum };
-            Course oldCourse = _courseRepo.GetCourseById(id);
+            Course oldCourse = (Course)(_courseRepo.GetCourseById(id));
             Course newcourse = new Course(0, Name, StartDate, EndDate, AttendeeRange, oldCourse.Attendees, (Member)_memberRepo.GetMemberByName(MasterName), Summary, Description);
-            _courseRepo.Update(newcourse, _courseRepo.GetCourseById(id));
+            _courseRepo.Update(newcourse, (Course)(_courseRepo.GetCourseById(id)));
             return RedirectToPage("ShowCourseList");
         }
         public IActionResult OnPostDelete(int deleteId)
