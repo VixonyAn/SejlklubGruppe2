@@ -32,7 +32,7 @@ namespace SejlklubRazor.Pages.Boats
         }
 
         public IActionResult OnPostEdit(string Registration)
-        {
+        { // redirects along with the Registration ID so it can be displayed on the editing page
             return RedirectToPage("EditBoat", new { Registration = Registration });
         }
 

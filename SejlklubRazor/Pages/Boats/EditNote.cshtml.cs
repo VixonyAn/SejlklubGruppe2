@@ -8,40 +8,47 @@ namespace SejlklubRazor.Pages.Boats
     public class EditNoteModel : PageModel
     {
         #region Instance Fields
-        private IBoatRepository _boatRepo;
         private IMaintenanceRepository _maintRepo;
         #endregion
 
         #region Properties
-        public IMaintenanceNote MaintenanceNote { get; set; }
-        public Boat Boat { get; set; }
+        [BindProperty]
+        public MaintenanceNote MaintenanceNote { get; set; }
+        [BindProperty]
+        public bool Resolved { get; set; }
         [BindProperty]
         public bool SevereDamage { get; set; }
         [BindProperty]
         public string Note { get; set; }
+        [BindProperty]
+        public int No { get; set; }
+        [BindProperty]
+        public string BoatReg { get; set; }
         #endregion
 
         #region Constructors
-        public EditNoteModel(IBoatRepository boatRepository) // dependency injection
+        public EditNoteModel(IMaintenanceRepository maintenanceRepository) // dependency injection
         {
-            this._boatRepo = boatRepository; // parameter overført
+            this._maintRepo = maintenanceRepository;
         }
         #endregion
 
         #region Methods
-        public IActionResult OnGet(int editMaintenanceNote, string boatReg)
-        {
-            _maintRepo = _boatRepo.GetBoatByReg(boatReg).MaintenanceLog;
+        public IActionResult OnGet(int editMaintenanceNote, string boatReg)//, string boatReg)
+        { // retrieve a specific note by its ID so it can be edited
+            BoatReg = boatReg; // saves boat registration for the OnPost method's redirect
             MaintenanceNote = _maintRepo.GetNoteById(editMaintenanceNote);
-            SevereDamage = MaintenanceNote.SevereDamage;
-            Note = MaintenanceNote.Note;
+            No = MaintenanceNote.No; // displays the note's ID
+            Resolved = MaintenanceNote.Resolved; // current resolved status
+            SevereDamage = MaintenanceNote.SevereDamage; // current damage status
+            Note = MaintenanceNote.Note; // displays current note on the editing page
             return Page();
         }
 
-        public IActionResult OnPost(int editMaintenanceNote, string note)
-        {
-            _maintRepo.EditNote(editMaintenanceNote, note);
-            return RedirectToPage("ShowMaintenanceLog");
+        public IActionResult OnPost()
+        { // overwrites the contents of the note
+            _maintRepo.EditNote(No, Note, SevereDamage, Resolved);
+            return RedirectToPage("ShowMaintenanceLog", new { boatReg = BoatReg});
         }
         #endregion
     }

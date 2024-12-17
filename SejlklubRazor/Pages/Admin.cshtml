@@ -1,0 +1,38 @@
+﻿@page
+@model SejlklubRazor.Pages.AdminModel
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<h3>Admin Navigation</h3>
+<br />
+<form method="post" style="display: inline;" asp-page-handler="AddModel">
+    <input type="submit" value="Add Model" />
+</form>
+<form method="post" style="display: inline;" asp-page-handler="ShowModelList">
+    <input type="submit" value="Model List" />
+</form>
+<br />
+<br />
+<form method="post" style="display: inline;" asp-page-handler="AddBoat">
+    <input type="submit" value="Add Boat" />
+</form>
+<form method="post" style="display: inline;" asp-page-handler="ShowBoatList">
+    <input type="submit" value="Boat List" />
+</form>
+<br />
+<br />
+<form method="post" style="display: inline;" asp-page-handler="AddCourse">
+    <input type="submit" value="Add Course" />
+</form>
+<form method="post" style="display: inline;" asp-page-handler="ShowCourseList">
+    <input type="submit" value="Course List" />
+</form>
+<br />
+<br />
+<form method="post" style="display: inline;" asp-page-handler="AddMember">
+    <input type="submit" value="Add Member" />
+</form>
+<form method="post" style="display: inline;" asp-page-handler="ShowMembers">
+    <input type="submit" value="Member List" />
+</form>

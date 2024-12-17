@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassLibrary.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary.Helpers
 {
-    public class DLStringComparer
+    public class DLStringComparer<T>
     {
         public static int Compare(string a, string b)
         {
@@ -50,15 +51,15 @@ namespace ClassLibrary.Helpers
             return matrix[a.Length, b.Length]; //Lower right corner of the grid is now the optimal cost (int)
         }
 
-        public static List<DLStringValuePair> SortPairs(List<string> matchables, string query)
+        public static List<DLStringValuePair<T>> SortPairs(List<string> matchables, string query)
         {
-            List<DLStringValuePair> sortables = new List<DLStringValuePair>();
+            List<DLStringValuePair<T>> sortables = new List<DLStringValuePair<T>>();
             foreach (string s in matchables)
             {
-                sortables.Add(new DLStringValuePair(Compare(query.ToLower(), s.ToLower()), s));
+                sortables.Add(new DLStringValuePair<T>(Compare(query.ToLower(), s.ToLower()), s));
             }
 
-            DLInsertionSort.Sort(sortables);
+            DLInsertionSort<T>.Sort(sortables);
 
             return sortables;
         }
@@ -66,7 +67,7 @@ namespace ClassLibrary.Helpers
 
         public static List<String> Matches(List<string> matchables, string query, int maxDLCost, int maxResults)
         {
-            List<DLStringValuePair> sortables = new List<DLStringValuePair>();
+            List<DLStringValuePair<T>> sortables = new List<DLStringValuePair<T>>();
             int checkValue;
             foreach(string s in matchables)
             {
@@ -74,17 +75,57 @@ namespace ClassLibrary.Helpers
 
                 if (checkValue < maxDLCost)
                 {
-                    sortables.Add(new DLStringValuePair(checkValue, s));
+                    sortables.Add(new DLStringValuePair<T>(checkValue, s));
                 }
             }
 
-            DLInsertionSort.Sort(sortables);
+            DLInsertionSort<T>.Sort(sortables);
 
             List<string> results = new List<string>();
 
             for(int i = 0; i<Math.Min(sortables.Count,maxResults);i++)
             {
                 results.Add(sortables[i].DLString);
+            }
+
+            return results;
+        }
+
+        //Altered this one to specifically take DLStringValuePair instead of string, since you'd want both email and name to be displayed
+        public static List<DLStringValuePair<T>> Matches(List<DLStringValuePair<T>> matchables, string query, int maxDLCost, int maxResults)
+        {
+            List<DLStringValuePair<T>> sortables = new List<DLStringValuePair<T>>();
+            int checkValue;
+            foreach (DLStringValuePair<T> s in matchables)
+            {
+                checkValue = Compare(query, s.DLString);
+
+                if (checkValue < maxDLCost)
+                {
+                    s.DLValue = checkValue;
+                    sortables.Add(s);
+                }
+            }
+
+            DLInsertionSort<T>.Sort(sortables);
+
+            List<DLStringValuePair<T>> results = new List<DLStringValuePair<T>>();
+
+            for (int i = 0; i < Math.Min(sortables.Count, maxResults); i++)
+            {
+                results.Add(sortables[i]);
+            }
+
+            return results;
+        }
+
+        public static List<DLStringValuePair<IMember>> ConvertFromMember(List<IMember> members)
+        {
+            List<DLStringValuePair<IMember>> results = new List<DLStringValuePair<IMember>>();
+
+            foreach(IMember member in members)
+            {
+                results.Add(new DLStringValuePair<IMember>(member.Name, member));
             }
 
             return results;

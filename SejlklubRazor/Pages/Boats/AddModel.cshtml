@@ -8,6 +8,7 @@
 <h3>Opret en Model</h3>
 
 <form method="post">
+    <span class="text-danger">@Model.MessageError</span>
     <div class="form-group">
         <label asp-for="@Model.ModelName" class="control-label"></label>
         <input asp-for="@Model.ModelName" style="display: br; width: 30%;" class="form-control" />

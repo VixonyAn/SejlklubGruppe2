@@ -16,6 +16,7 @@ namespace ClassLibrary.Models
 
         #region Properties
         public Member Member { get; set; }
+        public Boat Boat { get; set; }
         public string Note { get; set; }
         public int No { get { return _no; } }
         public DateTime TimeCreated { get; }
@@ -33,11 +34,12 @@ namespace ClassLibrary.Models
             _no = _counter;
         }
 
-        public MaintenanceNote(Member member, string note, bool severeDamage)
+        public MaintenanceNote(Member member, Boat boat, string note, bool severeDamage)
         {
             _counter++;
             _no = _counter;
             Member = member; //get by name
+            Boat = boat; //get by reg
             Note = note;
             TimeCreated = DateTime.Now;
             LastUpdated = TimeCreated;
@@ -49,7 +51,7 @@ namespace ClassLibrary.Models
         #region Methods
         public override string ToString()
         {
-            return $"Vedligeholdesesnotat: {Note}\nSkade: {SevereDamageString} Status: {ResolvedString}\nForfatter: {Member.Name} Dato Rapporteret: {TimeCreated} Sidst Opdateret: {LastUpdated}";
+            return $"ID: {No} Vedligeholdesesnotat: {Note}\nBåd: {Boat.Registration} Skade: {SevereDamageString} Status: {ResolvedString}\nForfatter: {Member.Name} Dato Rapporteret: {TimeCreated} Sidst Opdateret: {LastUpdated}\n";
         }
         #endregion
     }

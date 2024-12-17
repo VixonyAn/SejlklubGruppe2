@@ -42,13 +42,92 @@ internal class Program
         */
 
         // initializing data
-        //IModelRepository modelRepo = new ModelRepository();
+        IMaintenanceRepository maintRepo = new MaintenanceRepository();
         IBoatRepository boatRepo = new BoatRepository();
         List<Boat> boatList = boatRepo.GetAll(); // bring our dict into a list
         foreach (Boat boat in boatList)
         {
             Console.WriteLine($"{boat}");
         }
+
+        /* // testing try catch exception - works on 17/12
+        IModelRepository modelRepo = new ModelRepository();
+        try
+        {
+        boatRepo.AddBoat(new Boat(modelRepo.GetModelByName("Laserjolle"), "Haddock", "4r5t"));
+        boatRepo.AddBoat(new Boat(modelRepo.GetModelByName("Laserjolle"), "Snowy", "1234"));
+        }
+        catch (KeyTakenException regTaken)
+        {
+            Console.WriteLine("Denne registrerings ID findes allerede i systemet");
+        }
+        */
+
+        /* // testing Add for maintNotes - works on 17/12
+        IMemberRepository memberRepoT = new MemberRepository();
+        maintRepo.AddNote((Member)memberRepoT.GetMemberByName("Kurt"), boatRepo.GetBoatByReg("1234"), "problemer med motor", true);
+        foreach (Boat boat in boatList)
+        {
+            Console.WriteLine($"{boat}");
+        }
+        */
+
+        /* // testing Resolve for maintNotes - works on 17/12
+        List<MaintenanceNote> maintList = maintRepo.GetAll();
+        foreach (MaintenanceNote maintNote in maintList)
+        {
+            Console.WriteLine(maintNote.No);
+        }
+
+        int.TryParse(Console.ReadLine(), out int maintId);
+        maintRepo.ResolveNote(maintId);
+        foreach (Boat boat in boatList)
+        {
+            Console.WriteLine($"{boat}");
+        }
+        */
+
+        /* // testing Edit for maintNotes - works on 17/12
+        List<MaintenanceNote> maintList = maintRepo.GetAll();
+        foreach (MaintenanceNote maintNote in maintList)
+        {
+            Console.WriteLine(maintNote.No);
+        }
+
+        int.TryParse(Console.ReadLine(), out int maintId);
+        string editText = Console.ReadLine();
+        bool damage = Console.ReadLine() == "true";
+        maintRepo.EditNote(maintId, editText, damage, false);
+        foreach (Boat boat in boatList)
+        {
+            Console.WriteLine($"{boat}");
+        }
+        */
+
+        /* // testing Delete for maintNotes - works on 17/12
+        List<MaintenanceNote> maintList = maintRepo.GetAll();
+        foreach (MaintenanceNote maintNote in maintList)
+        {
+            Console.WriteLine(maintNote.No);
+        }
+
+        int.TryParse(Console.ReadLine(), out int maintId);
+        maintRepo.RemoveNote(maintId);
+        foreach (Boat boat in boatList)
+        {
+            Console.WriteLine($"{boat}");
+        }
+        */
+
+        /* // testing maintlogs
+        IMaintenanceRepository maintRepo = new MaintenanceRepository();
+        List<MaintenanceNote> maintList = maintRepo.GetAll();
+        foreach (MaintenanceNote maintenanceNote in maintList)
+        {
+            Console.WriteLine($"{maintenanceNote}");
+        }
+        */
+
         /* test print alle modeller
         List<Model> modelList = modelRepo.GetAll();
         foreach (Model model in modelList)
