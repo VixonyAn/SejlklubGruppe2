@@ -35,13 +35,13 @@ namespace SejlklubRazor.Pages.Boats
 
         #region Methods
         public IActionResult OnGet(int editMaintenanceNote, string boatReg)//, string boatReg)
-        { // retrieve a specific note by it's ID so it can be edited
-            BoatReg = boatReg;
+        { // retrieve a specific note by its ID so it can be edited
+            BoatReg = boatReg; // saves boat registration for the OnPost method's redirect
             MaintenanceNote = _maintRepo.GetNoteById(editMaintenanceNote);
-            No = MaintenanceNote.No;
-            Resolved = MaintenanceNote.Resolved;
-            SevereDamage = MaintenanceNote.SevereDamage;
-            Note = MaintenanceNote.Note;
+            No = MaintenanceNote.No; // displays the note's ID
+            Resolved = MaintenanceNote.Resolved; // current resolved status
+            SevereDamage = MaintenanceNote.SevereDamage; // current damage status
+            Note = MaintenanceNote.Note; // displays current note on the editing page
             return Page();
         }
 

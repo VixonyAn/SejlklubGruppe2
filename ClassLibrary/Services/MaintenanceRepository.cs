@@ -20,7 +20,10 @@ namespace ClassLibrary.Services
         #region Constructors
         public MaintenanceRepository()
         {
+            // populates the internal list
             _maintenanceNotes = new List<MaintenanceNote>();
+
+            // templist can be displayed through the console app with the boats
             List<MaintenanceNote> tempList = MockData.RandomNotes(10, MockData.GetInstance().MemberData.Values.ToList(), MockData.GetInstance().BoatData.Values.ToList()); // maintenance list is filled by mockdata
             foreach (MaintenanceNote maintNote in tempList)
             {
@@ -38,8 +41,10 @@ namespace ClassLibrary.Services
 
         public void AddNote(Member member, Boat boat, string note, bool severeDamage)
         {
+            // first two lines allow the boat's list to be updated
             MaintenanceNote tempNote = new MaintenanceNote(member, boat, note, severeDamage);
             boat.MaintenanceLog.Add(tempNote);
+            // last line updates the internal list
             _maintenanceNotes.Add(tempNote);
             //_maintenanceNotes.Add(new MaintenanceNote(member, boat, note, severeDamage));
         }
@@ -57,7 +62,7 @@ namespace ClassLibrary.Services
             return regNoteList;
         }
         public MaintenanceNote GetNoteById(int maintId)
-        {
+        { // checks the entire list until a note with the same ID is found, or returns null
             foreach (MaintenanceNote maintNote in _maintenanceNotes)
             {
                 if (maintId == maintNote.No)
@@ -70,8 +75,10 @@ namespace ClassLibrary.Services
 
         public void RemoveNote(int maintId)
         {
+            // first two lines allow the boat's list to be updated
             MaintenanceNote tempNote = GetNoteById(maintId);
             tempNote.Boat.MaintenanceLog.Remove(tempNote);
+            // last line updates the internal list
             _maintenanceNotes.Remove(tempNote);
             //_maintenanceNotes.Remove(GetNoteById(maintId));
         }
@@ -89,19 +96,15 @@ namespace ClassLibrary.Services
             GetNoteById(maintId).Resolved = resolved;
             GetNoteById(maintId).LastUpdated = DateTime.Now;
         }
-        public void SortNotes()
-        { // last updated, damage value, damage status, create a new list?
-            throw new NotImplementedException();
-        }
         public void PrintAllNotes()
-        {
+        { // for each note in the list, print notes ToString method
             foreach (MaintenanceNote maintNote in _maintenanceNotes)
             {
                 Console.WriteLine(maintNote.ToString());
             }
         }
         public override string ToString()
-        {
+        { // creates a local string and adds each note from the list to it then returns the string
             string maintLog = "\n";
             foreach (MaintenanceNote maintNote in _maintenanceNotes)
             {

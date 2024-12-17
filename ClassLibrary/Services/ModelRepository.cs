@@ -32,19 +32,19 @@ namespace ClassLibrary.Services
 
         public void AddModel(string modelName, string description, double hullLength, double hullWidth, double hullDepth, double baseWeight)
         {
-            if (!_models.ContainsKey(modelName))
+            if (!_models.ContainsKey(modelName)) // if modelname is NOT in the list, add new model
             { // because dictionaries cannot contain duplicates
                 Model newModel = new Model(modelName, description, hullLength, hullWidth, hullDepth, baseWeight);
                 _models.Add(modelName, newModel);
             }
             else
-            {
+            { // else if modelname is in the list, throw an exception
                 throw new KeyTakenException($"En model af navnet '{modelName}' findes allerede\n");
             }
         }
 
         public Model GetModelByName(string modelName)
-        {
+        { // if the input isn't empty, and the list contains the modelName, return the model of that name
             if (modelName != null && _models.ContainsKey(modelName))
             {
                 return _models[modelName];

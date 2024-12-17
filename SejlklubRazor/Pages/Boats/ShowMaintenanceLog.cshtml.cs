@@ -30,7 +30,7 @@ namespace SejlklubRazor.Pages.Boats
 
         #region Methods
         public IActionResult OnPostDelete(int deleteMaintenanceNote, string boatReg)
-        {
+        { // all of the OnPost methods redirect along with the boatReg
             _maintRepo.RemoveNote(deleteMaintenanceNote);
             return RedirectToPage("ShowMaintenanceLog", new { boatReg = boatReg });
         }

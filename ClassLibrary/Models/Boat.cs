@@ -45,7 +45,7 @@ namespace ClassLibrary.Models
                 maintLog += maintNote.ToString() + "\n";
             }
             return $"Model: {Model.ModelName}\nNavn: {Nickname}\nRegistration: {Registration}\nMaintenance Log:\n\n{maintLog}";
-        } // vil ønske at maintlog kunne printes sammen med båden
+        } // maintlog kan printes sammen med båden
         #endregion
     }
 }

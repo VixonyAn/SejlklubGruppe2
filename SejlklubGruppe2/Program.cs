@@ -50,6 +50,19 @@ internal class Program
             Console.WriteLine($"{boat}");
         }
 
+        /* // testing try catch exception - works on 17/12
+        IModelRepository modelRepo = new ModelRepository();
+        try
+        {
+        boatRepo.AddBoat(new Boat(modelRepo.GetModelByName("Laserjolle"), "Haddock", "4r5t"));
+        boatRepo.AddBoat(new Boat(modelRepo.GetModelByName("Laserjolle"), "Snowy", "1234"));
+        }
+        catch (KeyTakenException regTaken)
+        {
+            Console.WriteLine("Denne registrerings ID findes allerede i systemet");
+        }
+        */
+
         /* // testing Add for maintNotes - works on 17/12
         IMemberRepository memberRepoT = new MemberRepository();
         maintRepo.AddNote((Member)memberRepoT.GetMemberByName("Kurt"), boatRepo.GetBoatByReg("1234"), "problemer med motor", true);

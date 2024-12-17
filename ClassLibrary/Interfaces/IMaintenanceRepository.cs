@@ -17,7 +17,6 @@ namespace ClassLibrary.Interfaces
         void RemoveNote(int index);
         void ResolveNote(int index);
         void EditNote(int index, string note, bool severeDamage, bool resolved);
-        void SortNotes();
         void PrintAllNotes();
     }
 }
