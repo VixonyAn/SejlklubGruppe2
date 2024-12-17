@@ -32,29 +32,29 @@ namespace SejlklubRazor.Pages.Boats
         public IActionResult OnPostDelete(int deleteMaintenanceNote, string boatReg)
         {
             _maintRepo.RemoveNote(deleteMaintenanceNote);
-            return RedirectToPage("ShowMaintenanceLog");
+            return RedirectToPage("ShowMaintenanceLog", new { boatReg = boatReg });
         }
 
-        public IActionResult OnPostEdit(int editMaintenanceNote, int boatReg)
+        public IActionResult OnPostEdit(int editMaintenanceNote, string boatReg)
         {
             return RedirectToPage("EditNote", new { editMaintenanceNote = editMaintenanceNote, boatReg = boatReg });
         }
 
-        public IActionResult OnPostResolve(int resolveMaintenanceNote)
+        public IActionResult OnPostResolve(int resolveMaintenanceNote, string boatReg)
         {
-            //_maintRepo = _boatRepo.GetBoatByReg(boatReg).MaintenanceLog;
-            //MaintenanceNote = _maintRepo.GetAll();
             _maintRepo.ResolveNote(resolveMaintenanceNote);
-            return RedirectToPage("ShowMaintenanceLog");
+            return RedirectToPage("ShowMaintenanceLog", new { boatReg = boatReg });
+        }
+
+        public IActionResult OnPostAdd(string boatReg)
+        {
+            return RedirectToPage("AddNote", new { boatReg = boatReg });
         }
 
         public void OnGet(string boatReg)
         {
             Boat = _boatRepo.GetBoatByReg(boatReg);
             MaintenanceNotes = _maintRepo.GetNotesByReg(boatReg);
-            //_maintRepo = Boat.MaintenanceLog;
-            //MaintenanceNote = _maintRepo.GetAll();
-            //MaintenanceNote = _maintRepo.GetNoteById(boatReg);
         }
         #endregion
     }

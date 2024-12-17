@@ -6,7 +6,7 @@
     ViewData["Title"] = "Vedligeholdeslog";
 }
 
-<h3>Vedligeholdelseslog for båd "@Model.Boat.Nickname" registrering: "@Model.Boat.Registration"</h3>
+<h3>Vedligeholdelseslog for båd "@Model.Boat.Nickname" registrering: "@Model.Boat.Registration"    <form method="post" class="d-flex justify-content-end" style="display: inline;" asp-page-handler="Add" asp-route-boatReg="@Model.Boat.Registration"> <input type="submit" value="Add" /> </form> </h3>
 
 @foreach (MaintenanceNote Note in Model.MaintenanceNotes)
 {
@@ -25,9 +25,16 @@
             <td colspan="2"><b>Notat:</b> @Note.Note</td>
             <td>
                 <b>Admin:</b>
+                @if (!Note.Resolved)
+                {
                     <form method="post" style="display: inline;" asp-page-handler="Resolve" asp-route-resolveMaintenanceNote="@Note.No" asp-route-boatReg="@Model.Boat.Registration">
                     <input type="submit" value="Resolve" />
                 </form>
+                }
+                else
+                {
+                    <input type = "submit" value = "Resolve" />
+                }
                     <form method="post" style="display: inline;" asp-page-handler="Edit" asp-route-editMaintenanceNote="@Note.No" asp-route-boatReg="@Model.Boat.Registration">
                     <input type="submit" value="Edit" />
                 </form>
