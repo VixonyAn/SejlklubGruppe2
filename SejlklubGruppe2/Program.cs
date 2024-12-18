@@ -200,6 +200,16 @@ internal class Program
         Console.WriteLine("\nEnd of test \"bookingrepo\" 11-12-24");
         */
 
+        /*
+        MemberRepository kTestRepo = new MemberRepository();
+
+        kTestRepo.AddMember(new CommitteeMember("Bob", "Bob", "Bob", "Bob", "Bob", "Bob"));
+
+        foreach (IMember sM in kTestRepo.GetAll())
+        {
+            if(sM.GetType() == typeof(CommitteeMember)) Console.WriteLine(sM);
+        }
+        */
 
         #endregion
 
