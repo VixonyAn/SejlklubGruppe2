@@ -13,10 +13,10 @@ namespace ClassLibrary.Interfaces
         List<MaintenanceNote> GetAll();
         void AddNote(Member member, Boat boat, string note, bool severeDamage);
         List<MaintenanceNote> GetNotesByReg(string boatReg);
-        MaintenanceNote GetNoteById(int index);
-        void RemoveNote(int index);
-        void ResolveNote(int index);
-        void EditNote(int index, string note, bool severeDamage, bool resolved);
+        MaintenanceNote GetNoteById(int maintId);
+        void RemoveNote(int maintId);
+        void ResolveNote(int maintId);
+        void EditNote(int maintId, string note, bool severeDamage, bool resolved);
         void PrintAllNotes();
     }
 }
