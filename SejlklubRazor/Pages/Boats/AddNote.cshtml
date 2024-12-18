@@ -1,0 +1,28 @@
+﻿@page
+@model SejlklubRazor.Pages.Boats.AddNoteModel
+@{
+    ViewData["Title"] = "Opret Vedligeholdelsesnotat";
+}
+
+<h3>Opret Vedligeholdelsesnotat</h3>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="@Model.MemberName" class="control-label">Dit Navn</label>
+        <input asp-for="@Model.MemberName" style="display: br; width: 30%;" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.BoatReg" class="control-label"></label>
+        <input asp-for="@Model.BoatReg" readonly style="display: br; width: 30%;" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Note" class="control-label"></label>
+        <input asp-for="@Model.Note" style="display: br; width: 30%;" class="form-control" />
+    </div>
+        <label asp-for="@Model.SevereDamage" class="control-label">Skade</label>
+        <input type="radio" asp-for="@Model.SevereDamage" value="True" /> SERIØST
+        <input type="radio" asp-for="@Model.SevereDamage" value="False" /> Minimalt
+    <div class="formgroup">
+        <input type="submit" value="Opret Ny Vedligeholdelsesnotat" class="btn btn-primary" />
+    </div>
+</form>

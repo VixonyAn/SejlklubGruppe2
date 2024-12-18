@@ -3,21 +3,67 @@
 @using ClassLibrary.Models;
 @using ClassLibrary.Interfaces;
 @using SejlklubRazor.Pages;
+@using SejlklubRazor.Pages.Courses;
 @using SejlklubRazor.Pages.Courses.ShowCourseList;
-@model SejlklubRazor.Pages.Courses.SignInCourse
+@model SejlklubRazor.Pages.Courses.SignInCourseModel
 @{
+    ViewData["Title"] = "se dine tilmeldinger";
 }
-<label for="members">Choose a member:</label>
+<h3>se hvilke hold du er tilmeldt</h3>
 
-<select name="members" id="member">
-    @foreach(Member mem in Model.Members)
-    {
-        <option value="mem.Name">mem.Name</option>
+
+<form method="post" id="ajaxForm">
+    <label for="members">Choose a member:</label>
+    <select id="members" name="Member" onchange="submitViaAjax()">
+        @foreach (Member mem in Model.Members)
+        {
+            <option value="mem.Name">@mem.Name</option>
+        }
+    </select>
+    <div id="result"></div> <!-- Display result here -->
+</form>
+
+<script>
+    function submitViaAjax() {
+        const formData = new FormData(document.getElementById("ajaxForm"));
+
+        fetch("", { // Submit to the current page
+            method: "POST",
+            body: formData
+        })
+            .then(response => response.json()) // Expect JSON response
+            .then(data => {
+                if (data.success) {
+                    document.getElementById("result").innerHTML = data.message; // Success message
+                } else {
+                    document.getElementById("result").innerHTML = "Error: " + data.message;
+                }
+            })
+            .catch(error => console.error("Error:", error));
     }
-  
+</script>
 
-</select>
-
-
-
-
+//------------
+@if(Model.say(Model.Member.Name)){ <p>@Model.Member.Name</p>}
+@foreach(Course course in Model.ENTEREDcOURSES(Model.Member))
+{
+    @if (Model.ENTEREDcOURSES(Model.Member)[0].Name == " ")
+    {
+        <p> no courses entered yet</p>
+    }else{
+    <p>Name/Title @course.Name</p>    
+    <p>Course Leader: @course.Master.Name</p>
+    <p>StartDate= @course.TimeSlot[0]</p>
+    <p>EndDate= @course.TimeSlot[1]</p>
+    <p>Min Number Of Attendees: @course.AttendeeRange[0]   </p>
+    <p>Max Number Of Attendees: @course.AttendeeRange[1]</p>
+    <p>Numer Of Spots Left: @(course.AttendeeRange[1]-course.Attendees.Count)</p>
+    <p>Summary: @course.Summary</p>
+    <p>Description: @course.Description</p>
+    }
+}
+<div class="formgroup">
+<form style="display: inline;" asp-page-handler="EnterCourseSignIn" asp-route-Name="@Model.Member.Name">
+    <input type="submit" value="Sign In To Course" class="btn btn-primary" />
+</form>
+</div>

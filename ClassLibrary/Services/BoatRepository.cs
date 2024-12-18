@@ -44,7 +44,7 @@ namespace ClassLibrary.Services
             }
         }
 
-        //eyyyy this is polymorphism
+        // this is polymorphism
         public void AddBoat(Model modelName, string nickname, string registration)
         {
             if (!_boats.ContainsKey(registration)) // if dict DOESN'T contain this key, boat is added
@@ -87,7 +87,7 @@ namespace ClassLibrary.Services
             oldBoat.Nickname = newNickname; // overwrites old Nickname with new Nickname
         }
         public int NumberOfModel(string modelName)
-        {
+        { // checks through the list of boats and increments the counter for each matching modelname
             int count = 0;
             foreach (Boat boat in _boats.Values)
             {
@@ -99,7 +99,7 @@ namespace ClassLibrary.Services
             return count;
         }
         public void PrintAllBoats()
-        {
+        { // for each boat in the list, print boats ToString method
             foreach (Boat boat in _boats.Values)
             {
                 Console.WriteLine(boat.ToString());

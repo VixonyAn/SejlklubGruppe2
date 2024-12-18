@@ -6,9 +6,9 @@
     ViewData["Title"] = "Vedligeholdeslog";
 }
 
-<h3>Vedligeholdelseslog for båd "@Model.Boat.Nickname" registrering: "@Model.Boat.Registration"</h3>
+<h3>Vedligeholdelseslog for båd "@Model.Boat.Nickname" registrering: "@Model.Boat.Registration"    <form method="post" class="d-flex justify-content-end" style="display: inline;" asp-page-handler="Add" asp-route-boatReg="@Model.Boat.Registration"> <input type="submit" value="Add" /> </form> </h3>
 
-@foreach (MaintenanceNote Note in Model.MaintenanceNote)
+@foreach (MaintenanceNote Note in Model.MaintenanceNotes)
 {
 <table class="table">    
     <tbody>
@@ -25,13 +25,20 @@
             <td colspan="2"><b>Notat:</b> @Note.Note</td>
             <td>
                 <b>Admin:</b>
-                <form method="post" style="display: inline;" asp-page-handler="Resolve" asp-route-resolveMaintenanceNote="@Note.No">
+                @if (!Note.Resolved)
+                {
+                    <form method="post" style="display: inline;" asp-page-handler="Resolve" asp-route-resolveMaintenanceNote="@Note.No" asp-route-boatReg="@Model.Boat.Registration">
                     <input type="submit" value="Resolve" />
                 </form>
-                <form method="post" style="display: inline;" asp-page-handler="Edit" asp-route-editMaintenanceNote="@Note.No">
+                }
+                else
+                {
+                    <input type = "submit" value = "Resolve" />
+                }
+                    <form method="post" style="display: inline;" asp-page-handler="Edit" asp-route-editMaintenanceNote="@Note.No" asp-route-boatReg="@Model.Boat.Registration">
                     <input type="submit" value="Edit" />
                 </form>
-                <form method="post" style="display: inline;" asp-page-handler="Delete" asp-route-deleteMaintenanceNote="@Note.No">
+                    <form method="post" style="display: inline;" asp-page-handler="Delete" asp-route-deleteMaintenanceNote="@Note.No" asp-route-boatReg="@Model.Boat.Registration">
                     <input type="submit" value="Delete" />
                 </form>
             </td>

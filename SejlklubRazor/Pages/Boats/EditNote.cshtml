@@ -1,0 +1,27 @@
+﻿@page
+@using ClassLibrary.Models;
+@model SejlklubRazor.Pages.Boats.EditNoteModel
+@{
+    ViewData["Title"] = "Opdater Vedligeholdelsesnotat";
+}
+
+<h3>Opdater Vedligeholdelsesnotat</h3>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="@Model.No" class="control-label"></label>
+        <input asp-for="@Model.No" readonly class="form-control" />
+    </div>
+    <input type="radio" asp-for="@Model.Resolved" value="False" /> AKTUELT
+    <input type="radio" asp-for="@Model.Resolved" value="True" /> Løst
+    <br />
+    <input type="radio" asp-for="@Model.SevereDamage" value="True" /> SERIØST
+    <input type="radio" asp-for="@Model.SevereDamage" value="False" /> Minimalt
+    <div class="form-group">
+        <label asp-for="@Model.Note" class="control-label"></label>
+        <input asp-for="@Model.Note" style="display: br; width: 30%;" class="form-control" />
+    </div>
+    <div class="formgroup">
+        <input type="submit" value="Opdater Notat" class="btn btn-primary" />
+    </div>
+</form>

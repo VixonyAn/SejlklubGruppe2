@@ -38,7 +38,8 @@ namespace SejlklubRazor.Pages.Boats
         public IActionResult OnGet(string registration)
         {
             Boat = _boatRepo.GetBoatByReg(registration);
-            Nickname = Boat.Nickname;
+            // Registration appears on the edit page thanks to ShowBoatList OnPostEdit
+            Nickname = Boat.Nickname; // makes the current nickname appear in the nickname field
             return Page();
         }
 

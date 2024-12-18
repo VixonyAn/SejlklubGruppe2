@@ -22,6 +22,7 @@ namespace SejlklubRazor.Pages.Boats
         [BindProperty]
         public string ModelName { get; set; }
         public List<SelectListItem> ModelSelectList { get; set; }
+        public string MessageError { get; set; }
         #endregion
         
         #region Constructors
@@ -53,8 +54,16 @@ namespace SejlklubRazor.Pages.Boats
 
         public IActionResult OnPost()
         {
-            _boatRepo.AddBoat(_modelRepo.GetModelByName(ModelName), Nickname, Registration);
-            return RedirectToPage("ShowBoatList");
+            try
+            {
+                _boatRepo.AddBoat(_modelRepo.GetModelByName(ModelName), Nickname, Registration);
+                return RedirectToPage("ShowBoatList");
+            }
+            catch
+            {
+                MessageError = $"Kan ikke oprette en båd med registrerings ID '{Registration}' denne ID findes allerede";
+                return Page();
+            }
         }
         #endregion
     }

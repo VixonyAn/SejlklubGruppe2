@@ -12,6 +12,12 @@ internal class Program
     private static void Main(string[] args)
     {
         #region VTest
+        /* testing for UML design sekvens diagram
+        ModelRepository modelRepo = new ModelRepository();
+        modelRepo.AddModel("Optimistjolle", "hyggelig for begyndere", 00.00, 00.00, 00.00, 00.00);
+        // should try catch here when testing adding the same model to keep the program running
+        */
+
         /* initial constructor and Add to list exception test
         // THIS WILL NO LONGER WORK as of 06/12 since nicknames were added
         // test create new model and boats, add to list, catch exception when ID already exists in list
@@ -36,9 +42,91 @@ internal class Program
         */
 
         // initializing data
-        IModelRepository modelRepo = new ModelRepository();
+        IMaintenanceRepository maintRepo = new MaintenanceRepository();
         IBoatRepository boatRepo = new BoatRepository();
         List<Boat> boatList = boatRepo.GetAll(); // bring our dict into a list
+        foreach (Boat boat in boatList)
+        {
+            Console.WriteLine($"{boat}");
+        }
+
+        /* // testing try catch exception - works on 17/12
+        IModelRepository modelRepo = new ModelRepository();
+        try
+        {
+        boatRepo.AddBoat(new Boat(modelRepo.GetModelByName("Laserjolle"), "Haddock", "4r5t"));
+        boatRepo.AddBoat(new Boat(modelRepo.GetModelByName("Laserjolle"), "Snowy", "1234"));
+        }
+        catch (KeyTakenException regTaken)
+        {
+            Console.WriteLine("Denne registrerings ID findes allerede i systemet");
+        }
+        */
+
+        /* // testing Add for maintNotes - works on 17/12
+        IMemberRepository memberRepoT = new MemberRepository();
+        maintRepo.AddNote((Member)memberRepoT.GetMemberByName("Kurt"), boatRepo.GetBoatByReg("1234"), "problemer med motor", true);
+        foreach (Boat boat in boatList)
+        {
+            Console.WriteLine($"{boat}");
+        }
+        */
+
+        /* // testing Resolve for maintNotes - works on 17/12
+        List<MaintenanceNote> maintList = maintRepo.GetAll();
+        foreach (MaintenanceNote maintNote in maintList)
+        {
+            Console.WriteLine(maintNote.No);
+        }
+
+        int.TryParse(Console.ReadLine(), out int maintId);
+        maintRepo.ResolveNote(maintId);
+        foreach (Boat boat in boatList)
+        {
+            Console.WriteLine($"{boat}");
+        }
+        */
+
+        /* // testing Edit for maintNotes - works on 17/12
+        List<MaintenanceNote> maintList = maintRepo.GetAll();
+        foreach (MaintenanceNote maintNote in maintList)
+        {
+            Console.WriteLine(maintNote.No);
+        }
+
+        int.TryParse(Console.ReadLine(), out int maintId);
+        string editText = Console.ReadLine();
+        bool damage = Console.ReadLine() == "true";
+        maintRepo.EditNote(maintId, editText, damage, false);
+        foreach (Boat boat in boatList)
+        {
+            Console.WriteLine($"{boat}");
+        }
+        */
+
+        /* // testing Delete for maintNotes - works on 17/12
+        List<MaintenanceNote> maintList = maintRepo.GetAll();
+        foreach (MaintenanceNote maintNote in maintList)
+        {
+            Console.WriteLine(maintNote.No);
+        }
+
+        int.TryParse(Console.ReadLine(), out int maintId);
+        maintRepo.RemoveNote(maintId);
+        foreach (Boat boat in boatList)
+        {
+            Console.WriteLine($"{boat}");
+        }
+        */
+
+        /* // testing maintlogs
+        IMaintenanceRepository maintRepo = new MaintenanceRepository();
+        List<MaintenanceNote> maintList = maintRepo.GetAll();
+        foreach (MaintenanceNote maintenanceNote in maintList)
+        {
+            Console.WriteLine($"{maintenanceNote}");
+        }
+        */
 
         /* test print alle modeller
         List<Model> modelList = modelRepo.GetAll();
@@ -72,6 +160,14 @@ internal class Program
         Boat b5 = new Boat(modelRepo.GetModelByName("Laserjolle"), "1234");
         Console.WriteLine(b5); // works!! tested 05/12
         */
+
+        /* testing maintenance notes, works on 13/12/2024, remember 50/50 chance of generation
+        IMaintenanceRepository maintRepo = new MaintenanceRepository();
+        List<IMaintenanceNote> noteList = maintRepo.GetAll();
+        foreach (IMaintenanceNote note in noteList)
+        {
+            Console.WriteLine($"{note}");
+        }*/
         #endregion
 
         #region Atest

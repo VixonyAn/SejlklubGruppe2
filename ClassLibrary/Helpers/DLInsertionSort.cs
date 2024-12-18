@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary.Helpers
 {
-    public class DLInsertionSort
+    public class DLInsertionSort<T>
     {
-        public static void Sort(List<DLStringValuePair> list)
+        public static void Sort(List<DLStringValuePair<T>> list)
         {
-            DLStringValuePair currentValuePair;
+            DLStringValuePair<T> currentValuePair;
             for(int i = 1; i<list.Count;i++)
             {
                 currentValuePair = list[i];

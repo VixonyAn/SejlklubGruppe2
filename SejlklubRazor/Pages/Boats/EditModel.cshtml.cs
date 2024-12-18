@@ -28,6 +28,7 @@ namespace SejlklubRazor.Pages.Boats
         public double HullDepth { get; set; }
         [BindProperty]
         public double BaseWeight { get; set; }
+        public string MessageError { get; set; }
         #endregion
 
         #region Constructors
@@ -51,8 +52,16 @@ namespace SejlklubRazor.Pages.Boats
 
         public IActionResult OnPost(string newModelName)
         {
-            _modelRepo.EditModel(ModelName, newModelName, Description, HullLength, HullWidth, HullDepth, BaseWeight);
-            return RedirectToPage("ShowModelList");
+            try
+            { 
+                _modelRepo.EditModel(ModelName, newModelName, Description, HullLength, HullWidth, HullDepth, BaseWeight);
+                return RedirectToPage("ShowModelList");
+            }
+            catch
+            {
+                MessageError = $"Kan ikke ændre modellens navn til '{newModelName}' denne model navn findes allerede";
+                return Page();
+            }
         }
         #endregion
     }

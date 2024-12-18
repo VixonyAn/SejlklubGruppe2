@@ -30,7 +30,7 @@ namespace SejlklubRazor.Pages.Boats
         }
 
         public IActionResult OnPostEdit(string modelName)
-        {
+        { // redirects along with the current modelName so it can be displayed on the editing page
             return RedirectToPage("EditModel", new { modelName = modelName });
         }
 

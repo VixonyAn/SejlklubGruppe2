@@ -9,6 +9,7 @@ builder.Services.AddSingleton<IBoatRepository, BoatRepository>(); // Add singlet
 builder.Services.AddSingleton<IModelRepository, ModelRepository>();
 builder.Services.AddSingleton<IMemberRepository, MemberRepository>();
 builder.Services.AddSingleton<ICourseRepository, CourseRepository>();
+builder.Services.AddSingleton<IMaintenanceRepository, MaintenanceRepository>();
 
 var app = builder.Build();
 

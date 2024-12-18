@@ -14,46 +14,47 @@ namespace SejlklubRazor.Pages.Boats
         #endregion
 
         #region Properties
-        public List<IMaintenanceNote> MaintenanceNote { get; set; }
+        public List<MaintenanceNote> MaintenanceNotes { get; set; }
+        [BindProperty]
         public Boat Boat { get; set; }
-        //public MaintenanceNote MaintenanceNote { get; set; }
+        public string BoatReg { get; set; }
         #endregion
 
         #region Constructors
-        public ShowMaintenanceLogModel(IBoatRepository boatRepository) //, IMaintenanceRepository maintenanceRepository)
+        public ShowMaintenanceLogModel(IBoatRepository boatRepository, IMaintenanceRepository maintenanceRepository)
         {
-            //_maintRepo = maintenanceRepository;
             _boatRepo = boatRepository;
-            //_maintRepo = boatRepository.GetBoatByReg(boatReg).MaintenanceLog;
+            _maintRepo = maintenanceRepository;
         }
         #endregion
 
         #region Methods
-        public IActionResult OnPostDelete(int deleteMaintenanceNote)
-        {
+        public IActionResult OnPostDelete(int deleteMaintenanceNote, string boatReg)
+        { // all of the OnPost methods redirect along with the boatReg
             _maintRepo.RemoveNote(deleteMaintenanceNote);
-            return RedirectToPage("ShowMaintenanceLog");
+            return RedirectToPage("ShowMaintenanceLog", new { boatReg = boatReg });
         }
 
-        public IActionResult OnPostEdit(int editMaintenanceNote)
+        public IActionResult OnPostEdit(int editMaintenanceNote, string boatReg)
         {
-            return RedirectToPage("EditNote", new { editMaintenanceNote = editMaintenanceNote });
+            return RedirectToPage("EditNote", new { editMaintenanceNote = editMaintenanceNote, boatReg = boatReg });
         }
 
         public IActionResult OnPostResolve(int resolveMaintenanceNote, string boatReg)
         {
-            _maintRepo = _boatRepo.GetBoatByReg(boatReg).MaintenanceLog;
-            MaintenanceNote = _maintRepo.GetAll();
             _maintRepo.ResolveNote(resolveMaintenanceNote);
-            return RedirectToPage("ShowMaintenanceLog");
+            return RedirectToPage("ShowMaintenanceLog", new { boatReg = boatReg });
+        }
+
+        public IActionResult OnPostAdd(string boatReg)
+        {
+            return RedirectToPage("AddNote", new { boatReg = boatReg });
         }
 
         public void OnGet(string boatReg)
         {
             Boat = _boatRepo.GetBoatByReg(boatReg);
-            _maintRepo = Boat.MaintenanceLog;
-            MaintenanceNote = _maintRepo.GetAll();
-            //MaintenanceNote = _maintRepo.GetNoteById(boatReg);
+            MaintenanceNotes = _maintRepo.GetNotesByReg(boatReg);
         }
         #endregion
     }

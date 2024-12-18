@@ -150,7 +150,12 @@ namespace ClassLibrary.Services
 
                 return result;
             }
-            #endregion
+
+        public List<IBoat> BoatsNotBookedInInterval(List<IBoat> queryBoats, DateTime start, DateTime end)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
         #endregion
     }
 }
