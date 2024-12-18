@@ -14,9 +14,11 @@ namespace ClassLibrary.Services
         #region Instance fields
         private Dictionary<int, ICourse> _courses=new Dictionary<int, ICourse>() ;
         private static int counter;
+
         #endregion
         #region Properties
         public int Count { get { return _courses.Count; } }
+        public IMember SelectedMember { get; set; }
         #endregion 
         #region Constructors
         public CourseRepository()
@@ -104,6 +106,14 @@ namespace ClassLibrary.Services
             }
             Console.WriteLine("list of courses for a given member  just ran");
             return list;
+        }
+
+        public void AttendCourse(int Id, Member SelectedMember)
+        {
+            if (_courses[Id].Attendees.Count < _courses[Id].AttendeeRange[1])
+            {
+                _courses[Id].AttendCourse(SelectedMember);
+            }
         }
         #endregion
     }

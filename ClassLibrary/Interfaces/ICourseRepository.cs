@@ -17,5 +17,8 @@ namespace ClassLibrary.Interfaces
         void PrintAllCourses();
         public ICourse GetCourseById(int id);
         public List<ICourse> EnteredCourses(Member member); // search through all courses to find all that member is a part of
+        public void AttendCourse(int Id, Member SelectedMember);
+
+        public IMember SelectedMember { get; set; }
     }
 }

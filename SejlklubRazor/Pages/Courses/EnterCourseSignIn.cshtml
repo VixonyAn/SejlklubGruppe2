@@ -8,26 +8,48 @@
     ViewData["Title"] = "Tilmeld dig Til Et Hold";
 }
 <h3>Tilmeld dig Til Et Hold</h3>
+ 
 
-<label for="members">Choose a member:</label>
-<select name="members" id="member">
-    @foreach (Member mem in Model.Members)
-    {
-        <option value="mem.Name">@mem.Name</option>
-    }
-</select>
+<div class="dropdown">
+    <!-- Dropdown toggle button -->
+    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        @Model.Courep.SelectedMember.Name
+    </button>
 
-@foreach(Course course in Model.NonEnteredCoursesByMember(Model.Member))
+    <!-- Dropdown menu -->
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        @foreach (Member mem in Model.SortedMembers()) // Assuming `Members` is in your model
+        {
+            <div class="formgroup">
+                <form style="display: inline;" asp-page-handler="SelectMemberButton" asp-route-Name="@mem.Name">
+                    <input type="submit" value="@mem.Name" class="dropdown-item btn btn-primary" />
+                </form>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+@foreach (Course course in Model.NonEnteredCoursesByMember((Member)Model.Courep.SelectedMember))
 {
-    <p>Name/Title @course.Name          Course Leader: @course.Master.Name</p>
-    <p>StartDate= @course.TimeSlot[0]        EndDate= @course.TimeSlot[1]</p>
-    <p>Min Number Of Attendees: @course.AttendeeRange[0]     Max Number Of Attendees: @course.AttendeeRange[1]</p>
-    <p>Numer Of Spots Left: @(course.AttendeeRange[1] - course.Attendees.Count)</p>
-    <p>Summary: @course.Summary</p>
-    <p>Description: @course.Description</p>
-    <td>
-        <form style="display: inline;" asp-page-handler="Enter" asp-route-Id="@course.Id">
-            <input type="submit" value="Tilmeld dig Holdet" class="btn btn-primary" />
-        </form>
-    </td>
+    @if (Model.NonEnteredCoursesByMember((Member)Model.Courep.SelectedMember)[0].Name == " ")
+    {
+        <p> no courses avaliable, this may happen if you are written up to all courses</p>
+    }
+    else
+    {
+        <p>Name/Title @course.Name              Course Leader: @course.Master.Name</p>
+        <p>StartDate= @course.TimeSlot[0]       EndDate= @course.TimeSlot[1]</p>
+        <p>Min Number Of Attendees: @course.AttendeeRange[0]   Max Number Of Attendees: @course.AttendeeRange[1]</p>
+        <p>Numer Of Spots Left: @(course.AttendeeRange[1] - course.Attendees.Count)</p>
+        <p>Summary: @course.Summary</p>
+        <p>Description: @course.Description</p>
+
+        <div class="formgroup">
+            <form style="display: inline;" asp-page-handler="AttendCourse" asp-route-Id="@course.Id">
+                <input type="submit" value="Attend This Course" class="btn btn-primary" />
+            </form>
+        </div>
+    }
 }

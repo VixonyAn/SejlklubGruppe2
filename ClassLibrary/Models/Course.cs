@@ -44,6 +44,17 @@ namespace ClassLibrary.Models
         {
             return $"id: {Id} \n Name: {Name} \n  timeslot   from: {TimeSlot[0]}, to:{TimeSlot[1]} \n  Creator: {Master.Name} \n  Minimum Number of Attendees: {AttendeeRange[0]} ,  Max Number of Attendees: {AttendeeRange[1]}  \n  places left: {((Attendees.Count < AttendeeRange[1]) ? $"der er {AttendeeRange[1]-Attendees.Count} pladser tilbage" : $"der er ikke flere pladser {Attendees.Count} ud af {AttendeeRange[1]} \n short description: {Summary}  \n  long description: {Description}" +$"")}";
         }
+
+        public void AttendCourse(Member SelectedMember)
+        {
+            Attendees.Add(SelectedMember);
+            Console.WriteLine($"\n added  { SelectedMember} to {Name},   ");
+            foreach (Member Member in Attendees)
+            {
+                Console.WriteLine(Member.Name);
+            }
+            Console.WriteLine();
+        }
     }
 
 }

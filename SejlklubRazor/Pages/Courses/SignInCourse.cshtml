@@ -12,42 +12,34 @@
 <h3>se hvilke hold du er tilmeldt</h3>
 
 
-<form method="post" id="ajaxForm">
-    <label for="members">Choose a member:</label>
-    <select id="members" name="Member" onchange="submitViaAjax()">
-        @foreach (Member mem in Model.Members)
+
+<div class="dropdown">
+    <!-- Dropdown toggle button -->
+    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        @Model.Courep.SelectedMember.Name
+    </button>
+
+    <!-- Dropdown menu -->
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        @foreach (Member mem in Model.SortedMembers()) // Assuming `Members` is in your model
         {
-            <option value="mem.Name">@mem.Name</option>
+            <div class="formgroup">
+                <form style="display: inline;" asp-page-handler="SelectMemberButton" asp-route-Name="@mem.Name">
+                    <input type="submit" value="@mem.Name" class="dropdown-item btn btn-primary" />
+                </form>
+            </div>
         }
-    </select>
-    <div id="result"></div> <!-- Display result here -->
-</form>
+    </div>
+</div>
 
-<script>
-    function submitViaAjax() {
-        const formData = new FormData(document.getElementById("ajaxForm"));
+       
 
-        fetch("", { // Submit to the current page
-            method: "POST",
-            body: formData
-        })
-            .then(response => response.json()) // Expect JSON response
-            .then(data => {
-                if (data.success) {
-                    document.getElementById("result").innerHTML = data.message; // Success message
-                } else {
-                    document.getElementById("result").innerHTML = "Error: " + data.message;
-                }
-            })
-            .catch(error => console.error("Error:", error));
-    }
-</script>
 
 //------------
-@if(Model.say(Model.Member.Name)){ <p>@Model.Member.Name</p>}
-@foreach(Course course in Model.ENTEREDcOURSES(Model.Member))
+
+@foreach (Course course in Model.ENTEREDcOURSES((Member)Model.Courep.SelectedMember))
 {
-    @if (Model.ENTEREDcOURSES(Model.Member)[0].Name == " ")
+    @if (Model.ENTEREDcOURSES((Member)Model.Courep.SelectedMember)[0].Name == " ")
     {
         <p> no courses entered yet</p>
     }else{
@@ -60,10 +52,14 @@
     <p>Numer Of Spots Left: @(course.AttendeeRange[1]-course.Attendees.Count)</p>
     <p>Summary: @course.Summary</p>
     <p>Description: @course.Description</p>
+        @foreach(Member member in course.Attendees)
+        {
+            <p>@member.Name</p>
+        }
     }
 }
 <div class="formgroup">
-<form style="display: inline;" asp-page-handler="EnterCourseSignIn" asp-route-Name="@Model.Member.Name">
+    <form style="display: inline;" asp-page-handler="EnterCourseSignIn" asp-route-Name="@Model.Courep.SelectedMember.Name">
     <input type="submit" value="Sign In To Course" class="btn btn-primary" />
 </form>
 </div>

@@ -15,5 +15,6 @@ namespace ClassLibrary.Interfaces
         List<Member> Attendees { get; set; }
         Member Master { get; set; }
         string Description { get; set; }
+        public void AttendCourse(Member SelectedMember);
     }
 }

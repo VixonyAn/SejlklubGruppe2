@@ -15,9 +15,10 @@ namespace SejlklubRazor.Pages.Courses
         #endregion
 
         #region Properties
-        public Course SelectedCourse { get; private set; }
-        public Member Member { get; private set; }
 
+        
+       
+        public ICourseRepository Courep {  get; set; }
 
         public List<IMember> Members { get; set; }
         public List<ICourse> Courses { get; set; }
@@ -32,7 +33,13 @@ namespace SejlklubRazor.Pages.Courses
             _MemberRepo = memberRepository;
             Courses = _CourseRepo.GetAll();
             Members = _MemberRepo.GetAll();
-
+            Courep = _CourseRepo;
+            Console.WriteLine($" SelectedMember is {_CourseRepo.SelectedMember}");
+            if (_CourseRepo.SelectedMember == null)
+            {
+                _CourseRepo.SelectedMember = (Member)_MemberRepo.GetMemberByName("Kurt");
+                Console.WriteLine("(EnterCourseSignIn.cshtml.cs)  SelectedMember was null, changed it to Kurt");
+            }
         }
 
         #endregion
@@ -41,33 +48,71 @@ namespace SejlklubRazor.Pages.Courses
         public List<Course> NonEnteredCoursesByMember(Member member) 
         {
             List<Course> list = new List<Course>();
+            Console.WriteLine("list == null");
+            DateTime start = new DateTime(0001, 01, 01);
+            DateTime end = new DateTime(0001, 01, 01);
+            int[] attRange = { 1, 1000 };
+            List<Member> members = new List<Member>();
+            Member master = new Member(" ", "  ", "  ");
+            members.Add(master);
+            Course course1 = new Course(0, " ", start, end, attRange, members, master, " ", " ");
+            list.Add(course1);
+
             foreach (ICourse course in Courses)
             {
-                if (!(_CourseRepo.EnteredCourses(member).Contains((ICourse)course)))
+                if (!_CourseRepo.EnteredCourses(member).Contains(course))
                 {
+                    if (list[0].Name==" ")
+                    {
+                        list.Remove(list[0]);
+                    }
                     list.Add((Course)course);
                 }
+             
             }
+            Console.WriteLine($"the list of non entered courses is: {list[0]}");
+            return list;
+        }
+
+        public List<IMember> SortedMembers()
+        {
+            List<IMember> list = new List<IMember>();
+            list = Members;
+            list.Remove(_CourseRepo.SelectedMember);
+            list.Prepend(_CourseRepo.SelectedMember);
             return list;
         }
 
         public void OnGet()
-        {   
-        }
-        public IActionResult OnPost(int Id)
         {
-            Console.WriteLine($"{Member.Name} aplied to Course: {_CourseRepo.GetCourseById(Id)}");
-            if(_CourseRepo.GetCourseById(Id).Attendees.Count<= _CourseRepo.GetCourseById(Id).AttendeeRange[1])
+            if (_CourseRepo.SelectedMember == null)
             {
-                _CourseRepo.GetCourseById(Id).Attendees.Add(Member);
-                return RedirectToPage("SignInCourse");
+                _CourseRepo.SelectedMember = new Member("noone is selected yet", "no", "no");
             }
-            else
-            {
-                Console.WriteLine($"{Member} tried to sign in to course: {_CourseRepo.GetCourseById(Id).Name}, But there is too many");
-            }
-            
+        }
+ 
+
+        
+        public IActionResult OnPostAttendCourse(int Id)
+        {
+
+            Console.WriteLine($"selectedMember is {_CourseRepo.SelectedMember}");
+            _CourseRepo.AttendCourse(Id, (Member)_CourseRepo.SelectedMember);
+
             return RedirectToPage("SignInCourse");
+        }
+
+        public IActionResult OnPostSelectMemberButton(string Name)
+        {
+
+            _CourseRepo.SelectedMember = (Member)_MemberRepo.GetMemberByName(Name);
+            Console.WriteLine($"Selected Member = {_CourseRepo.SelectedMember}");
+            if (_CourseRepo.SelectedMember == null)
+            {
+                Console.WriteLine("SelectedMember is NULL"); // Debugging: Log null issues
+            }
+
+            return Page();
         }
         #endregion
     }
